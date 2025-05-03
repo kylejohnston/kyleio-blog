@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import { format } from 'date-fns';
 import Tags from './Tags.astro';
 
-const posts = await getCollection('posts');
-const filteredPosts = import.meta.env.PROD 
-  ? posts.filter(post => !post.data.draft)
-  : posts;
+const posts = await getCollection('posts', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+const filteredPosts = posts;
 
 // Get the newest post tagged with 'post'
 const featuredPost = filteredPosts
