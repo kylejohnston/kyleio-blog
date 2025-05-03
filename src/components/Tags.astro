@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 
-// Get all posts
-const posts = await getCollection('posts');
+// Get all posts with draft filtering
+const posts = await getCollection('posts', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
 
 // Define tag order
 const tagOrder = ['post', 'til', 'page', 'project'];
