@@ -1,0 +1,387 @@
+/*
+TO DO
+rss feed
+clean up readme
+clean up draft content
+/* later: raindrop.io api for links page
+later: add classes for lists, images
+later: pagination styles
+later: light/dark/color modes
+later: shuffle button to randomize posts
+*/
+
+@import "tailwindcss";
+
+/* Theme Variables */
+@theme {
+  --font-head: var(--font-custom);
+  --font-base: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+}
+
+:root {
+  --dark:     #242424;
+  --text:     #242424;
+  --mid:      #484848;
+  --light:    #8C8C8C;
+  --lightest: #F2F2F2;
+  --warm:     #FF8888;
+  --warmer:   #BB5555;
+  --cool:     #8888FF;
+  --cooler:   #5555BB;
+  --base:     8px;
+  --spacing:  8px;
+}
+
+/* Base Elements */
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(0deg, rgba(255, 136, 136, 1) 40%, rgba(136, 136, 255, 1) 88%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--dark);
+  font-size: 1.25em;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: var(--font-base);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-image: linear-gradient(0deg, rgba(255, 136, 136, 1) 40%, rgba(136, 136, 255, 1) 88%) 1;
+  border-width: calc(var(--base) * 1) calc(var(--base) * 1) 0 calc(var(--base) * 1);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Typography */
+h1 {
+  font-size: calc(var(--base) * 9);
+  font-family: var(--font-head);
+  line-height: 0.88;
+  margin-bottom: calc(var(--base) * 3);
+  text-wrap: balance;
+}
+h1.tertiary, h2.tertiary, h3.tertiary {
+  font-size: 1em; 
+  font-family: var(--font-base);
+  font-weight: 500;
+}
+
+h2 {
+  margin: calc(var(--base) * 3) 0;
+  font-size: 1.5em;
+  line-height: 1.2;
+  font-family: var(--font-base);
+  font-weight: 500;
+}
+
+h3 {
+  font-size: 1em;
+  line-height: 1.2;
+  font-family: var(--font-base);
+  font-weight: 500;
+}
+
+p {
+  margin: calc(var(--base) * 3) 0;
+}
+
+.content h2, .content h3, .content p {
+  margin-block: 1lh;
+}
+
+ul {
+  @apply list-disc list-inside m-0 p-0;
+}
+ol {
+  @apply list-decimal list-inside;
+}
+li {
+  @apply m-0 p-0;
+}
+blockquote {
+  padding-left: calc(var(--base) * 2);
+  border-left: 4px solid var(--cool);
+}
+
+code { 
+  font-family: var(--font-mono);
+  color: var(--text);
+  background: var(--lightest);
+  margin: -2px;
+  @apply -mx-0.5 px-0.5;
+}
+/* Navigation */
+nav, main {
+  background: #fff;
+  max-width: 808px;
+  margin: 0 auto;
+  padding: 0 calc(var(--base) * 3);
+}
+
+nav {
+  height: calc(var(--base) * 16);
+  display: flex;
+  align-items: center;
+  margin-bottom: calc(var(--base) * 4);
+}
+
+nav.pagination {
+  margin: calc(var(--base) * 4) 0;
+  padding: 0;
+  font-weight: 500;
+  height: auto;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.nav-separator {
+  color: var(--light);
+}
+
+.nav-tag {
+  color: var(--light);
+  font-family: var(--font-mono);
+  text-transform: capitalize;
+  font-size: 0.875em;
+}
+
+/* Logo Styles */
+.guava {
+  fill: var(--warm);
+  width: 32px;
+  height: 32px;
+  transform: rotate(0deg);
+  transition: all 320ms ease;
+}
+
+body.home .guava {
+  width: 48px;
+  height: 48px;
+}
+
+.guava:hover, .guava:active {
+  fill: var(--cool);
+  transform: rotate(-8deg);
+}
+
+body.home .guava:hover, body.home .guava:active {
+  transform: rotate(0deg);
+}
+
+/* Links */
+a:link, a:visited {
+  color: var(--warm);
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+a:hover, a:active {
+  color: #f55;
+  background: #FDD;
+}
+
+.nav-left a:hover, .nav-left a:active {
+  background: none;
+}
+
+/* Tags */
+.tags {
+  flex-wrap: wrap;
+}
+
+a.tag {
+  background: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  color: var(--mid);
+  border: 1px solid var(--mid);
+  text-decoration: none;
+  line-height: 1;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+a.tag:hover { 
+  background: var(--light);
+  transition: 0.15s;
+
+}
+a.tag:hover .count {
+  color: white;
+}
+
+a.post {
+  border: 1px solid var(--cool);
+}
+a.post:hover {
+  background: var(--cool);
+  color: white;
+}
+a.til {
+  border: 1px solid var(--cooler);
+}
+a.til:hover {
+  background: var(--cooler);
+  color: white;
+}
+
+a.page {
+  border: 1px solid var(--warm);
+}
+a.page:hover {
+  background: var(--warm);
+  color: white;
+}
+a.project {
+  border: 1px solid var(--warmer);
+}
+a.project:hover {
+  color: white;
+  background: var(--warmer);
+}
+
+/* Articles */
+/* article { 
+  text-wrap: balance; 
+} */
+
+article h3 a {
+  color: var(--warm);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.posts article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  text-wrap: balance;
+}
+
+article hr {
+  flex-grow: 1;
+  border-top: 2px dotted var(--light);
+}
+
+.content img {
+  width: calc(100% + var(--base) * 4);
+  margin-left: calc(var(--base) * -2);
+  margin-right: calc(var(--base) * -2);
+  max-width: none;
+  border-radius: var(--base);
+}
+p.caption { margin-top: var(--base); }
+
+
+/* Utility Classes */
+.secondary {
+  color: var(--mid);
+}
+
+.tertiary {
+  color: var(--light);
+}
+
+.small {
+  font-size: .7em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+p img {
+  border-radius: var(--base);
+}
+
+.description {
+  color: var(--light);
+  line-height: 1.2;
+}
+
+/* Accessibility */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #0066cc;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Layout Components */
+.filter { 
+  display: flex; 
+  flex-direction: row;
+  gap: calc(var(--base) * 2) calc(var(--base) * 1);
+  align-items: center;
+}
+
+main header {
+  margin-bottom: calc(var(--base) * 6);
+}
+
+main footer {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--base) * 2);
+  padding: calc(var(--base) * 3) 0;
+}
+
+.spacer {
+  margin: calc(var(--base) * 6.5) 0;
+}
+
+time, .count {
+  color: var(--light);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.recent-posts h2 {
+  color: var(--light);
+}
+
+@media (min-width: 1024px) /* DESKTOP */ {
+  nav, main {
+    padding: 0 calc(var(--base) * 3);
+  }
+  a:not(.tag):link, a:not(.tag):visited {
+    padding: 2px 4px;
+    margin: -2px -4px;
+  }
+  a:not(.tag):hover, a:not(.tag):active {
+    border-radius: 4px;
+  }
+  .content img {
+    width: calc(100% + var(--base) * 16);
+    margin-left: calc(var(--base) * -8);
+    margin-right: calc(var(--base) * -8);
+    max-width: none;
+    border-radius: var(--base);
+  }
+  
+}

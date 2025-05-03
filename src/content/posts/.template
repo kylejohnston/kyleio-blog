@@ -1,0 +1,11 @@
+---
+title: Title
+description: Short description
+pubDate: 2025-01-01
+tags: ['page', 'project', 'post', 'til']
+draft: true
+---
+
+## H2 Title
+
+Markdown is a powerful way to write content for your Astro website. Let's explore how to use it effectively.

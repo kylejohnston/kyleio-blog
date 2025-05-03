@@ -1,0 +1,82 @@
+---
+// lists all posts, paginated
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { format } from 'date-fns';
+import Tags from '../../components/Tags.astro';
+
+export async function getStaticPaths({ paginate }) {
+  let posts = await getCollection("posts", ({ data }) => {
+    return import.meta.env.PROD ? data.draft !== true : true;
+  });
+
+// Sort posts by date in descending order (newest first)
+  const sortedPosts = posts.sort((a, b) => {
+    const dateA = a.data.tendDate?.getTime() || a.data.pubDate.getTime();
+    const dateB = b.data.tendDate?.getTime() || b.data.pubDate.getTime();
+    return dateB - dateA; // Descending order
+  });
+
+  return paginate(sortedPosts, { pageSize: 32 });
+}
+
+const { page } = Astro.props;
+const currentPage = page.currentPage;
+const totalPages = page.lastPage;
+
+---
+
+<Layout>
+  <div class="archive">
+    <header>
+      <h1 class="tertiary capitalize">Log</h1>
+    </header>
+    <div class="posts grid gap-y-3">
+      {
+        page.data.map((post) => (
+          <article class="post">
+            <h3>
+              <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
+            </h3>
+            <hr>
+            <time datetime={post.data.pubDate.toISOString()} class="small">
+              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')} · 
+            </time>
+            <div class="tags small">
+              {post.data.tags.map((tag) => (
+                <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
+              ))}
+            </div>
+              {/* {post.data.description && <p>{post.data.description}</p>} */}
+          </article>
+        ))
+      }
+    </div>
+
+    {totalPages > 1 && (
+      <nav class="pagination flex gap-x-2">
+        <span class="current tertiary mono">
+          P.{currentPage}<span class="mx-1">–{totalPages}</span>
+        </span>
+        {page.url.prev && (
+          <div>
+            <a href={page.url.prev} class="prev">
+              <span class="inline-block relative text-2xl top-0.25">☜</span> PREV
+            </a>
+          </div>
+        )}
+        {page.url.next && (
+          <a href={page.url.next} class="next">
+            NEXT <span class="inline-block relative text-2xl top-0.25">☞</span>
+          </a>
+        )}
+      </nav>
+    )}
+
+    <div>
+      <Tags />
+    </div>
+  </div>
+</Layout>
+
+<style></style>

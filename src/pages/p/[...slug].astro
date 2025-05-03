@@ -1,0 +1,44 @@
+---
+// #post
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { format } from 'date-fns';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={post.data.title} tag={post.data.tags[0]}>
+  <article class="post">
+    <header>
+      <h1>{post.data.title}</h1>
+      {post.data.description && <p class="description">{post.data.description}</p>}
+    </header>
+    <div class="content-wrapper">
+      <div class="content">
+        <Content />
+      </div>
+    </div>
+    <footer class="small">
+      {post.data.tendDate ?
+        <time datetime={post.data.tendDate.toISOString()}>
+          Tended: {format(post.data.tendDate, 'MMM yyyy')}
+        </time>
+        <span class="tertiary">· · ·</span>
+        :
+        null
+      }
+      <time datetime={post.data.pubDate.toISOString()}>
+        Planted: {format(post.data.pubDate, 'MMM yyyy')}
+      </time>
+    </footer>
+  </article>
+</Layout>

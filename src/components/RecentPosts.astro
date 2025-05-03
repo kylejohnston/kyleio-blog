@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import { format } from 'date-fns';
+import Tags from './Tags.astro';
+
+const posts = await getCollection('posts');
+const filteredPosts = import.meta.env.PROD 
+  ? posts.filter(post => !post.data.draft)
+  : posts;
+
+// Get the newest post tagged with 'post'
+const featuredPost = filteredPosts
+  .filter(post => post.data.tags?.includes('post'))
+  .sort((a, b) => {
+    const dateA = a.data.tendDate?.getTime() || a.data.pubDate.getTime();
+    const dateB = b.data.tendDate?.getTime() || b.data.pubDate.getTime();
+    return dateB - dateA; // Sort newest to oldest
+  })[0];
+
+// Exclude featured post from recent posts
+const recentPosts = filteredPosts
+  .filter(post => post.slug !== featuredPost?.slug)
+  .sort((a, b) => {
+    const dateA = a.data.tendDate?.getTime() || a.data.pubDate.getTime();
+    const dateB = b.data.tendDate?.getTime() || b.data.pubDate.getTime();
+    return dateB - dateA; // Sort newest to oldest
+  })
+  .slice(0, 8);
+
+// Get tag counts and sort by frequency
+const tagCounts = filteredPosts.reduce((acc, post) => {
+  post.data.tags?.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {});
+
+// Sort tags by count (descending) and then alphabetically
+const sortedTags = Object.entries(tagCounts)
+  .sort(([tagA, countA], [tagB, countB]) => {
+    if (countA !== countB) {
+      return countB - countA; // Sort by count first
+    }
+    return tagA.localeCompare(tagB); // Then alphabetically
+  })
+  .map(([tag]) => tag);
+
+// Replace existing allTags definition with:
+const allTags = sortedTags;
+---
+
+<section>
+  <div class="featured">
+    {featuredPost && (
+      <article>
+        <h3>
+          <a href={`/p/${featuredPost.slug}`}>{featuredPost.data.title}</a>
+        </h3>
+        <p class="mt-1 font-">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`} class="font-medium"> Continue <span class="inline-block relative text-2xl top-0.5">☞</span></a></p>
+      </article>
+    )}
+  </div>
+  <h2 class="mb-3 tertiary">Explore</h2>
+  <div class="posts grid gap-y-3">
+    {
+      recentPosts.map((post) => (
+          <article class="post">
+            <h3>
+              <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
+            </h3>
+            <hr>
+            <time datetime={post.data.pubDate.toISOString()} class="small">
+              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
+            </time>
+            <div class="tags small">
+              {post.data.tags.map((tag) => (
+                <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
+              ))}
+            </div>
+          </article>
+      ))
+    }
+  </div>
+  <Tags />
+  <div class="mt-4 mb-4 font-medium">
+    <a href="/p">Everything <span class="inline-block relative text-2xl top-0.5">☞</span></a>
+  </div>
+
+</section>
+
+<style>
+  .featured {
+    margin-bottom: calc(var(--base) * 8);
+    text-wrap: balance;
+  }
+</style>

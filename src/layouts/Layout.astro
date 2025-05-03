@@ -1,22 +1,70 @@
+---
+// layout: #head, #navigation, #main
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Logo from '../assets/guava.svg';
+import ID from '../assets/kio.svg';
+
+interface Props {
+  title?: string;
+  tag?: string;
+  isHome?: boolean;
+}
+const { title, tag, isHome } = Astro.props;
+const siteTitle = title ? `${title} | Astro Blog` : 'Astro Blog';
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+    <meta name="description" content="A blog about web development, technology, and programming" />
+    <meta name="theme-color" content="#ffffff" />
+    <Font cssVariable="--font-plex-mono" preload />
+    <Font cssVariable="--font-plex-sans" preload />
+    <Font cssVariable="--font-custom" preload />
+  </head>
+  <body class={isHome ? 'home' : ''}>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="contentful">
+      <nav class="main-nav" aria-label="Main navigation">
+        <div class="nav-left">
+          <a href="/" title="Home" aria-label="Home">
+            <Logo class="guava" />
+          </a>
+          {tag && <span class="nav-separator"> / </span>}
+          {tag && <div><a href={`/t/${tag}`} class={`small tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}
+        </div>
+      </nav>
+      <main id="main-content">
+        <slot />
+      </main>
+    </div>
+    <footer>
+      <ID>
+    </footer>
+  </body>
 </html>
-
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  .contentful {
+    background: #fff;
+    width: calc(100vw - 12px);
+    margin: 0 auto;
+    padding-bottom: calc(var(--base) * 8);
+    border-radius: 0 0 8px 8px;
+    min-height: 88vh;
+  }
+  footer
+  {
+    background: var(--warm);
+    color: var(--color-text);
+    padding: calc(var(--base) * 4);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
 </style>

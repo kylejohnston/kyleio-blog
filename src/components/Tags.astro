@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+
+// Get all posts
+const posts = await getCollection('posts');
+
+// Define tag order
+const tagOrder = ['post', 'til', 'page', 'project'];
+
+// Get tag counts
+const tagCounts = posts.reduce((acc, post) => {
+  post.data.tags?.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {});
+
+// Sort tags by custom order first, then alphabetically for any remaining tags
+const sortedTags = Object.keys(tagCounts).sort((a, b) => {
+  const aIndex = tagOrder.indexOf(a);
+  const bIndex = tagOrder.indexOf(b);
+  
+  // If both tags are in tagOrder, sort by order
+  if (aIndex !== -1 && bIndex !== -1) {
+    return aIndex - bIndex;
+  }
+  // If only one tag is in tagOrder, it goes first
+  if (aIndex !== -1) return -1;
+  if (bIndex !== -1) return 1;
+  // For tags not in tagOrder, sort alphabetically
+  return a.localeCompare(b);
+});
+
+const allTags = sortedTags;
+---
+
+<div class="filter tags small my-6">
+  <h3 class="font-mono">VIEW</h3>
+  {allTags.map((tag) => (
+    <div>
+      <a href={`/t/${tag}`} class={`tag ${tag}`}>
+        {tag}s <span class="count">{tagCounts[tag]}</span>
+      </a>
+    </div>
+  ))}
+</div>
