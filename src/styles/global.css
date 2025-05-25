@@ -20,11 +20,15 @@ later: shuffle button to randomize posts
 }
 
 :root {
+  --back:     hsl(0, 24%, 98%);
   --dark:     #242424;
   --text:     #242424;
   --mid:      #484848;
   --light:    #8C8C8C;
   --lightest: #F2F2F2;
+  --light:    #808080;
+  --lighter:  #C0C0C0;
+  --lightest: #F8F8F8;
   --warm:     #FF8888;
   --warmer:   #BB5555;
   --cool:     #8888FF;
