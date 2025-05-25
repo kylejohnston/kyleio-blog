@@ -45,26 +45,43 @@ const siteTitle = title ? `${title} | Astro Blog` : 'Astro Blog';
       </main>
     </div>
     <footer>
-      <ID>
+        <div class="small">
+          <p><a href="/p/now/">Now</a> · <a href="/p/about/">About</a></p>
+          <p>Elsewhere: <a href="https://mastodon.online/@kylejohnston">Mastodon</a> · <a href="https://bsky.app/profile/kylejohnston.bsky.social">Bluesky</a> · <a href="https://www.linkedin.com/in/kylejohnston/">LinkedIn</a></p>
+          <p>RSS · GitHub</p>
+        </div>
+        <div class="">
+          <ID>
+        </div>
     </footer>
   </body>
 </html>
 <style>
   .contentful {
-    background: #fff;
+    background: var(--back);
     width: calc(100vw - 12px);
     margin: 0 auto;
     padding-bottom: calc(var(--base) * 8);
     border-radius: 0 0 8px 8px;
     min-height: 88vh;
   }
-  footer
-  {
+  footer {
+    max-width: 808px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
     background: var(--warm);
     color: var(--color-text);
     padding: calc(var(--base) * 4);
-    width: 100vw;
-    display: flex;
-    justify-content: center;
+    gap: var(--base);
+  }
+  footer p {
+    margin-block: auto;
+  }
+  footer a:link, footer a:visited {
+    color: var(--color-text);
+    text-decoration: none;
   }
 </style>
