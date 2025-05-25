@@ -1,25 +1,25 @@
 ---
-title: How I organize my work
-description: An overview of my approach to organizing my work in Figma and thriving in a fast-paced, highly collaborative product team.
+title: My Figma workflow
+description: My current approach to organizing work in Figma in the context of a fast-paced, highly collaborative product team.
 pubDate: 2023-01-31
 tendDate: 2025-05-02
 tags: ['post']
 draft: true
 ---
 
-At work, a fellow product designer recently asked how others structure their Figma files to make it easy for others to collaborate and how we flow from roving design explorations to tightly focused design specifications. Here's the inside scoop on my approach to organizing my work in Figma and thriving in a fast-paced, highly collaborative product team.
+At work, a fellow product designer asked (1) how other designers structure their Figma files in a way that  makes it easy for others to collaborate and (2) how we flow from roving design explorations to focused design specifications. This is my current workflow.
 
 ## Context setting
 
-We work in squads, which consist of a designer, product manager (PM), engineering manager, and several engineers. Each squad is part of an initiative, or focus area.
+We work in squads, which consist of a designer, product manager (PM), engineering manager, and 6-ish engineers. Each squad has a particular focus area, which helps to scope our work and the design needs. Squads delivering on similar tracks of work are organized into groups. Which is important for the next bit, collaboration.
 
 ## Who do I collaborate with?
 
-Multiple times a week, I share ideas and designs with my PM and other product designers in my initiative. We have weekly critiques to get detailed feedback on work-in-progress. And engineers view the files during estimation meetings and design handoffs. There are other touchpoints, but these are the key interactions that shape how I think about organizing my work.
+Multiple times a week, I share ideas and work-in-progress with my PM and engineers as well as  other product designers. In particular, we have weekly critiques to gather feedback on ideas and designs. Strategy-centric meetings ensure we're addressing goals, and technical meetings  determine how we're going to build features. There are other touch points, but these are the key interactions that shape how I think about organizing my work in Figma.
 
 ## How I organize my Figma files
 
-My squad works across several pages on the website, usually developing features that are scoped to a page. I've found the best approach is to organize my designs explorations into page-specific files – I have a Figma file dedicated to the homepage, another to the listing page, and so on.
+My squad works across several pages on the website, usually developing features that are scoped to a page. I've found the best approach is to organize my designs explorations into page-specific files – I might have a Figma file dedicated to the homepage, another to the listing page, and so on.
 
 A quick aside: when I've worked with other squads, I adapted my approach. For example, I worked with an App squad, and I found it was best to create one file per feature or experiment. That file included separate pages for explorations, iterations, and specifications. The people I was working with, scope of work, and timeline all influenced how I decided to organize things. *TKTK: screenshot?*
 
