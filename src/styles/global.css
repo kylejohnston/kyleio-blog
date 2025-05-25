@@ -258,16 +258,37 @@ a.project:hover {
 }
 
 .posts article {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto auto;
   align-items: center;
   gap: 8px;
+  width: 100%;
   text-wrap: balance;
+}
+.post h3 {
+  min-width: 0;
+  font-weight: 500;
+}
+.post h3 a {
+  color: var(--warm);
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 article hr {
-  flex-grow: 1;
-  border-top: 2px dotted var(--light);
+  flex-grow: 3;
+  border-top: 2px dotted var(--lighter);
+}
+.post .grid {
+  flex: 0 1 auto;
+  min-width:0;
+}
+.truncate {
+  text-overflow: clip;
+  color: var(--lighter);
 }
 
 .content img {
