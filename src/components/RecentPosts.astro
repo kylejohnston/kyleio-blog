@@ -68,23 +68,27 @@ const allTags = sortedTags;
             <h3>
               <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
             </h3>
-            <hr>
-            <time datetime={post.data.pubDate.toISOString()} class="small">
-              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
-            </time>
+            <div class="grid">
+              <div class="truncate">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
+            </div>
+            {/* <hr> */}
             <div class="tags small">
               {post.data.tags.map((tag) => (
                 <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
               ))}
             </div>
+            <span class="tertiary hidden sm:block" style="">·</span>
+            <time datetime={post.data.pubDate.toISOString()} class="small hidden sm:block">
+              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
+            </time>
           </article>
       ))
     }
   </div>
-  <Tags />
   <div class="mt-4 mb-4 font-medium">
-    <a href="/p">Everything <span class="inline-block relative text-2xl top-0.5">☞</span></a>
+    <a href="/p">View everything <span class="inline-block relative text-2xl top-0.5">☞</span></a>
   </div>
+  <Tags />
 
 </section>
 
