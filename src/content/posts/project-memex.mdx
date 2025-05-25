@@ -1,0 +1,27 @@
+---
+title: MEMEX
+description: A tool for collecting visual inspiration
+pubDate: 2018-07-01
+tags:
+  - project
+draft: true
+---
+import { Image } from 'astro:assets';
+import visual from '../../assets/posts/project-placeholder.png';
+
+- [ ] Add images
+
+I created MEMEX as a tool to gather design inspiration. For years, I had used tools like Pinterest or standalone macOS apps to gather inspiration, but they were either too complicated or a pain to manage. 
+
+I just wanted something where I could drag-and-drop files into a folder and see them on a webpage. When I discovered PHP had a relatively simple method to support this, MEMEX was born. 
+
+<Image src={visual} alt="MEMEX page" />
+
+I run a local version of the site that's always up-to-date (and speedy), and I keep a public version updated so I can browse for inspiration when I'm away from home.
+
+Since creating MEMEX in 2018, I've restructured the nav several times, randomized the image rendering, added an inbox, and more. I've also added a few LLM-assisted features, like image counts for each page, and index pages that combine all of the subdirectories for my largest categories.
+
+[Visit my MEMEX](https://memex.flow14.com/)
+
+There's a  [colophon](https://memex.flow14.com/colophon.php) if you're curious about the design and tooling. And I keep a [changelog](https://memex.flow14.com/colophon.php) to track how the site has evolved.
+The [sourcecode is available on GitHub](https://github.com/kylejohnston/memex) and there's even a  [boilerplate version](https://github.com/kylejohnston/memex-core) if you want to roll your own.
