@@ -28,7 +28,7 @@ later: shuffle button to randomize posts
   --lighter:  #C0C0C0;
   --lightest: #F8F8F8;
   --warm:     #FF8888;
-  --warmer:   #BB5555;
+  --warmer:   #DD6666;
   --cool:     #8888FF;
   --cooler:   #5555BB;
   --base:     8px;
@@ -78,7 +78,7 @@ h1 {
 h1.tertiary, h2.tertiary, h3.tertiary {
   font-size: 1em; 
   font-family: var(--font-base);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h2 {
@@ -86,14 +86,14 @@ h2 {
   font-size: 1.5em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 h3 {
   font-size: 1em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 p {
@@ -105,13 +105,13 @@ p {
 }
 
 ul {
-  @apply list-disc list-inside m-0 p-0;
+  @apply list-disc list-outside mx-2 my-0 p-0;
 }
 ol {
-  @apply list-decimal list-inside;
+  @apply list-decimal list-outside;
 }
 li {
-  @apply m-0 p-0;
+  @apply mx-0 my-1 p-0;
 }
 blockquote {
   padding-left: calc(var(--base) * 2);
@@ -188,7 +188,7 @@ body.home .guava:hover, body.home .guava:active {
 
 /* Links */
 a:link, a:visited {
-  color: var(--warm);
+  color: var(--warmer);
   text-decoration: none;
   transition: 0.4s;
 }
@@ -209,7 +209,7 @@ a:hover, a:active {
 
 a.tag {
   padding: 0.25rem 0.5rem;
-  border-radius: 8px;
+  border-radius: var(--base);
   color: var(--mid);
   border: 1px solid var(--mid);
   text-decoration: none;
@@ -270,7 +270,7 @@ a.project:hover {
   font-weight: 500;
 }
 .post h3 a {
-  color: var(--warm);
+  color: var(--warmer);
   text-decoration: none;
   display: block;
   white-space: nowrap;
@@ -288,17 +288,19 @@ article hr {
 }
 .truncate {
   text-overflow: clip;
-  color: var(--lighter);
 }
 
-.content img {
+.content img.wide, .content .wide {
   width: calc(100% + var(--base) * 4);
   margin-left: calc(var(--base) * -2);
   margin-right: calc(var(--base) * -2);
   max-width: none;
-  border-radius: var(--base);
 }
-p.caption { margin-top: var(--base); }
+p.caption {
+  margin-top: var(--base);
+  color: var(--light);
+  font-size: .85em;
+}
 
 
 /* Utility Classes */
@@ -307,6 +309,10 @@ p.caption { margin-top: var(--base); }
 }
 
 .tertiary {
+  color: var(--light);
+}
+
+.lite {
   color: var(--lighter);
 }
 
@@ -318,9 +324,9 @@ p.caption { margin-top: var(--base); }
   font-family: var(--font-mono);
 }
 
-p img {
+/* p img {
   border-radius: var(--base);
-}
+} */
 
 .description {
   color: var(--light);
@@ -387,11 +393,11 @@ time, .count {
   a:not(.tag):hover, a:not(.tag):active {
     border-radius: 4px;
   }
-  .content img {
+  .content img.wide, .content .wide {
     width: calc(100% + var(--base) * 16);
     margin-left: calc(var(--base) * -8);
     margin-right: calc(var(--base) * -8);
     max-width: none;
-    border-radius: var(--base);
+    /* border-radius: var(--base); */
   }
 }
