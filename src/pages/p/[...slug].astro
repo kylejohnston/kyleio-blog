@@ -21,24 +21,25 @@ const { Content } = await post.render();
     <header>
       <h1>{post.data.title}</h1>
       {post.data.description && <p class="description">{post.data.description}</p>}
+      <div class="small">
+        <time datetime={post.data.pubDate.toISOString()}>
+          Planted {format(post.data.pubDate, 'MMM yyyy')}
+        </time>
+        {post.data.tendDate ?
+          <span class="tertiary">· · ·</span>
+          <time datetime={post.data.tendDate.toISOString()}>
+            Tended {format(post.data.tendDate, 'MMM yyyy')}
+          </time>
+          :
+          null
+        }
+      </div>
     </header>
     <div class="content-wrapper">
       <div class="content">
         <Content />
       </div>
     </div>
-    <footer class="small">
-      {post.data.tendDate ?
-        <time datetime={post.data.tendDate.toISOString()}>
-          Tended: {format(post.data.tendDate, 'MMM yyyy')}
-        </time>
-        <span class="tertiary">· · ·</span>
-        :
-        null
-      }
-      <time datetime={post.data.pubDate.toISOString()}>
-        Planted: {format(post.data.pubDate, 'MMM yyyy')}
-      </time>
-    </footer>
+    <footer class="small"></footer>
   </article>
 </Layout>
