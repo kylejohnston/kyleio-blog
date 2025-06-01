@@ -42,6 +42,7 @@ const siteTitle = title ? `${title} | Astro Blog` : 'Astro Blog';
       </nav>
       <main id="main-content">
         <slot />
+        <div>{tag && <div><span class="small secondary mr-0.5">View more </span><a href={`/t/${tag}`} class={`small tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}</div>
       </main>
     </div>
     <footer>
