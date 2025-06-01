@@ -5,19 +5,36 @@ pubDate: 2022-09-01
 tendDate: 2025-05-02
 tags:
   - project
-draft: true
+draft: false
 ---
 import { Image } from 'astro:assets';
-import visual from '../../assets/posts/project-placeholder.png';
-
-- [ ] Add image(s)
+import desktop from '../../assets/projects/bookshelf-desktop.webp';
+import mweb from '../../assets/projects/bookshelf-mweb.webp';
+import bookPageDesktop from '../../assets/projects/book-page-desktop.webp';
+import bookPageMweb from '../../assets/projects/book-page-mweb.webp';
 
 I created a bookshelf to track the books I've read since I started tracking my reading in 2009-ish. It's a completely custom design, built with [Astro](https://astro.build/), my current favorite web framework.
 
-<Image src={visual} alt="My Bookshelf" />
+<div class="flex flex-row gap-2 wide">
+	<div>
+		<Image src={desktop} alt="My bookshelf, desktop" class="border border-neutral-200 rounded-sm shadow-xl" />
+	</div>
+	<div>
+		<Image src={mweb} alt="My bookshelf, mweb" class="border border-neutral-200 rounded-sm shadow-xl" />
+	</div>
+</div>
+<p class="caption">Homepage · [View the project](https://books.kyleio.com/) · [GitHub repo](https://github.com/kylejohnston/astro_bookshelf)</p>
+
+<div class="flex flex-row gap-2">
+	<div>
+		<Image src={bookPageDesktop} alt="Book detail page, desktop" class="border border-neutral-200 rounded-sm" />
+	</div>
+	<div>
+		<Image src={bookPageMweb} alt="Book detail page, mweb" class="border border-neutral-200 rounded-sm" />
+	</div>
+</div>
+<p class="caption">[Book detail page](https://books.kyleio.com/book/the-creative-act)</p>
 
 Since launching the site in 2022, I've continued to tinker with it and add features. I've added search, pagination, page transitions, [a list view](https://books.kyleio.com/list), and more.
-
-[Visit my bookshelf](https://books.kyleio.com/).
 
 If you're curious about the design and tooling, [the about page](https://books.kyleio.com/about) has all the details. And [the code is available on GitHub](https://github.com/kylejohnston/astro_bookshelf)
