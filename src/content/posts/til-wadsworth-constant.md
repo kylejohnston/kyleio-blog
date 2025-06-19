@@ -12,3 +12,5 @@ draft: false
 Via this excellent post, [28 slightly rude notes on writing](https://www.experimental-history.com/p/28-slightly-rude-notes-on-writing).
 
 Soon after I learned about the Wadsworth Constant, I spotted it in a [big list of eponymous laws](https://www.secretorum.life/p/the-grand-encyclopedia-of-eponymous).
+
+This *also* relates to a communication principle from the military I learned recently, [BLUF](https://en.wikipedia.org/wiki/BLUF_(communication)), or bottom line up front. Meaning communicate key information *first*. Which goes against the Wadwworth Constant, but now those ideas are connected in my mind.

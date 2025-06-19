@@ -4,17 +4,29 @@ description: A word game
 pubDate: 2024-07-01
 tags:
   - project
-draft: true
+draft: false 
 ---
 import { Image } from 'astro:assets';
-import visual from '../../assets/posts/project-placeholder.png';
+import desktop from '../../assets/projects/wordwiz-desktop.webp';
+import mweb from '../../assets/projects/wordwiz-mweb.webp';
 
-- [ ] Add images 
+[WordWiz](https://wordwiz.xyz/) is a word game I created in 2024. It's a simple game where you choose a letter then add as many words as you can think of that start with that letter.
 
-<Image src={visual} alt="WordWiz, a word game" />
+## The concept
+The idea for the game was inspired by a newly-retired family member who wanted a fun, casual way to keep their mind sharp, but didn't like the competitiveness or complexity of other popular word games.
 
-TK project description 
-Vibe-coded all of the functionality and added a custom design.
+<div class="flex flex-row gap-2 wide">
+	<div>
+		<Image src={desktop} alt="WordWiz.xyz, desktop" class="border border-neutral-200 shadow-xl rounded-sm" />
+	</div>
+	<div>
+		<Image src={mweb} alt="WordWiz.xyz, mweb" class="border border-neutral-200 shadow-xl rounded-sm" />
+	</div>
+</div>
 
-Link
-GitHub
+<p class="caption">[View the project](https://wordwiz.xyz/) · [GitHub repo](https://github.com/kylejohnston/wordwiz)</p>
+
+## How LLMs unlocked this project
+We had joked about finding a game where you just type as many words as you could think of, so I built a simple proof of concept with ChatGPT to test the mechanics of the idea. From that seed, I quickly iterated and added features like score tracking, an optional timer, and motivational phrases provided by [ElevenLabs](https://elevenlabs.io/).
+
+Once the core features were in place, I took over and customized the design. I created a logo and color scheme and optimized the design for desktop and mobile browsers. The game was well-received and at least one person in the world enjoys playing it each day!
