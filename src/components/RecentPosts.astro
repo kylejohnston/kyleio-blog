@@ -70,6 +70,7 @@ const allTags = sortedTags;
             </h3>
             <div class="grid">
               <div class="truncate">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
+              <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
             </div>
             {/* <hr> */}
             <div class="tags small">
@@ -78,6 +79,7 @@ const allTags = sortedTags;
               ))}
             </div>
             <span class="tertiary hidden sm:block" style="">·</span>
+            <span class="lite hidden sm:block" style="">·</span>
             <time datetime={post.data.pubDate.toISOString()} class="small hidden sm:block">
               { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
             </time>
