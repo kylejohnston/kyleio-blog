@@ -69,7 +69,6 @@ const allTags = sortedTags;
               <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
             </h3>
             <div class="grid">
-              <div class="truncate">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
               <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
             </div>
             {/* <hr> */}
@@ -78,7 +77,6 @@ const allTags = sortedTags;
                 <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
               ))}
             </div>
-            <span class="tertiary hidden sm:block" style="">·</span>
             <span class="lite hidden sm:block" style="">·</span>
             <time datetime={post.data.pubDate.toISOString()} class="small hidden sm:block">
               { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
@@ -91,7 +89,6 @@ const allTags = sortedTags;
   <div class="mt-4 mb-4 font-medium">
     <a href="/p">View everything <span class="inline-block relative text-2xl top-0.5">☞</span></a>
   </div>
-  <Tags />
 
 </section>
 
