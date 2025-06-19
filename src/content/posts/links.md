@@ -1,7 +1,7 @@
 ---
-title: Links
-description: This is a short post description
-pubDate: 2025-05-01
+title: 'Links  ✐'
+description: This is a placeholder for a future page
+pubDate: 2025-06-01
 tags: ['page']
 draft: true
 ---
