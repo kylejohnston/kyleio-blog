@@ -1,7 +1,8 @@
 ---
 title: .new & multiple accounts
 description: TIL how to use '.new' when you have multiple Google accounts
-pubDate: 2023-06-03
+pubDate: 2023-06-03T14:00:00-05:00
+# tendDate:
 tags: ['til']
 draft: false
 ---
