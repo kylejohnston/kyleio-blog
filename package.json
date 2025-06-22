@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.6",
+    "@astrojs/rss": "^4.0.12",
     "@tailwindcss/vite": "^4.1.5",
     "astro": "^5.7.10",
     "date-fns": "^4.1.0",
+    "markdown-it": "^14.1.0",
+    "sanitize-html": "^2.17.0",
     "tailwindcss": "^4.1.5"
   }
 }
