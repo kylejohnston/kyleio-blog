@@ -1,7 +1,7 @@
 ---
 title: 'Links  ✐'
 description: This is a placeholder for a future page
-pubDate: 2025-06-01
+pubDate: 2025-06-01T14:00:00-05:00
 tags: ['page']
 draft: true
 ---
