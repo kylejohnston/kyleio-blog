@@ -333,6 +333,7 @@ p.caption {
 
 /* Accessibility */
 .skip-link {
+  display: none;
   position: absolute;
   top: -40px;
   left: 0;
