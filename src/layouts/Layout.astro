@@ -11,7 +11,7 @@ interface Props {
   isHome?: boolean;
 }
 const { title, tag, isHome } = Astro.props;
-const siteTitle = title ? `${title} · · K:IO` : 'K:IO';
+const siteTitle = title ? `${title} · · K:IO` : 'K:IO, a creative journal';
 ---
 
 <!doctype html>
@@ -24,7 +24,6 @@ const siteTitle = title ? `${title} · · K:IO` : 'K:IO';
     <title>{siteTitle}</title>
     <meta name="description" content="A collection of things I've made written, and that spark my curiosity" />
     <meta name="theme-color" content="#ff8888" />
-    <link rel="alternate" type="application/rss+xml" title="Kyle IO" href={new URL("rss.xml", Astro.site)}
 />
     <Font cssVariable="--font-plex-mono" preload />
     <Font cssVariable="--font-plex-sans" preload />
