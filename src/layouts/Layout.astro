@@ -24,6 +24,7 @@ const siteTitle = title ? `${title} · · K:IO` : 'K:IO, a creative journal';
     <title>{siteTitle}</title>
     <meta name="description" content="A collection of things I've made written, and that spark my curiosity" />
     <meta name="theme-color" content="#ff8888" />
+    <link rel="alternate" type="application/rss+xml" title="K:IO, a creative journal" href={new URL("rss.xml", Astro.site)} />
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kyleio.com/">
