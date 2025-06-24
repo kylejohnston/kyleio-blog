@@ -10,7 +10,7 @@ draft: false
 
 Hello! I'm Kyle Johnston. I'm based in the Kansas City area where I spend my days as a staff product designer at Etsy. Prior to Etsy, I ran my own design studio, [flow14](https://www.flow14.com/). Before *that*, I worked for a range of companies – from startups to agencies to big companies like Garmin. You can find my professional design portfolio at [kylejohnston.com](https://www.kylewjohnston.com/) or check out my [LinkedIn](https://www.linkedin.com/in/kylejohnston/).
 
-This site a good overview of things that spark my curiosity, including [projects](/t/project), [posts](/t/post), and [discoveries](/t/til).
+This site is a creative journal of things that spark my curiosity, including [projects](/t/project), [posts](/t/post), and [discoveries](/t/til).
 
 ### What's with the 'IO'?
 In computer terms, IO (or I/O) stands for input and output. This site represents a collection of inputs (ideas, projects I've built to inform my work) and outputs (thoughts and things I've made).
