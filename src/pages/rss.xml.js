@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 export async function GET(context) {
-  const blog = await getCollection('posts');
+  const blog = await getCollection('posts', ({ data }) => {
+    return !data.draft;
+  });
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -12,8 +14,6 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
-      // Compute RSS link from post `id`
-      // This example assumes all posts are rendered as `/blog/[id]` routes
       link: `/p/${post.slug}/`,
     })),
   });
