@@ -2,10 +2,24 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
+import rssFullTextIntegration from './src/integrations/rssFullText.js';
+
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    rssFullTextIntegration({
+      postsDir: './src/content/posts', // adjust if needed
+      output: 'rss.xml',
+      siteUrl: 'https://kyleio.com',
+      channel: {
+        title: 'Kyle IO, a creative journal',
+        description: 'A collection of things I\'ve made, written, and that spark my curiosity',
+        language: 'en-us'
+      }
+    })
+ ],
   experimental: {
     fonts: [
       {
