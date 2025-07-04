@@ -1,8 +1,8 @@
 ---
 title: 'Maker, manager, maker'
-# description:
-pubDate: 2023-01-31
-tendDate: 2025-05-02
+description: 'Why I left management to return to the maker’s path'
+pubDate: 2023-01-3T14:00:00-05:00
+tendDate: 2025-05-02T14:00:00-05:00
 tags: ['post']
 draft: true
 ---
