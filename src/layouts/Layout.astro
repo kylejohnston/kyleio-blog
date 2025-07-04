@@ -43,6 +43,7 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
       <nav class="main-nav" aria-label="Main navigation">
         <div class="nav-left">
           <a href="/" title="Home" aria-label="Home">
+            <GuavaSprites style="display:none" />
             <Logo class="guava" />
           </a>
           {tag && <span class="nav-separator"> / </span>}
@@ -95,9 +96,6 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
     text-decoration: none;
   }
 </style>
-
-<!-- Add the sprites to your HTML -->
-<GuavaSprites />
 
 <!-- Add this script before closing body tag -->
 <script>
