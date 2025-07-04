@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "NODE_PATH=$(pwd)/node_modules astro build",
+    "build": "astro build",
     "preview": "astro preview"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.1.0",
     "marked": "^16.0.0",
+    "node-html-parser": "^7.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "rehype-highlight": "^7.0.2",
