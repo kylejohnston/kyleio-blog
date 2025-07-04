@@ -4,11 +4,11 @@ const posts = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string().optional(),
+    description: z.string(),
     pubDate: z.date(),
     tendDate: z.date().optional(),
     tags: z.array(z.string()),
-    draft: z.boolean().optional()
+    draft: z.boolean().default(false)
   })
 });
 
