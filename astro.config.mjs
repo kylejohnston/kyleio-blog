@@ -7,19 +7,7 @@ import rssFullTextIntegration from './src/integrations/rssFullText.js';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    mdx(),
-    rssFullTextIntegration({
-      postsDir: './src/content/posts', // adjust if needed
-      output: 'rss.xml',
-      siteUrl: 'https://kyleio.com',
-      channel: {
-        title: 'Kyle IO, a creative journal',
-        description: 'A collection of things I\'ve made, written, and that spark my curiosity',
-        language: 'en-us'
-      }
-    })
- ],
+  integrations: [mdx()],
   experimental: {
     fonts: [
       {
