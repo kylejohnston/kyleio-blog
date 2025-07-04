@@ -6,7 +6,6 @@ import { loadRenderers } from "astro:container";
 import { getCollection } from "astro:content";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 export async function GET(context: APIContext) {
   // Get the URL to prepend to relative site links. Based on `site` in `astro.config.mjs`.
@@ -21,10 +20,11 @@ export async function GET(context: APIContext) {
   const container = await AstroContainer.create({ renderers });
 
   // Load the content collection entries to add to our RSS feed.
-  const posts = (await getCollection("posts")).sort((a, b) =>
-    // Sort by publication date descending.
-    a.data.pubDate > b.data.pubDate ? -1 : 1
-  );
+  const posts = (await getCollection("posts")).sort((a, b) => {
+    const dateA = a.data.tendDate || a.data.pubDate;
+    const dateB = b.data.tendDate || b.data.pubDate;
+    return dateA > dateB ? -1 : 1;
+  });
 
   // Loop over blog posts to create feed items for each, including full content.
   const feedItems: RSSFeedItem[] = [];
@@ -59,7 +59,6 @@ export async function GET(context: APIContext) {
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    site: baseUrl,
     items: feedItems,
   });
 }
