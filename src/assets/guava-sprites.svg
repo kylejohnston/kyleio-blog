@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" display="none">
+    <symbol id="rect">
+        <rect width="48" height="48" fill="#FFFFFF" />
+        <rect width="48" height="48" rx="8" />
+    </symbol>
+    
+    <symbol id="circle">
+        <rect width="48" height="48" fill="#FFFFFF" />
+        <rect width="48" height="48" rx="24" />
+    </symbol>
+    
+    <symbol id="hex">
+        <rect width="48" height="48" fill="#FFFFFF" />
+        <path d="M24 0L40.9706 7.02944L48 24L40.9706 40.9706L24 48L7.02944 40.9706L0 24L7.02944 7.02944L24 0Z" />
+    </symbol>
+    
+    <symbol id="star">
+        <rect width="48" height="48" fill="#FFFFFF" />
+        <path d="M18.9643 48V32.7399L5.53571 40.3699L0.5 31.6301L13.7887 24L0.5 16.3699L5.53571 7.63006L18.9643 15.2601V0H29.1756V15.2601L42.4643 7.63006L47.5 16.3699L34.2113 24L47.5 31.6301L42.4643 40.3699L29.1756 32.7399V48H18.9643Z" />
+    </symbol>
+</svg>
