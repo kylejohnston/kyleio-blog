@@ -2,11 +2,10 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwindcss from '@tailwindcss/vite';
-import rssFullTextIntegration from './src/integrations/rssFullText.js';
-
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://kyleio.com',
   integrations: [mdx()],
   experimental: {
     fonts: [
@@ -37,5 +36,4 @@ export default defineConfig({
 vite: {
   plugins: [tailwindcss()]
 },
-site: 'https://kyleio.com',
 });
