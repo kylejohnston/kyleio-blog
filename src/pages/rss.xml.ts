@@ -21,7 +21,7 @@ export async function GET(context: APIContext) {
   const container = await AstroContainer.create({ renderers });
 
   // Load the content collection entries to add to our RSS feed.
-  const posts = (await getCollection("posts")).sort((a, b) => {
+  const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort((a, b) => {
     const dateA = a.data.tendDate || a.data.pubDate;
     const dateB = b.data.tendDate || b.data.pubDate;
     return dateA > dateB ? -1 : 1;
