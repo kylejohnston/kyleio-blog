@@ -4,6 +4,7 @@ import { Font } from 'astro:assets';
 import '../styles/global.css';
 import Logo from '../assets/guava.svg';
 import ID from '../assets/kio.svg';
+import GuavaSprites from '../assets/guava-sprites.svg';
 
 interface Props {
   title?: string;
@@ -81,7 +82,7 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
     flex-direction: row;
     justify-content: space-between;
     align-items: top;
-    background: var(--warm);
+    background: var(--cool);
     color: var(--color-text);
     padding: calc(var(--base) * 4);
     gap: var(--base);
@@ -94,3 +95,30 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
     text-decoration: none;
   }
 </style>
+
+<!-- Add the sprites to your HTML -->
+<GuavaSprites />
+
+<!-- Add this script before closing body tag -->
+<script>
+  const shapes = ['rect', 'circle', 'hex', 'star'];
+  const logo = document.querySelector('.guava use');
+  let isHovering = false;
+  
+  if (logo) {
+    const parent = logo.parentElement;
+    
+    parent.addEventListener('mouseenter', () => {
+      if (!isHovering) {
+        isHovering = true;
+        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+        logo.setAttribute('href', `#${randomShape}`);
+      }
+    });
+
+    parent.addEventListener('mouseleave', () => {
+      isHovering = false;
+      logo.setAttribute('href', '#rect');
+    });
+  }
+</script>
