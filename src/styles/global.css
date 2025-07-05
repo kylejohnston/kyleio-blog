@@ -208,8 +208,8 @@ a:hover, a:active {
 a.tag {
   padding: 0.25rem 0.5rem;
   border-radius: var(--base);
-  color: var(--mid);
-  border: 1px solid var(--mid);
+  color: var(--light);
+  border: 1px solid var(--light);
   text-decoration: none;
   line-height: 1;
   font-family: var(--font-mono);
@@ -225,34 +225,28 @@ a.tag:hover .count {
   color: white;
 }
 
-a.post {
-  border: 1px solid var(--cool);
-}
 a.post:hover {
   background: var(--cool);
-  color: white;
-}
-a.til {
-  border: 1px solid var(--cooler);
-}
-a.til:hover {
-  background: var(--cooler);
+  border: 1px solid var(--cool);
   color: white;
 }
 
-a.page {
-  border: 1px solid var(--warm);
+a.til:hover {
+  background: var(--cooler);
+  border: 1px solid var(--cooler);
+  color: white;
 }
+
 a.page:hover {
   background: var(--warm);
+  border: 1px solid var(--warm);
   color: white;
 }
-a.project {
-  border: 1px solid var(--warmer);
-}
+
 a.project:hover {
-  color: white;
   background: var(--warmer);
+  border: 1px solid var(--warmer);
+  color: white;
 }
 
 .posts article {
