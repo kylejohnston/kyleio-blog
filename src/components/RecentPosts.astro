@@ -56,7 +56,7 @@ const allTags = sortedTags;
         <h3>
           <a href={`/p/${featuredPost.slug}`}>{featuredPost.data.title}</a>
         </h3>
-        <p class="mt-1 font-">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`} class="font-medium"> Continue <span class="inline-block relative text-2xl top-0.5">☞</span></a></p>
+        <p class="mt-1 font-">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`} class="font-medium"> <nobr>Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
       </article>
     )}
   </div>
@@ -68,17 +68,16 @@ const allTags = sortedTags;
             <h3>
               <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
             </h3>
-            <div class="grid">
+            <div class="grid ml-1">
               <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
             </div>
-            {/* <hr> */}
-            <div class="tags small">
+            <div class="tags small ml-1">
               {post.data.tags.map((tag) => (
                 <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
               ))}
             </div>
-            <span class="lite hidden sm:block" style="">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="small hidden sm:block">
+            <span class="lite hidden ml-1 sm:block" style="">·</span>
+            <time datetime={post.data.pubDate.toISOString()} class="small hidden ml-1 sm:block">
               { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
             </time>
           </article>
