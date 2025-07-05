@@ -253,7 +253,6 @@ a.project:hover {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto auto auto;
   align-items: center;
-  gap: 8px;
   width: 100%;
   text-wrap: balance;
 }
