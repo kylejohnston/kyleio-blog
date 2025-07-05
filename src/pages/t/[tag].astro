@@ -40,10 +40,10 @@ const { posts } = Astro.props;
           <h3>
             <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
           </h3>
-          <div class="grid">
+          <div class="grid ml-1">
             <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
           </div>
-          <time datetime={post.data.pubDate.toISOString()} class="small">
+          <time datetime={post.data.pubDate.toISOString()} class="small ml-1">
             { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
           </time>
         </article>
