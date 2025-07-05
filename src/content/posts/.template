@@ -1,7 +1,7 @@
 ---
 title: Title
 description: Short description
-pubDate: 2025-01-01:00:00:00
+pubDate: 2025-01-01T14:00:00-05:00
 # tendDate:
 tags: ['page', 'project', 'post', 'til']
 draft: true
