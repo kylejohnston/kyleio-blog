@@ -9,7 +9,7 @@ draft: false
 
 Today I learned how to generate a full-text RSS feed in Astro! It handles both Markdown and MDX files. And most importantly, it handles any images or inline components used in those files.
 
-**tl;dr** I used [this code](https://github.com/delucis/astro-blog-full-text-rss/) from Chris Swithinbank, . It works by rendering any posts in a content collection, then pipes *that* content to Astro’s [native RSS function](https://docs.astro.build/en/recipes/rss/). And it works like a charm.
+**tl;dr** I used [this code](https://github.com/delucis/astro-blog-full-text-rss/) from Chris Swithinbank. It works by rendering any posts in a content collection, then pipes *that* content to Astro’s [native RSS function](https://docs.astro.build/en/recipes/rss/). And it works like a charm.
 
 One gotcha I ran into implementing this: I followed [Astro’s documentation](https://docs.astro.build/en/recipes/rss/) for implementing a feed. They recommend creating a `rss.xml.js` file. Chris's solution includes type-checking, so the code didn't work until I renamed the file `rss.xml.ts`.
 
