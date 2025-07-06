@@ -7,21 +7,21 @@ tags:
 draft: false
 ---
 import { Image } from 'astro:assets';
-import past from '../../assets/projects/t000day-past.webp';
-import present from '../../assets/projects/t000day-present.webp';
-import future from '../../assets/projects/t000day-future.webp';
+import one from '../../assets/projects/t000day-01.webp';
+import two from '../../assets/projects/t000day-02.webp';
+import three from '../../assets/projects/t000day-03.webp';
 
 [t000.day](https://t000.day/) is a single-serving site that answers a simple question: what day of the year is it?
 
 <div class="flex flex-row gap-2 wide">
 	<div>
-		<Image src={past} alt="Back in time" class="border border-neutral-200 rounded-sm" />
+		<Image src={one} alt="Back in time" class="border border-neutral-200 rounded-sm" />
 	</div>
 	<div>
-		<Image src={present} alt="Today's day" class="border border-neutral-200 rounded-sm" />
+		<Image src={two} alt="Today's day" class="border border-neutral-200 rounded-sm" />
 	</div>
 	<div>
-		<Image src={future} alt="Future" class="border border-neutral-200 rounded-sm" />
+		<Image src={three} alt="Future" class="border border-neutral-200 rounded-sm" />
 	</div>
 </div>
 <p class="caption">[View the project](https://t000.day/) · [GitHub repo](https://github.com/kylejohnston/t000day)</p>
@@ -31,4 +31,4 @@ The idea for this project was inspired by a frustration with my 365 photo projec
 ## How LLMs unlocked this project
 When LLM-based coding tools hit the scene, I dusted off this idea and used ChatGPT to turn it into a super-simple, working site. Under the hood, it's bascially an HTML file with few JavaScript functions. The JavaScript determines the date, adds the correct suffix, and renders it on the page.
 
-Since launching, I've added a few quality-of-life features, like parsing the day based on the URL. Now, I can add any date to the URL (starting in [1900](https://t000.day/1900-01-01)) and see what the day was (or [will be](https://t000.day/2096-04-10)). I have redesign planned with some ideas to make bits of the UI change based on the current day. 
+Since launching, I've added a few quality-of-life features, like parsing the day based on the URL. Now, I can add any date to the URL (starting in [1900](https://t000.day/1900-09-09)) and see what the day was (or [will be](https://t000.day/2096-04-10)).
