@@ -25,11 +25,14 @@ export async function getStaticPaths() {
   }));
 }
 
+// Get tag name and make first letter uppercase, then add 's'
 const { tag } = Astro.params;
+const pluralizedTag = tag.charAt(0).toUpperCase() + tag.slice(1) + 's';
+
 const { posts } = Astro.props;
 ---
 
-<Layout>
+<Layout title={pluralizedTag}>
   <div class="tag-page">
     <header>
       <h1 class="tertiary uppercase">{tag}s</h1>
