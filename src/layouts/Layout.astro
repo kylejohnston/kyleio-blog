@@ -56,12 +56,12 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
       </main>
     </div>
     <footer>
-        <div class="small">
-          <p><a href="/">Home</a> · · <a href="/p/about/">About</a> · · <a href="/p/now/">Now</a></p>
-          <p>Elsewhere: <a href="https://mastodon.online/@kylejohnston">Mastodon</a> · · <a href="https://bsky.app/profile/kylejohnston.bsky.social">Bluesky</a> · · <a href="https://www.linkedin.com/in/kylejohnston/">LinkedIn</a></p>
-          <p><a href="/rss.xml">RSS</a> · · <a href="https://github.com/kylejohnston/kyleio-blog">GitHub</a> · · <a href="https://v1.kyleio.com/">V1</a></p>
+        <div class="smallish">
+          <p><a href="/">Home</a> • <a href="/p/about/">About</a> • <a href="/p/now/">Now</a></p>
+          <p>Connect with me on <a href="https://mastodon.online/@kylejohnston">🦣 Mastodon</a>, <a href="https://bsky.app/profile/kylejohnston.bsky.social">🦋 Bluesky</a>, or <a href="https://www.linkedin.com/in/kylejohnston/">👔 LinkedIn</a></p>
+          <p><a href="/rss.xml">Subscribe to RSS</a> for new posts • <a href="https://github.com/kylejohnston/kyleio-blog">GitHub</a> • <a href="https://v1.kyleio.com/">V1</a></p>
         </div>
-        <div class="">
+        <div>
           <ID>
         </div>
     </footer>
@@ -84,14 +84,26 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
     justify-content: space-between;
     align-items: top;
     background: var(--cool);
-    color: var(--color-text);
+    color: var(--lightest);
     padding: calc(var(--base) * 4);
-    gap: var(--base);
+    gap: calc(var(--base) * 1);
   }
   footer p {
-    margin-block: auto;
+    margin: 0.5rem 0;
+    text-wrap: balance;
   }
-  footer a:link, footer a:visited {
+  footer a:link, footer a:visited,
+  footer p a:link, footer p a:visited
+   {
+    color: var(--lightest);
+    text-decoration: underline dotted;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 3px;
+  }
+  footer a:hover, footer a:active,
+  footer p a:hover, footer p a:active
+   {
+    background: var(--cooler);
     color: var(--color-text);
     text-decoration: none;
   }
