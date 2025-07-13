@@ -307,6 +307,10 @@ p.caption {
   color: var(--lighter);
 }
 
+.smallish {
+  font-size: .8em;
+}
+
 .small {
   font-size: .7em;
 }
