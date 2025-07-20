@@ -111,7 +111,7 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
 
 <!-- Add this script before closing body tag -->
 <script>
-  const shapes = ['arcs', 'hex', 'ko', 'mod', 'octo', 'star'];
+  const shapes = ['arcs', 'hex', 'ko', 'mod', 'octo', 'star', 'fox'];
   const logo = document.querySelector('.guava use');
   let isHovering = false;
   
@@ -128,7 +128,7 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
 
     parent.addEventListener('mouseleave', () => {
       isHovering = false;
-      logo.setAttribute('href', '#rect');
+      logo.setAttribute('href', '#ko');
     });
   }
 </script>
