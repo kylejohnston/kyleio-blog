@@ -1,0 +1,53 @@
+---
+title: Halucidations
+description: I made a weird little site that serves up inspirational ideas that seem profound… until they don’t
+pubDate: 2025-07-26T14:00:00-05:00
+# tendDate:
+tags: ['project']
+draft: false
+---
+import { Image } from 'astro:assets';
+import one from '../../assets/projects/halucidations-unfinished.webp';
+import two from '../../assets/projects/halucidations-deep.webp';
+import three from '../../assets/projects/halucidations-balance.webp';
+
+This project started with an idea and this prompt to ChatGPT:  
+> Write 10 short inspirational quotes or phrases. At a glance, they should read profound, but on closer inspection, they make no sense
+
+Which resulted in a promising start:  
+```prompt
+Sure! Here are 10 short inspirational quotes that *sound* deep at first—but if you think too hard about them, they unravel into delightful nonsense:  
+Chase the horizon until the sky turns inside out // Be the echo of your own silence // When the clock forgets time, you’ll remember truth // Only a still river knows how to climb // Grow roots in the wind, and the storm becomes home // To leap is to arrive before you begin // The loudest whispers carve the deepest shadows // You are the footprint of a thought not yet walked // Melt your boundaries in the furnace of maybe // Balance is just falling in every direction at once
+```
+
+From that seed, I generated a lot more nonsense phrases (100+) and transformed them into a simple site with this prompt:  
+> I'd like to turn these into a simple web page that displays one quote at a time. Visually, the quote appears on something that looks like tissue paper. Something with an ephemeral vibe. Serif type. Soft, pastel color scheme. Maybe a blobby animated gradient in the background. There's a 'next' button at the bottom of the screen to load the next phrase. Before you give me the answer, ask me everything you need to know to give me the best result possible.
+
+**Note:** I've found finishing a prompt with this phrase — `Before you give me the answer, ask me everything you need to know to give me the best result possible.` — acts as a requirements-gathering step that really clarifies intent and vision.
+
+In this case, it helped me clarify details like the quotes should be randomized and stored in a way that lets me easily add more over time; where I planned to host the site; the language and framework I wanted to use; and a feature or two that I ended up dropping, like a share button.
+
+ChatGPT's output was a zip file with the HTML, CSS, and JavaScript files that I could use to test and tweak locally. I refined the CSS and typography to my tastes, prompted ChatGPT to add swipe support on mobile, then named and launched the site. Easy peasy.
+
+<div class="flex flex-row gap-2 wide">
+	<div>
+		<Image src={one} alt="Only the unfinished road can arrive." class="border border-neutral-200 rounded-sm" />
+	</div>
+	<div>
+		<Image src={two} alt="The deeper the puddle, the taller your reflection." class="border border-neutral-200 rounded-sm" />
+	</div>
+	<div>
+		<Image src={three} alt="Balance is just falling in every direction at once." class="border border-neutral-200 rounded-sm" />
+	</div>
+</div>
+<p class="caption">[View the project](https://halucidations.kyleio.com/) · [GitHub repo](https://github.com/kylejohnston/halucidations)</p>
+
+All in, this project took 1–2 hours to complete. One surprising detail of using ChatGPT for this; it would suggest features. For example, I asked ChatGPT to add swipe support on mobile. In addition to the code, it asked if I wanted to add haptic/tactile feedback or animations on swipe. I found out later that's only supported on Android, but I liked the suggestion.
+
+## Tools used
+- **ChatGPT** for generating the quotes and the initial HTML/CSS/JS. (free)
+- **VS Code** for editing the code and making refinements. (free)
+- **GitHub** for hosting the code. (free)
+- **Cloudflare** for serving the site. (free)
+
+[Check out Halucidations](https://halucidations.kyleio.com/)
