@@ -38,7 +38,7 @@ later: shuffle button to randomize posts
 /* Base Elements */
 html {
   scroll-behavior: smooth;
-  background: linear-gradient(0deg, rgba(136, 136, 255, 1) 16%, rgba(255, 136, 136, 1) 64%);
+  background: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%);
 }
 
 body {
@@ -50,7 +50,7 @@ body {
   line-height: 1.5;
   font-family: var(--font-base);
   position: relative;
-  background: var(--cool);
+  background: var(--cooler);
 }
 
 body::before {
@@ -60,7 +60,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  border-image: linear-gradient(0deg, rgba(136, 136, 255, 1) 16%, rgba(255, 136, 136, 1) 64%) 1;
+  border-image: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%) 1;
   border-width: calc(var(--base) * 1) calc(var(--base) * 1) 0 calc(var(--base) * 1);
   border-style: solid;
   pointer-events: none;
