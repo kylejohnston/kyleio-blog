@@ -118,6 +118,12 @@ blockquote {
   border-left: 4px solid var(--cool);
 }
 
+pre {
+  white-space: pre-wrap;
+  background: #E0E0E0 !important;
+  padding: calc(var(--base) * 2);
+}
+
 code { 
   font-family: var(--font-mono);
   color: var(--text);
