@@ -27,18 +27,23 @@ export async function GET(context: APIContext) {
     return dateA > dateB ? -1 : 1;
   });
 
-  // Loop over blog posts to create feed items for each, including full content.
+  // Add RSS footer template
+  const getRssFooter = (postUrl: string) => `
+    <hr />
+    <p style="font-size: 0.875em; color: #666;">
+      Thank you for using RSS! 
+      <a href="mailto:hello@flow14.com">Reply via email</a> 
+      or <a href="${postUrl}">view this post on the web</a>.
+    </p>
+  `;
+
+  // Loop over blog posts to create feed items
   const feedItems: RSSFeedItem[] = [];
   for (const post of posts) {
-    // Get the `<Content/>` component for the current post.
     const { Content } = await post.render();
-    // Use the Astro container to render the content to a string.
     const rawContent = await container.renderToString(Content);
-    // Process and sanitize the raw content:
-    // - Removes `<!DOCTYPE html>` preamble
-    // - Makes link `href` and image `src` attributes absolute instead of relative
-    // - Strips any `<script>` and `<style>` tags
-    // Thanks @Princesseuh — https://github.com/Princesseuh/erika.florist/blob/1827288c14681490fa301400bfd815acb53463e9/src/middleware.ts
+    const postUrl = `${baseUrl}/p/${post.slug}/`;
+    
     const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ''), [
       async (node) => {
         await walk(node, (node) => {
@@ -53,7 +58,15 @@ export async function GET(context: APIContext) {
       },
       sanitize({ dropElements: ["script", "style"] }),
     ]);
-    feedItems.push({ ...post.data, link: `/p/${post.slug}/`, content });
+
+    // Add footer to content
+    const contentWithFooter = content + getRssFooter(postUrl);
+
+    feedItems.push({ 
+      ...post.data, 
+      link: `/p/${post.slug}/`, 
+      content: contentWithFooter 
+    });
   }
 
   // Return our RSS feed XML response.
