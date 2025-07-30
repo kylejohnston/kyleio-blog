@@ -69,11 +69,12 @@ body::before {
 
 /* Typography */
 h1 {
-  font-size: calc(var(--base) * 9);
+  font-size: calc(var(--base) * 7);
   font-family: var(--font-head);
   line-height: 0.88;
   margin-bottom: calc(var(--base) * 3);
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 h1.tertiary, h2.tertiary, h3.tertiary {
   font-size: 1em; 
@@ -394,6 +395,9 @@ time, .count {
   }
   a:not(.tag):hover, a:not(.tag):active {
     border-radius: 4px;
+  }
+  h1 {
+    font-size: calc(var(--base) * 9);
   }
   .content img.wide, .content .wide {
     width: calc(100% + var(--base) * 16);
