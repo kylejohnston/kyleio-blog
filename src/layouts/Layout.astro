@@ -56,13 +56,15 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
       </main>
     </div>
     <footer>
-        <div class="smallish">
-          <p><a href="/">Home</a> • <a href="/p/about/">About</a> • <a href="/p/now/">Now</a></p>
-          <p>Connect with me on <a href="https://mastodon.online/@kylejohnston">🦣 Mastodon</a>, <a href="https://bsky.app/profile/kylejohnston.bsky.social">🦋 Bluesky</a>, or <a href="https://www.linkedin.com/in/kylejohnston/">👔 LinkedIn</a></p>
-          <p><a href="/rss.xml">Subscribe to RSS</a> for new posts • <a href="https://github.com/kylejohnston/kyleio-blog">GitHub</a> • <a href="https://v1.kyleio.com/">V1</a></p>
-        </div>
-        <div>
-          <ID>
+        <div class="wrapper">
+          <div class="smallish">
+            <p><a href="/">Home</a> • <a href="/p/about/">About</a> • <a href="/p/now/">Now</a></p>
+            <p>Connect with me on <a href="https://mastodon.online/@kylejohnston">🦣 Mastodon</a>, <a href="https://bsky.app/profile/kylejohnston.bsky.social">🦋 Bluesky</a>, or <a href="https://www.linkedin.com/in/kylejohnston/">👔 LinkedIn</a></p>
+            <p><a href="/rss.xml">Subscribe to RSS</a> for new posts • <a href="https://github.com/kylejohnston/kyleio-blog">GitHub</a> • <a href="https://v1.kyleio.com/">V1</a></p>
+          </div>
+          <div>
+            <ID>
+          </div>
         </div>
     </footer>
   </body>
@@ -77,6 +79,10 @@ const siteTitle = isHome ? 'Kyle IO, a creative journal' : `${title} · · K:IO`
     min-height: 88vh;
   }
   footer {
+    margin: 0 auto;
+    background: var(--cooler);
+  }
+  footer .wrapper {
     max-width: 808px;
     margin: 0 auto;
     display: flex;
