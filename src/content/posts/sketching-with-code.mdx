@@ -1,0 +1,66 @@
+---
+title: Sketching with Code
+description: A peek into my Processing process
+pubDate: 2018-10-31T14:00:00-05:00
+# tendDate: 
+tags: ['post']
+draft: false
+---
+import { Image } from 'astro:assets';
+import { Vimeo } from 'astro-embed';
+import final from '../../assets/posts/2018-10-processing/code-sketch.webp';
+import color from '../../assets/posts/2018-10-processing/color-palette.webp';
+import textureIn from '../../assets/posts/2018-10-processing/texture-input.webp';
+import textureOut from '../../assets/posts/2018-10-processing/texture-output.webp';
+
+<Image src={final} alt="A colorful, abstract pattern generated wit Processing" class="border border-neutral-200 shadow-xl rounded-sm wide" />
+<p class="caption">Read on to learn how I made this image…</p>
+
+I’ve been spending some of my free time sketching in code using Processing and the Hype library. There are tons or resources and inspiration out there, but I’ve learned a lot by joining [Joshua Davis’](https://joshuadavis.com/) Patreon page, where he shares the methods to his generative art madness. His lessons helped me generate this video:
+
+<Vimeo id="https://vimeo.com/298098588" />
+
+## Color, texture, and algorithm
+One of takeaways I especially liked from Josh's tutorials was the idea that you can generate endless number of patterns by manipulating three variables: (1) color, (2) texture, and (3) the algorithm.
+
+To speed up my process, I’ve started to build a library of colors and textures I can use in my code sketches. When I have time to create a new sketch, I grab a few elements from my library and jump right into code. Like anything else, when you start to look for inspiration, you’ll see it everywhere.
+
+### Color
+My color inspiration came from the plethora of Apple logos created to promote an October 2018 event. I had saved of number of the logos from [this gallery](https://imgur.com/a/all-of-apple-logos-from-october-30th-event-invites-ufybGk6), so I picked three of my favorites, created gradient scales in Figma, then output those gradients as PNGs.
+
+<Image src={color} alt="Apple logo variants and color scales" class="border border-neutral-200 rounded-sm" />
+<p class="caption">My color inspiration and gradient scales</p>
+
+### Texture
+My texture inspiration came from a case study of Uber’s 2018 rebrand. I spotted a cool tile pattern in one of the photos featured in their photography guidelines, and created several graphics based on those patterns.
+<div class="flex flex-row gap-2 wide">
+	<div>
+		<Image src={textureIn} alt="Texture inspiration from an Uber case study." class="border border-neutral-200 rounded-sm" />
+	</div>
+	<div>
+		<Image src={textureOut} alt="Shapes I created based on the inspiration." class="border border-neutral-200 rounded-sm" />
+	</div>
+</div>
+<p class="caption">The inspiration and the output</p>
+
+### Algorithm
+Using my colors and textures and the code Josh shared, I started playing with different combinations of elements until I found one I liked. You can find [my final source code on GitHub](https://github.com/kylejohnston/code-sketches/blob/master/09_texture/tx0001/build/build.pde).
+
+## Turning a Processing sketch into a video
+There are a number of ways to generate a video from a Processing sketch; my current preferred technique is using a snippet of code that exports each frame of the sketch as a high-res image. I wasn’t exactly sure how many frames it would take to create a usable video, so I started by exporting 5,000 jpegs. After ~12 minutes of render time, I looked through the jpegs to find a good stopping point for my video — frame 2,580 was the winner. It’s easily divisible by 30 and 60, which is great for my purposes because 1 frame = 1 second of video. Simple math!
+
+I trashed the jpegs, changed the output format to TIFF (for a crisp, high-res image) and output my images. 2 minutes later, I had 2,580 TIFFs ready to use.
+
+I like to use Adobe Premiere to create my videos because it gives me a lot of control over outputs and effects. I start by importing all the TIFFs into Premiere, add those to the timeline, set the frame duration to 1 second, then export a video. I’m still trying to find a combination of export settings that I’m happy with; so far starting with Premiere’s default settings for Vimeo and changing VBR to 2-pass has delivered the best results. In this case, the result is this slow-paced video:
+
+<Vimeo id="https://vimeo.com/298098604" />
+
+To make things more interesting, I import my first video into a new Premiere project. Now, I can play with the playback speed, visual effects (mirroring is always fun to try), and color treatments. In this case, I changed the duration to 10 seconds, which dramatically speeds up the animation, and exported a new video (using the same settings from the first pass), resulting in my final video:
+
+<Vimeo id="https://vimeo.com/298098588" />
+
+## It’s just that easy!
+Once you get the steps down, this is a relatively quick process — and the possibilities are endless. If you think it looks interesting, I highly encourage you to jump in and try it for yourself. Josh’s Patreon posts are a great starting point and cover everything you need to get started.
+
+Happy sketching!
+
