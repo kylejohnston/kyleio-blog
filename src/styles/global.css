@@ -50,7 +50,7 @@ body {
   line-height: 1.5;
   font-family: var(--font-base);
   position: relative;
-  background: var(--cooler);
+  background: var(--warm);
 }
 
 body::before {
