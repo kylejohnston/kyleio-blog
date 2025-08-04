@@ -1,0 +1,18 @@
+---
+title: Links
+description: Links and articles that I found interesting.
+pubDate: 2025-08-04T14:00:00-05:00
+# tendDate:
+tags: ['page']
+draft: false
+---
+
+import RaindropCollection from '../../components/RaindropCollection.astro';
+
+<p class="small" style="margin-block: 0 !important;"><a href="https://kyleio.com/links.xml">Links RSS</a></p>
+
+<RaindropCollection 
+  collectionId={58403513} 
+  accessToken={import.meta.env.RAINDROP_TOKEN}
+  perpage={10}
+/>

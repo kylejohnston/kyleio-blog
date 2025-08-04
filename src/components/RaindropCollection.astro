@@ -1,0 +1,56 @@
+---
+// RaindropCollection.astro
+export interface Props {
+  collectionId: number;
+  perpage?: number;
+  accessToken: string;
+}
+
+const { collectionId, perpage = 25, accessToken } = Astro.props;
+
+async function fetchRaindrops(collectionId: number, accessToken: string, perpage: number) {
+  try {
+    const response = await fetch(
+      `https://api.raindrop.io/rest/v1/raindrops/${collectionId}?perpage=${perpage}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    return data.items || [];
+  } catch (error) {
+    console.error('Error fetching raindrops:', error);
+    return [];
+  }
+}
+
+const raindrops = await fetchRaindrops(collectionId, accessToken, perpage);
+---
+
+<div>
+  {raindrops.length === 0 ? (
+    <p>No bookmarks found.</p>
+  ) : (
+    <div class="link-list">
+        {raindrops.map((raindrop: any) => (
+            <div class="link-item">
+                <h2><a href={raindrop.link} target="_blank" rel="noopener noreferrer">{raindrop.title}</a></h2>
+                {raindrop.excerpt && (
+                <blockquote class="raindrop-excerpt">{raindrop.excerpt}</blockquote>
+                )}
+                {raindrop.note && (
+                <p class="raindrop-note">{raindrop.note}</p>
+                )}
+            </div>
+        ))}
+    </div>
+  )}
+</div>
