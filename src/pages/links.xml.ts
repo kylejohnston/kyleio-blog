@@ -18,7 +18,7 @@ export async function GET(context: APIContext) {
     items: links.map((link: any) => ({
       title: link.title,
       pubDate: link.created,
-      description: link.excerpt,
+      description: `<blockquote>${link.excerpt}</blockquote>${link.note ? `<p>${link.note.replace(/\n/g, '<br />')}</p>` : ''}`,
       link: link.link,
     })),
   });
