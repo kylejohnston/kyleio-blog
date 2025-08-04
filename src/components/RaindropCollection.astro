@@ -35,127 +35,22 @@ async function fetchRaindrops(collectionId: number, accessToken: string, perpage
 const raindrops = await fetchRaindrops(collectionId, accessToken, perpage);
 ---
 
-<div class="raindrop-collection">
-  <h2>My Bookmarks</h2>
+<div>
   {raindrops.length === 0 ? (
     <p>No bookmarks found.</p>
   ) : (
-    <div class="raindrop-grid">
-      {raindrops.map((raindrop: any) => (
-        <article class="raindrop-item">
-          <a href={raindrop.link} target="_blank" rel="noopener noreferrer">
-            {raindrop.cover && (
-              <img 
-                src={raindrop.cover} 
-                alt={raindrop.title}
-                class="raindrop-cover"
-                loading="lazy"
-              />
-            )}
-            <div class="raindrop-content">
-              <h3>{raindrop.title}</h3>
-              {raindrop.excerpt && (
-                <p class="raindrop-excerpt">{raindrop.excerpt}</p>
-              )}
-              {raindrop.note && (
-                <p class="raindrop-note">{raindrop.note}</p>
-              )}
-              <div class="raindrop-meta">
-                <span class="raindrop-domain">{raindrop.domain}</span>
-                {raindrop.tags && raindrop.tags.length > 0 && (
-                  <div class="raindrop-tags">
-                    {raindrop.tags.map((tag: string) => (
-                      <span class="tag">{tag}</span>
-                    ))}
-                  </div>
+    <div class="link-list">
+        {raindrops.map((raindrop: any) => (
+            <div class="link-item">
+                <h2><a href={raindrop.link} target="_blank" rel="noopener noreferrer">{raindrop.title}</a></h2>
+                {raindrop.excerpt && (
+                <blockquote class="raindrop-excerpt">{raindrop.excerpt}</blockquote>
                 )}
-              </div>
+                {raindrop.note && (
+                <p class="raindrop-note">{raindrop.note}</p>
+                )}
             </div>
-          </a>
-        </article>
-      ))}
+        ))}
     </div>
   )}
 </div>
-
-<style>
-  .raindrop-collection {
-    margin: 2rem 0;
-  }
-  
-  .raindrop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
-  .raindrop-item {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .raindrop-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .raindrop-item a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-  }
-  
-  .raindrop-cover {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  
-  .raindrop-content {
-    padding: 1rem;
-  }
-  
-  .raindrop-content h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-    line-height: 1.4;
-  }
-  
-  .raindrop-excerpt {
-    color: #64748b;
-    font-size: 0.9rem;
-    margin: 0 0 1rem 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .raindrop-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .raindrop-domain {
-    color: #64748b;
-    font-size: 0.8rem;
-  }
-  
-  .raindrop-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-  }
-  
-  .tag {
-    background: #f1f5f9;
-    color: #475569;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.75rem;
-  }
-</style>
