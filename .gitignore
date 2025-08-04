@@ -1,8 +1,7 @@
 # build output
 dist/
-
-# generated types
 .astro/
+.env
 .obsidian/
 src/content/posts/.obsidian/
 
@@ -26,3 +25,4 @@ pnpm-debug.log*
 .idea/
 src/assets/posts/placeholder.png
 .gemini/settings.json
+/.gemini
