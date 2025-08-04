@@ -101,9 +101,18 @@ p {
   margin: calc(var(--base) * 3) 0;
 }
 
-.content h2, .content h3, .content p {
-  margin-block: 1lh;
+.content h2, .content h3, .content p, .link-item {
+  margin-block: calc(var(--base) * 4);
 }
+
+.link-item {
+  margin-block: calc(var(--base) * 8);
+}
+
+.link-item h2, .link-item h3, .link-item p {
+  margin-block: calc(var(--base) * 2);
+}
+
 
 ul {
   @apply list-disc list-outside mx-2 my-0 p-0;
@@ -121,6 +130,10 @@ li {
 blockquote {
   padding-left: calc(var(--base) * 2);
   border-left: 4px solid var(--cool);
+  width: calc(100% - 8px);
+  margin: 0 auto;
+  color: var(--mid);
+  font-style: italic;
 }
 
 pre {
