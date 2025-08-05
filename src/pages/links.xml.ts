@@ -27,9 +27,9 @@ export async function GET(context: APIContext) {
       console.error(`Raindrop API error: ${response.status} ${response.statusText}`);
       // Return empty RSS feed instead of crashing
       return rss({
-        title: `${SITE_TITLE} - Links`,
+        title: `Kyle Johnston - Links`,
         description: SITE_DESCRIPTION,
-        site: `${SITE_URL}/links`,
+        site: `${SITE_URL}/p/links`,
         items: [],
       });
     }
@@ -40,9 +40,9 @@ export async function GET(context: APIContext) {
     const links = Array.isArray(data.items) ? data.items : [];
 
     return rss({
-      title: `${SITE_TITLE} - Links`,
+      title: `Kyle Johnston - Links`,
       description: SITE_DESCRIPTION,
-      site: `${SITE_URL}/links`,
+      site: `${SITE_URL}/p/links`,
       items: links.map((link: any) => ({
         title: link.title || 'Untitled',
         pubDate: link.created || new Date(),
