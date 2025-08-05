@@ -10,7 +10,7 @@ export async function GET(context: APIContext) {
       console.error('RAINDROP_TOKEN environment variable is not set');
       // Return empty RSS feed instead of crashing
       return rss({
-        title: `${SITE_TITLE} - Links`,
+        title: `Kyle Johnston - Links`,
         description: SITE_DESCRIPTION,
         site: `${SITE_URL}/links`,
         items: [],
@@ -55,9 +55,9 @@ export async function GET(context: APIContext) {
     
     // Return empty RSS feed instead of crashing the build
     return rss({
-      title: `${SITE_TITLE} - Links`,
+      title: `Kyle Johnston - Links`,
       description: SITE_DESCRIPTION,
-      site: `${SITE_URL}/links`,
+      site: `${SITE_URL}/p/links`,
       items: [],
     });
   }
