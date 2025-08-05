@@ -23,7 +23,7 @@ export async function GET(context: APIContext) {
   // Load the content collection entries to add to our RSS feed.
   const posts = (await getCollection("posts", ({ data, id }) => {
     // Exclude drafts and the links page
-    return !data.draft && id !== 'links.mdx';
+    return !data.draft && id !== 'links.mdx' && id !== 'about.md';
   })).sort((a, b) => {
     const dateA = a.data.tendDate || a.data.pubDate;
     const dateB = b.data.tendDate || b.data.pubDate;
