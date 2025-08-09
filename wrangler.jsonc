@@ -1,0 +1,17 @@
+{
+  // Name of your Worker
+  "name": "kyleio-blog",
+  
+  // Entry point for your Worker
+  "main": "src/worker.ts",
+  
+  // Required compatibility date for Workers features
+  "compatibility_date": "2025-08-01",
+  
+  // Static asset configuration
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page"
+  }
+}
