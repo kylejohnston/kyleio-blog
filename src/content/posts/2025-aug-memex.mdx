@@ -1,0 +1,60 @@
+---
+title: MEMEX, AUG ‘25 EDITION
+description: A selection of visuals I've saved to MEMEX, my tool for collecting visual inspiration
+pubDate: 2025-08-10T14:00:00-05:00
+# tendDate:
+tags: ['post']
+draft: false
+---
+
+import { Image } from 'astro:assets';
+export const memexImages = import.meta.glob('../../assets/posts/2025-08-memex/*.webp', { eager: true });
+
+<div class="image-grid">
+  {Object.entries(memexImages).map(([path, module]) => {
+    const filename = path.split('/').pop()?.replace('.webp', '') || '';
+    const altText = filename.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    
+    return (
+      <div class="image-item">
+        <Image 
+          src={module.default} 
+          alt={altText}
+          class="rounded-sm"
+        />
+        <p class="caption">{altText}</p>
+      </div>
+    );
+  })}
+</div>
+
+Pulled from [MEMEX](https://memex.flow14.com/), a tool I built to collect visual inspiration.
+
+## Sources:
+1. ADC Awards pattern by [Mullen Lowe Design Studio](https://mullenlowedesign.co/adc-104th-campaign-id) via [BrandNew](https://www.underconsideration.com/brandnew/archives/new_logo_and_campaign_for_the_104th_adc_awards_by_mullenlowe_design_studio.php)
+2. Normal Computing t-shirt by [Company Policy](https://www.companypolicy.studio/work/normal-computing) via [BrandNew](https://www.underconsideration.com/brandnew/archives/new_logo_and_identity_for_normal_computing.php)
+3. [Pavel Ripley paper scrap collage](https://www.itsnicethat.com/articles/pavel-ripley-art-graphic-design-discover-220425)
+4. Portugalia Coaster - ???
+6. [DIY bookcase](https://www.initialesgg.com/2013/11/diy-bibliotheque-design.html)
+8. [En Iwamura sculpture](https://www.en-iwamura.com/works)
+9. [Esperanza Font by LaborAndWait.xyz](https://www.laborandwait.xyz/fonts/esperanza)
+5. [Grace Mitchell - White Iverson cover](https://music.apple.com/us/album/white-iverson-single/1445291462)
+10. [Host Grotesk font sample](https://elementtype.co/host-grotesk/)
+11. 100 Ways to Improve Your Writing - ??? but based on [Gary Provost's book](https://www.amazon.com/100-Ways-Improve-Your-Writing/dp/0451627210)
+12. La Tour Eiffel logo by Les Zinc via [BrandNew](https://www.underconsideration.com/brandnew/archives/new_logo_and_identity_for_la_tour_eiffel_official_merchandise_by_les_zinc.php)
+13. [Noah Kalina zine](https://www.instagram.com/p/C8ZvEW6Onp7/)
+14. [Open Mike Eagle tour poster](https://bsky.app/profile/mike-eagle.bsky.social)
+15. Orville Wright pilot's license - ???
+16. [Pavel Ripley collage](https://www.instagram.com/pavelripley/reel/CnaUxDvMvk-/)
+17. [Popeyemagazine.Jp](https://popeyemagazine.jp/)
+18. [Sable Illustration](https://www.shed-works.co.uk/sable)
+19. [Stabilo ad](https://www.adsoftheworld.com/campaigns/highlight-the-remarkable-lise)
+20. [TimePeek.App](https://timepeek.app/)
+21. [Tucker Nichols, Mostly Everything](https://store.mcsweeneys.net/products/mostly-everything-the-art-of-tucker-nichols)
+7. [Websites Done Cheap](https://cheap.urls.loan/)
+22. When I Believe It - ???
+23. [Why Architects custom type by Need.](https://www.needthinking.com/work/why/)
+24. [WritingExamples.com](https://writingexamples.com/)
+
+
+
