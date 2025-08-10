@@ -12,6 +12,7 @@
     "dev:cf": "npm run build && wrangler dev"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.3",
     "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.12",
     "@tailwindcss/vite": "^4.1.5",
