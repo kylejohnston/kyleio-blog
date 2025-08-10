@@ -1,7 +1,6 @@
 # build output
 dist/
 .astro/
-.env
 .obsidian/
 src/content/posts/.obsidian/
 
@@ -17,6 +16,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.dev.vars
 
 # macOS-specific files
 .DS_Store
