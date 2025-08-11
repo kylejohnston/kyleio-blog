@@ -8,6 +8,7 @@ export default defineConfig({
   site: 'https://kyleio.com',
   integrations: [mdx()],
   experimental: {
+    liveContentCollections: true,
     fonts: [
       {
         provider: fontProviders.google(),
