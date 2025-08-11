@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.3",
-    "@astrojs/mdx": "^4.2.6",
+    "@astrojs/mdx": "^4.3.3",
     "@astrojs/rss": "^4.0.12",
     "@tailwindcss/vite": "^4.1.5",
-    "astro": "^5.7.10",
+    "astro": "^5.12.9",
     "astro-embed": "^0.9.0",
     "date-fns": "^4.1.0",
     "tailwindcss": "^4.1.5",
