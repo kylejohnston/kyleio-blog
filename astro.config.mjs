@@ -13,13 +13,19 @@ export default defineConfig({
       {
         provider: fontProviders.google(),
         name: "IBM Plex Mono",
-        cssVariable: "--font-plex-mono",
+        cssVariable: "--font-mono",
       },
       {
         provider: fontProviders.google(),
         name: "IBM Plex Sans",
         weights: [400, 500],
-        cssVariable: "--font-plex-sans",
+        cssVariable: "--font-sans",
+      },
+      {
+        provider: fontProviders.google(),
+        name: "Newsreader",
+        weights: [400, 700],
+        cssVariable: "--font-text",
       },
       {
         provider: "local",
