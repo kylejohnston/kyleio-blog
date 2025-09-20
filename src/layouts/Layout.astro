@@ -10,9 +10,15 @@ interface Props {
   title?: string;
   tag?: string;
   isHome?: boolean;
+  description?: string;
+  ogImage?: string;
 }
-const { title, tag, isHome } = Astro.props;
+const { title, tag, isHome, description, ogImage } = Astro.props;
 const siteTitle = isHome ? 'Kyle Johnston\'s creative journal' : `${title} · · K:IO`;
+const siteDescription = description || "A collection of things I've made, written, and that spark my curiosity";
+const image = new URL(ogImage || '/og-image.png', Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const ogType = isHome ? 'website' : 'article';
 ---
 
 <!doctype html>
@@ -25,15 +31,15 @@ const siteTitle = isHome ? 'Kyle Johnston\'s creative journal' : `${title} · ·
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{siteTitle}</title>
-    <meta name="description" content="A collection of things I've made, written, and that spark my curiosity" />
+    <meta name="description" content={siteDescription} />
     <meta name="theme-color" content="#ff8888" />
     <link rel="alternate" type="application/rss+xml" title="Kyle Johnston's a creative journal" href={new URL("rss.xml", Astro.site)} />
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kyleio.com/">
-    <meta property="og:title" content="Kyle Johnston's creative journal">
-    <meta property="og:description" content="A collection of things I've made, written, and that spark my curiosity">
-    <meta property="og:image" content="/og-image.png">
+    <meta property="og:type" content={ogType}>
+    <meta property="og:url" content={canonicalUrl}>
+    <meta property="og:title" content={siteTitle}>
+    <meta property="og:description" content={siteDescription}>
+    <meta property="og:image" content={image}>
 
     <Font cssVariable="--font-plex-mono" preload />
     <Font cssVariable="--font-plex-sans" preload />
