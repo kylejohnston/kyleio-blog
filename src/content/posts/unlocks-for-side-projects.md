@@ -3,6 +3,7 @@ title: 'Unlocks for side projects '
 description: A sampling of the techniques and tools I use to capture ideas, explore designs, and launch side projects
 pubDate: 2025-07-07T14:00:00-05:00
 tags: ['post']
+ogImage: /ogImage/unlocks-for-side-projects.png
 draft: false
 ---
 
