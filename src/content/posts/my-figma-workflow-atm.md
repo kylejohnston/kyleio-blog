@@ -4,6 +4,7 @@ description: My current approach to organizing work in Figma in the context of a
 pubDate: 2025-06-23T14:00:00-05:00
 # tendDate:
 tags: ['post']
+ogImage: /ogImage/my-figma-workflow.png
 draft: false
 ---
 
