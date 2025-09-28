@@ -13,5 +13,10 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page"
+  },
+  "triggers": {
+    "crons": [
+      "0 0 * * mon"
+    ]
   }
 }
