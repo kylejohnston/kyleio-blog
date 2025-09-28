@@ -39,7 +39,6 @@ later: shuffle button to randomize posts
 /* Base Elements */
 html {
   scroll-behavior: smooth;
-  background: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%);
 }
 
 body {
@@ -51,21 +50,9 @@ body {
   line-height: 1.5;
   font-family: var(--font-base);
   position: relative;
-  background: var(--warm);
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-image: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%) 1;
-  border-width: calc(var(--base) * 1) calc(var(--base) * 1) 0 calc(var(--base) * 1);
-  border-style: solid;
-  pointer-events: none;
-  z-index: 99;
+  /* background: var(--warm); */
+  border-top: 8px solid var(--warm);
+  background: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%); 
 }
 
 /* Typography */
@@ -122,7 +109,6 @@ p {
   margin-block: calc(var(--base) * 2);
 }
 
-
 ul {
   @apply list-disc list-outside mx-2 my-0 p-0;
 }
@@ -160,7 +146,7 @@ code {
 nav, main {
   max-width: 808px;
   margin: 0 auto;
-  padding: 0 calc(var(--base) * 3);
+  padding: 0 calc(var(--base) * 2);
 }
 
 nav {
@@ -314,6 +300,11 @@ article hr {
   text-overflow: clip;
 }
 
+.featured {
+  margin-bottom: calc(var(--base) * 8);
+  text-wrap: balance;
+}
+
 .content img.wide, .content .wide {
   width: calc(100% + var(--base) * 4);
   margin-left: calc(var(--base) * -2);
@@ -325,7 +316,6 @@ p.caption {
   color: var(--light);
   font-size: .85em;
 }
-
 
 /* Utility Classes */
 .secondary {
@@ -410,6 +400,54 @@ time, .count {
 .recent-posts h2 {
   color: var(--light);
 }
+
+
+  .contentful {
+    background: var(--back);
+    width: calc(100vw - 16px);
+    margin: 0 auto;
+    padding-bottom: calc(var(--base) * 8);
+    border-radius: 0 0 8px 8px;
+    min-height: 88vh;
+  }
+  footer {
+    margin: 0 auto;
+    background: var(--cooler);
+  }
+  footer .wrapper {
+    max-width: 808px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    background: var(--cooler);
+    color: var(--lightest);
+    padding: calc(var(--base) * 4);
+    gap: calc(var(--base) * 1);
+  }
+  footer p {
+    margin: 0.5rem 0;
+    text-wrap: balance;
+  }
+  .spacer { margin: 0 8px; }
+  footer a:link, footer a:visited,
+  footer p a:link, footer p a:visited
+   {
+    color: var(--lightest);
+    text-decoration: underline dotted;
+    text-decoration-color: var(--cool);
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 3px;
+  }
+  footer a:hover, footer a:active,
+  footer p a:hover, footer p a:active
+   {
+    background: var(--cooler);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
 
 @media (min-width: 1024px) /* DESKTOP */ {
   nav, main {
