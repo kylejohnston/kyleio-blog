@@ -51,7 +51,7 @@ body {
   font-family: var(--font-base);
   position: relative;
   /* background: var(--warm); */
-  border-top: 8px solid var(--warm);
+  /* border-top: 8px solid var(--warm); */
   background: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%); 
 }
 
@@ -67,7 +67,7 @@ h1 {
 h1.tertiary, h2.tertiary, h3.tertiary {
   font-size: 1em; 
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 4--;
 }
 
 h2 {
@@ -75,14 +75,14 @@ h2 {
   font-size: 1.5em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 h3 {
   font-size: 1em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 p {
@@ -159,7 +159,7 @@ nav {
 nav.pagination {
   margin: calc(var(--base) * 4) 0;
   padding: 0;
-  font-weight: 500;
+  font-weight: 400;
   height: auto;
 }
 
@@ -277,7 +277,7 @@ a.project:hover {
 }
 .post h3 {
   min-width: 0;
-  font-weight: 500;
+  font-weight: 400;
 }
 .post h3 a {
   color: var(--warmer);
@@ -404,10 +404,10 @@ time, .count {
 
   .contentful {
     background: var(--back);
-    width: calc(100vw - 16px);
     margin: 0 auto;
     padding-bottom: calc(var(--base) * 8);
-    border-radius: 0 0 8px 8px;
+    /* width: calc(100vw - 16px); */
+    /* border-radius: 0 0 8px 8px; */
     min-height: 88vh;
   }
   footer {
