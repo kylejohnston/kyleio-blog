@@ -4,6 +4,7 @@ description: Short description
 pubDate: 2025-01-01T14:00:00-05:00
 # tendDate:
 tags: ['page', 'project', 'post', 'til']
+ogImage: /ogImage/filename.png
 draft: true
 ---
 
