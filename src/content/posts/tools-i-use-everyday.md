@@ -5,7 +5,7 @@ pubDate: 2025-12-03T14:00:00-05:00
 # tendDate:
 tags: ['post']
 ogImage: /ogImage/tools-i-use.png
-draft: true
+draft: false
 ---
 
 I’m in the ‘we’ll see’ camp about LLMs in general. But for coding—especially bite-size projects—I’m bullish on the idea that there’s never been a better or easier time to explore and build. 
