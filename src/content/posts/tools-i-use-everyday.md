@@ -1,5 +1,5 @@
 ---
-title: Tools I use every day—that I've made
+title: Tools I use every day—that I made
 description: I've been busy making tools just for me, and it feels good.
 pubDate: 2025-12-03T14:00:00-05:00
 # tendDate:
