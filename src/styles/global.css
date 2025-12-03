@@ -67,7 +67,7 @@ h1 {
 h1.tertiary, h2.tertiary, h3.tertiary {
   font-size: 1em; 
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 4--;
 }
 
 h2 {
@@ -75,14 +75,14 @@ h2 {
   font-size: 1.5em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 h3 {
   font-size: 1em;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 p {
@@ -159,7 +159,7 @@ nav {
 nav.pagination {
   margin: calc(var(--base) * 4) 0;
   padding: 0;
-  font-weight: 500;
+  font-weight: 400;
   height: auto;
 }
 
@@ -277,7 +277,7 @@ a.project:hover {
 }
 .post h3 {
   min-width: 0;
-  font-weight: 500;
+  font-weight: 400;
 }
 .post h3 a {
   color: var(--warmer);
