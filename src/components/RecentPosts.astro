@@ -54,10 +54,10 @@ const allTags = sortedTags;
     {featuredPost && (
       <article>
         <h3>
-          <span class="small tertiary block font-normal">NEWEST POST · · ·</span>
+          <span class="small tertiary block font-normal mb-1">NEWEST POST · · ·</span>
           <a href={`/p/${featuredPost.slug}`}>{featuredPost.data.title}</a>
         </h3>
-        <p class="mt-1 font-">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`} class="font-medium"> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
+        <p style="margin-block: 8px 24px;">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`} class="font-medium"> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
       </article>
     )}
   </div>
