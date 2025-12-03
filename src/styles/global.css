@@ -51,7 +51,7 @@ body {
   font-family: var(--font-base);
   position: relative;
   /* background: var(--warm); */
-  border-top: 8px solid var(--warm);
+  /* border-top: 8px solid var(--warm); */
   background: linear-gradient(0deg, rgba(85, 85, 187, 1) 16%, rgba(255, 136, 136, 1) 64%); 
 }
 
@@ -404,10 +404,10 @@ time, .count {
 
   .contentful {
     background: var(--back);
-    width: calc(100vw - 16px);
     margin: 0 auto;
     padding-bottom: calc(var(--base) * 8);
-    border-radius: 0 0 8px 8px;
+    /* width: calc(100vw - 16px); */
+    /* border-radius: 0 0 8px 8px; */
     min-height: 88vh;
   }
   footer {
