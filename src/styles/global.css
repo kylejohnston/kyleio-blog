@@ -17,8 +17,7 @@ later: shuffle button to randomize posts
   --font-mono: var(--font-mono);
   --font-base: var(--font-sans);
   --font-text: var(--font-text);
-  --font-head: var(--font-custom);
-  --font-headline: "Bricolage Grotesque", "Arial", "sans-serif";
+  --font-headline: "Bricolage Grotesque", "Helvetica", "sans-serif";
 }
 
 :root {
@@ -59,7 +58,7 @@ body {
 /* Typography */
 h1 {
   font-size: calc(var(--base) * 7);
-  font-family: var(--font-headline);
+  font-family: "Bricolage Grotesque", "Helvetica", "sans-serif";
   font-weight: 800;
   line-height: 0.8;
   letter-spacing: 0;
