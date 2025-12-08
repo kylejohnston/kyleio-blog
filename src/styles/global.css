@@ -18,6 +18,7 @@ later: shuffle button to randomize posts
   --font-base: var(--font-sans);
   --font-text: var(--font-text);
   --font-head: var(--font-custom);
+  --font-headline: "Bricolage Grotesque", "Arial", "sans-serif";
 }
 
 :root {
@@ -58,8 +59,13 @@ body {
 /* Typography */
 h1 {
   font-size: calc(var(--base) * 7);
-  font-family: var(--font-head);
-  line-height: 0.88;
+  font-family: var(--font-headline);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: 0;
+  font-variation-settings:
+    "wdth" 75, "opsz" 40;
+  padding-top: 4px;
   margin-bottom: calc(var(--base) * 3);
   text-wrap: balance;
   overflow-wrap: break-word;
@@ -461,6 +467,8 @@ time, .count {
     border-radius: 4px;
   }
   h1 {
+    margin-top: -8px;
+    padding-top: unset;
     font-size: calc(var(--base) * 9);
   }
   .content img.wide, .content .wide {

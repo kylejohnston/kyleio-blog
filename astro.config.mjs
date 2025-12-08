@@ -26,18 +26,7 @@ export default defineConfig({
         name: "Newsreader",
         weights: [400, 700],
         cssVariable: "--font-text",
-      },
-      {
-        provider: "local",
-        name: "Custom",
-        cssVariable: "--font-custom",
-        variants: [
-            {
-                weight: 400,
-                style: "normal",
-                src: ["./src/assets/fonts/Ginestra-Black.otf"]
-            }]
-        }
+      }
     ]
 },
 vite: {
