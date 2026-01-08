@@ -1,0 +1,57 @@
+---
+title: Learning Log, December 2025
+description: Where my attention flowed in December 2025.
+pubDate: 2026-01-08T14:00:00-05:00
+# tendDate:
+tags: ['post']
+ogImage: /ogImage/2025-12-log.png
+draft: false
+---
+
+import { Image } from 'astro:assets';
+export const memexImages = import.meta.glob('../../assets/posts/2025-25-december/*.webp', { eager: true });
+
+
+Life-wise, it was a pretty chill month. We had a mid-month family get-together for a three-in-one celebration; the holidays, a birthday, and my parents' anniversary. The festivities started with light snow and an impressive [Titanic exhibition](https://unionstation.org/event/titanic-an-immersive-voyage/). We closed the day with a wonderful [dinner in a castle](https://www.wanderingvine.com/) where the owner was kind enough to bake a custom-made anniversary cake for dessert.
+
+## Projects
+- Built [notebin](https://github.com/kylejohnston/notebin) for myself. It's a super minimal web app that's made for quick, transitory notes – no organization or syncing. This was an idea I'd had in my backlog for a long time. Since I've been testing Claude Code with [superpowers](https://github.com/obra/superpowers), I was able to build, launch, and test iterations in no time. Which is a trend I've seen from other people using Claude Code… curious to see how quickly this evolves in 2026.
+- Built a book cover search tool, another just-for-me project. This one allows me to search for high-res book covers that I use to populate [my bookshelf](https://books.kyleio.com/). It's a simple HTML file that runs locally and works like a dream.
+
+## Digital gardening
+### Bookshelf
+- [*A Conspiracy of Tall Men* by Noah Hawley](https://books.kyleio.com/book/conspiracy-of-tall-men). Noah's first book and (I realized) the third book of his I've read. I guess that makes me a fan? Other writing credits he's known for include the Fargo TV series, Alien: Earth, etc. 
+- [*The DaVinci Code* by Dan Brown](https://books.kyleio.com/book/davinci-code/). The book adds color and nuance that didn't make the cut in the movie adaptation.
+- [*Things Become Other Things* by Craig Mod](https://books.kyleio.com/book/things-become-other-things/). I picked this up when it was on sale briefly in November-ish and really enjoyed the book.
+
+### Other reading
+- [Everything I've learned about homeowner's insurance, natural disasters, and recovery aid in 2025](https://a.wholelottanothing.org/all-crazy-stuff-ive-learned-about-homeowners-insurance-natural-disasters-and-recovery/). Great post by Matt Haughey sharing things many people don't realize about insurance and relatively easy steps you can take to improve your coverage
+- [Things I've Learned by Tyler TK](https://thingsivelearned.dev/u/tyler/). I'm drawn to posts like this, and many of Tyler's lessons really resonated. There's a lot of great content to absorb, but self-care and big life stuff are great places to start.
+
+### MEMEX
+A few favorite visuals that I've added to MEMEX, my ever-growing [swipe file](https://memex.flow14.com/):
+
+<div class="image-grid">
+  {Object.entries(memexImages).map(([path, module]) => {
+    const filename = path.split('/').pop()?.replace('.webp', '') || '';
+    const altText = filename.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    
+    return (
+      <div class="image-item">
+        <Image 
+          src={module.default} 
+          alt={altText}
+          class="rounded-sm"
+        />
+        <p class="caption">{altText}</p>
+      </div>
+    );
+  })}
+</div>
+
+- [Nieman Lab's Predictions for Journalism 2026](https://www.niemanlab.org/collection/predictions-2026/). I've been drawn to card-based designs for a while, so this was an easy add.
+- Stüssy Spring 2023 collection. The framing of the subject caught my eye.
+- [Too Due list by Andrew Neyer](https://andrewneyer.com/stuff/p/too-due). Pro tip: [Andrew's shop](https://andrewneyer.com/stuff) rewards a deep dive.
+- [Tyco catalog cover](https://casualarchivist.substack.com/p/all-aboard). The marker-texture and sense of movement made me save this one.
+
+*N.B. Inspiration for this post format comes from Melanie Richards' [monthly learning logs](https://melanie-richards.com/blog/).*
