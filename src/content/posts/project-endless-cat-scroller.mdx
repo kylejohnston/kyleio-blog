@@ -1,0 +1,52 @@
+---
+title: Endless Mew Scroller
+description: I made an endless feed of cat photos to give you a break from the algorithms
+pubDate: 2025-11-17T14:00:00-05:00
+tendDate: 2026-01-14T14:00:00-05:00
+tags: ['project']
+draft: false
+---
+import { Image } from 'astro:assets';
+import one from '../../assets/projects/ems/endlessmewscroller-home.webp';
+import two from '../../assets/projects/ems/endlessmewscroller-cats.webp';
+import three from '../../assets/projects/ems/endlessmewscroller-more-cats.webp';
+
+This project started with a thought captured in my spark file: [Endless Doom Scroller](https://endlessdoomscroller.com/), but kittens?
+
+That thought lingered in my spark file until [Claude Code on the Web](https://code.claude.com/docs/en/claude-code-on-the-web) came along. This project felt like a perfect way to kick the tires.
+
+I started with a [design doc](https://github.com/kylejohnston/endlessmewscroller/blob/main/docs/plans/2025-11-13-endless-cat-scroller-design.md)—created with the help of [Obra’s superpowers](https://github.com/obra/superpowers)—and pointed Claude Code Web to a fresh repo with this prompt: `Follow the design doc in this repo and create a working prototype. The preferred API is cataas.com. But I may want to test thecatapi.com. Any questions?`
+
+I answered a few questions, went to sleep while Claude churned, and woke up to a working prototype! Exciting? Ye… not so fast! 
+
+Before declaring it a one shot, I tried a new prompt shared by a [distinguished engineer](https://en.wikipedia.org/wiki/Rasmus_Lerdorf) at work: `If you were going to re-implement this entire feature we added on this branch cleanly, which findings were non-obvious or surprising and what would you do differently?`
+
+Claude’s responses were surprising:
+1. I’m not actually using the API properly (Biggest issue!)
+2. Didn’t implement srcset (You specifically asked for it!)
+
+Oh my. That day, I learned Claude Code Web isn’t as diligent about following design docs as its CLI counterpart. After a few more rounds of prompts to resolve the issues followed by design refinements, the Endless Mew Scroller launched.
+
+Now, if you need a break from the algorithmic feeds, you can scroll cats!
+
+<div class="flex flex-row gap-2 wide">
+	<div>
+		<Image src={one} alt="The homepage." class="border border-neutral-200 rounded-lg" />
+	</div>
+	<div>
+		<Image src={two} alt="Cat pictures." class="border border-neutral-200 rounded-lg" />
+	</div>
+	<div>
+		<Image src={three} alt="More cat pictures." class="border border-neutral-200 rounded-lg" />
+	</div>
+</div>
+<p class="caption">[View the project](https://endlessmewscroller.pages.dev/) · [GitHub repo](https://github.com/kylejohnston/endlessmewscroller)</p>
+
+## Tools used
+- **Claude Code** (pro plan) + **[Superpowers](https://github.com/obra/superpowers)** for planning (free)
+- **[Claude Code on the Web](https://code.claude.com/docs/en/claude-code-on-the-web)** for development (pro plan)
+- **[TheCatAPI](https://thecatapi.com)** for the endless cats (free)
+- **GitHub** for hosting the code (free)
+- **Cloudflare** for serving the site (free)
+
+[Check out EndlessMewScroller](https://endlessmewscroller.pages.dev/)
