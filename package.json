@@ -9,7 +9,11 @@
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "npm run build && wrangler deploy",
-    "dev:cf": "npm run build && wrangler dev"
+    "dev:cf": "npm run build && wrangler dev",
+    "admin": "tsx scripts/admin.ts",
+    "post:create": "tsx scripts/admin.ts create",
+    "post:publish": "tsx scripts/admin.ts publish",
+    "post:select": "tsx scripts/admin.ts select"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.6.8",
@@ -23,6 +27,9 @@
     "ultrahtml": "^1.6.0"
   },
   "devDependencies": {
+    "@clack/prompts": "^0.11.0",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.21.0",
     "wrangler": "^4.35.0"
   }
 }
