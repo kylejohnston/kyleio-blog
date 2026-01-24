@@ -71,7 +71,13 @@ export function getExistingTags(): string[] {
  */
 export function createPost(filename: string, frontmatter: PostFrontmatter, content: string = ''): string {
   const filepath = path.join(POSTS_DIR, filename);
-  const fileContent = matter.stringify(content, frontmatter);
+  // Use Date objects for date fields so gray-matter outputs unquoted YAML timestamps
+  const frontmatterForYaml = {
+    ...frontmatter,
+    pubDate: new Date(frontmatter.pubDate),
+    ...(frontmatter.tendDate && { tendDate: new Date(frontmatter.tendDate) }),
+  };
+  const fileContent = matter.stringify(content, frontmatterForYaml);
   fs.writeFileSync(filepath, fileContent);
   return filepath;
 }
@@ -82,17 +88,24 @@ export function createPost(filename: string, frontmatter: PostFrontmatter, conte
  * Otherwise, update pubDate
  */
 export function publishPost(post: Post): void {
-  const now = formatDateForFrontmatter();
+  const now = new Date();
 
   const updatedFrontmatter = { ...post.frontmatter, draft: false };
 
   if (post.frontmatter.tendDate) {
-    updatedFrontmatter.tendDate = now;
+    updatedFrontmatter.tendDate = formatDateForFrontmatter(now);
   } else {
-    updatedFrontmatter.pubDate = now;
+    updatedFrontmatter.pubDate = formatDateForFrontmatter(now);
   }
 
-  const fileContent = matter.stringify(post.content, updatedFrontmatter);
+  // Use Date objects for date fields so gray-matter outputs unquoted YAML timestamps
+  const frontmatterForYaml = {
+    ...updatedFrontmatter,
+    pubDate: new Date(updatedFrontmatter.pubDate),
+    ...(updatedFrontmatter.tendDate && { tendDate: new Date(updatedFrontmatter.tendDate) }),
+  };
+
+  const fileContent = matter.stringify(post.content, frontmatterForYaml);
   fs.writeFileSync(post.filepath, fileContent);
 }
 
@@ -102,6 +115,14 @@ export function publishPost(post: Post): void {
 export function updateTendDate(post: Post): void {
   const now = formatDateForFrontmatter();
   const updatedFrontmatter = { ...post.frontmatter, tendDate: now };
-  const fileContent = matter.stringify(post.content, updatedFrontmatter);
+
+  // Use Date objects for date fields so gray-matter outputs unquoted YAML timestamps
+  const frontmatterForYaml = {
+    ...updatedFrontmatter,
+    pubDate: new Date(updatedFrontmatter.pubDate),
+    tendDate: new Date(updatedFrontmatter.tendDate!),
+  };
+
+  const fileContent = matter.stringify(post.content, frontmatterForYaml);
   fs.writeFileSync(post.filepath, fileContent);
 }

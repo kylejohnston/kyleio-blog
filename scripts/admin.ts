@@ -1,5 +1,5 @@
 import * as p from '@clack/prompts';
-import { execSync } from 'node:child_process';
+import { execSync, exec } from 'node:child_process';
 import { generateSlug, formatDateForFrontmatter } from './lib/utils.js';
 import {
   getAllPosts,
@@ -97,7 +97,12 @@ async function createCommand() {
   });
 
   if (openInEditor && !p.isCancel(openInEditor)) {
-    execSync(`code "${filepath}"`);
+    exec(`code "${filepath}"`, (error) => {
+      if (error) {
+        p.log.warn(`Failed to open editor: ${error.message}`);
+      }
+    });
+    p.log.info('Opening in VS Code...');
   }
 }
 
@@ -195,8 +200,12 @@ async function selectCommand() {
     }
   }
 
-  execSync(`code "${post.filepath}"`);
-  p.outro(`Opened: ${post.filename}`);
+  exec(`code "${post.filepath}"`, (error) => {
+    if (error) {
+      p.log.warn(`Failed to open editor: ${error.message}`);
+    }
+  });
+  p.outro(`Opening: ${post.filename}`);
 }
 
 async function main() {
