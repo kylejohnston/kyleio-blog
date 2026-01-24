@@ -1,0 +1,7 @@
+
+✏️ POST ADMIN CLI AVAILABLE!
+   npm run admin        - Interactive CLI
+   npm run post:create  - create a new post
+   npm run post:select  - edit a post
+   npm run post:publish - publish a post
+
