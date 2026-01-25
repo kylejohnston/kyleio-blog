@@ -105,6 +105,12 @@ p {
 .content code {
   font-size: 0.8em;
 }
+pre code {
+  white-space: pre;
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
 
 .link-item {
   margin-block: calc(var(--base) * 8);
@@ -146,7 +152,6 @@ code {
   font-family: var(--font-mono);
   color: var(--text);
   background: #E0E0E0;
-  white-space: pre;
 }
 /* Navigation */
 nav, main {
