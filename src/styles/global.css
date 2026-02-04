@@ -434,7 +434,7 @@ time, .count {
     align-items: top;
     background: var(--cooler);
     color: var(--lightest);
-    padding: calc(var(--base) * 4);
+    padding: calc(var(--base) * 2);
     gap: calc(var(--base) * 1);
   }
   footer p {
@@ -462,7 +462,7 @@ time, .count {
 
 @media (min-width: 1024px) /* DESKTOP */ {
   nav, main {
-    padding: 0 calc(var(--base) * 3);
+    padding: 0 calc(var(--base) * 2);
   }
   a:not(.tag):link, a:not(.tag):visited {
     padding: 2px 4px;
