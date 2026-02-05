@@ -3,6 +3,8 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { format } from 'date-fns';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -14,10 +16,23 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+// Edit mode detection (dev only)
+const isEditMode = import.meta.env.DEV && Astro.url.searchParams.get('edit') === 'true';
+let rawContent = '';
+
+if (isEditMode) {
+  const postsDir = join(process.cwd(), 'src/content/posts');
+  try {
+    rawContent = await readFile(join(postsDir, `${post.slug}.mdx`), 'utf-8');
+  } catch {
+    rawContent = await readFile(join(postsDir, `${post.slug}.md`), 'utf-8');
+  }
+}
 ---
 
-<Layout 
-  title={post.data.title} 
+<Layout
+  title={post.data.title}
   tag={post.data.tags[0]}
   description={post.data.description}
   ogImage={post.data.ogImage}
@@ -38,12 +53,130 @@ const { Content } = await post.render();
           :
           null
         }
+        {import.meta.env.DEV && (
+          <>
+            <span class="tertiary">· · ·</span>
+            <a href={isEditMode ? Astro.url.pathname : `${Astro.url.pathname}?edit=true`} class="small">
+              {isEditMode ? 'View' : 'Edit'}
+            </a>
+          </>
+        )}
       </div>
     </header>
     <div class="content-wrapper">
-      <div class="content">
-        <Content />
-      </div>
+      {isEditMode ? (
+        <div class="editor">
+          <textarea id="editor-content" rows="30">{rawContent}</textarea>
+          <div class="editor-actions">
+            <button id="save-btn" type="button">Save <kbd>⌘S</kbd></button>
+            <span id="save-status"></span>
+          </div>
+        </div>
+      ) : (
+        <div class="content">
+          <Content />
+        </div>
+      )}
     </div>
   </article>
 </Layout>
+
+{isEditMode && (
+  <script define:vars={{ slug: post.slug }}>
+    const textarea = document.getElementById('editor-content');
+    const saveBtn = document.getElementById('save-btn');
+    const status = document.getElementById('save-status');
+    let isDirty = false;
+
+    textarea.addEventListener('input', () => {
+      isDirty = true;
+    });
+
+    window.addEventListener('beforeunload', (e) => {
+      if (isDirty) e.preventDefault();
+    });
+
+    async function savePost() {
+      status.textContent = 'Saving...';
+      try {
+        const res = await fetch('/api/save-post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, content: textarea.value })
+        });
+        const data = await res.json();
+        if (data.success) {
+          isDirty = false;
+          status.textContent = 'Saved! Reloading...';
+        } else {
+          status.textContent = `Error: ${data.error}`;
+        }
+      } catch (err) {
+        status.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    saveBtn.addEventListener('click', savePost);
+
+    // Cmd/Ctrl+S to save
+    textarea.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        savePost();
+      }
+    });
+  </script>
+)}
+
+<style>
+  .editor {
+    width: 100%;
+  }
+
+  .editor textarea {
+    width: 100%;
+    min-height: 60vh;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    resize: vertical;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .editor-actions button {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .editor-actions button:hover {
+    background: var(--border);
+  }
+
+  .editor-actions kbd {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  #save-status {
+    font-size: 0.875rem;
+    color: var(--secondary);
+  }
+</style>
