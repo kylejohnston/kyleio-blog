@@ -3,8 +3,6 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { format } from 'date-fns';
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -17,18 +15,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await post.render();
 
-// Edit mode detection (dev only)
-const isEditMode = import.meta.env.DEV && Astro.url.searchParams.get('edit') === 'true';
-let rawContent = '';
-
-if (isEditMode) {
-  const postsDir = join(process.cwd(), 'src/content/posts');
-  try {
-    rawContent = await readFile(join(postsDir, `${post.slug}.mdx`), 'utf-8');
-  } catch {
-    rawContent = await readFile(join(postsDir, `${post.slug}.md`), 'utf-8');
-  }
-}
+const isDev = import.meta.env.DEV;
 ---
 
 <Layout
@@ -53,40 +40,84 @@ if (isEditMode) {
           :
           null
         }
-        {import.meta.env.DEV && (
+        {isDev && (
           <>
             <span class="tertiary">· · ·</span>
-            <a href={isEditMode ? Astro.url.pathname : `${Astro.url.pathname}?edit=true`} class="small">
-              {isEditMode ? 'View' : 'Edit'}
-            </a>
+            <a id="edit-toggle" href="#edit" class="small">Edit</a>
           </>
         )}
       </div>
     </header>
     <div class="content-wrapper">
-      {isEditMode ? (
-        <div class="editor">
-          <textarea id="editor-content" rows="30">{rawContent}</textarea>
+      <div class="content" id="view-mode">
+        <Content />
+      </div>
+      {isDev && (
+        <div class="editor" id="edit-mode" style="display: none;">
+          <textarea id="editor-content" rows="30" placeholder="Loading..."></textarea>
           <div class="editor-actions">
-            <button id="save-btn" type="button">Save <kbd>⌘S</kbd></button>
+            <button id="save-btn" type="button" disabled>Save <kbd>⌘S</kbd></button>
             <span id="save-status"></span>
           </div>
-        </div>
-      ) : (
-        <div class="content">
-          <Content />
         </div>
       )}
     </div>
   </article>
 </Layout>
 
-{isEditMode && (
+{isDev && (
   <script define:vars={{ slug: post.slug }}>
     const textarea = document.getElementById('editor-content');
     const saveBtn = document.getElementById('save-btn');
     const status = document.getElementById('save-status');
+    const editToggle = document.getElementById('edit-toggle');
+    const viewMode = document.getElementById('view-mode');
+    const editMode = document.getElementById('edit-mode');
+
     let isDirty = false;
+    let contentLoaded = false;
+
+    function isEditHash() {
+      return window.location.hash === '#edit';
+    }
+
+    async function loadContent() {
+      if (contentLoaded) return;
+      status.textContent = 'Loading...';
+      try {
+        const res = await fetch(`/api/read-post?slug=${encodeURIComponent(slug)}`);
+        const data = await res.json();
+        if (data.content) {
+          textarea.value = data.content;
+          textarea.placeholder = '';
+          saveBtn.disabled = false;
+          status.textContent = '';
+          contentLoaded = true;
+        } else {
+          status.textContent = `Error: ${data.error || 'Failed to load'}`;
+        }
+      } catch (err) {
+        status.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    function updateMode() {
+      const editing = isEditHash();
+      viewMode.style.display = editing ? 'none' : '';
+      editMode.style.display = editing ? '' : 'none';
+      editToggle.textContent = editing ? 'View' : 'Edit';
+      editToggle.href = editing ? window.location.pathname : '#edit';
+
+      if (editing) {
+        loadContent();
+      }
+    }
+
+    // Handle hash changes (back/forward, clicking toggle)
+    window.addEventListener('hashchange', updateMode);
+
+    // Initial state
+    updateMode();
 
     textarea.addEventListener('input', () => {
       isDirty = true;
@@ -107,7 +138,7 @@ if (isEditMode) {
         const data = await res.json();
         if (data.success) {
           isDirty = false;
-          status.textContent = 'Saved! Reloading...';
+          status.textContent = 'Saved!';
         } else {
           status.textContent = `Error: ${data.error}`;
         }
