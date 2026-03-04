@@ -14,10 +14,12 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
+
+const isDev = import.meta.env.DEV;
 ---
 
-<Layout 
-  title={post.data.title} 
+<Layout
+  title={post.data.title}
   tag={post.data.tags[0]}
   description={post.data.description}
   ogImage={post.data.ogImage}
@@ -38,12 +40,174 @@ const { Content } = await post.render();
           :
           null
         }
+        {isDev && (
+          <>
+            <span class="tertiary">· · ·</span>
+            <a id="edit-toggle" href="#edit" class="small">Edit</a>
+          </>
+        )}
       </div>
     </header>
     <div class="content-wrapper">
-      <div class="content">
+      <div class="content" id="view-mode">
         <Content />
       </div>
+      {isDev && (
+        <div class="editor" id="edit-mode" style="display: none;">
+          <textarea id="editor-content" rows="30" placeholder="Loading..."></textarea>
+          <div class="editor-actions">
+            <button id="save-btn" type="button" disabled>Save <kbd>⌘S</kbd></button>
+            <span id="save-status"></span>
+          </div>
+        </div>
+      )}
     </div>
   </article>
 </Layout>
+
+{isDev && (
+  <script define:vars={{ slug: post.slug }}>
+    const textarea = document.getElementById('editor-content');
+    const saveBtn = document.getElementById('save-btn');
+    const status = document.getElementById('save-status');
+    const editToggle = document.getElementById('edit-toggle');
+    const viewMode = document.getElementById('view-mode');
+    const editMode = document.getElementById('edit-mode');
+
+    let isDirty = false;
+    let contentLoaded = false;
+
+    function isEditHash() {
+      return window.location.hash === '#edit';
+    }
+
+    async function loadContent() {
+      if (contentLoaded) return;
+      status.textContent = 'Loading...';
+      try {
+        const res = await fetch(`/api/read-post?slug=${encodeURIComponent(slug)}`);
+        const data = await res.json();
+        if (data.content) {
+          textarea.value = data.content;
+          textarea.placeholder = '';
+          saveBtn.disabled = false;
+          status.textContent = '';
+          contentLoaded = true;
+        } else {
+          status.textContent = `Error: ${data.error || 'Failed to load'}`;
+        }
+      } catch (err) {
+        status.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    function updateMode() {
+      const editing = isEditHash();
+      viewMode.style.display = editing ? 'none' : '';
+      editMode.style.display = editing ? '' : 'none';
+      editToggle.textContent = editing ? 'View' : 'Edit';
+      editToggle.href = editing ? window.location.pathname : '#edit';
+
+      if (editing) {
+        loadContent();
+      }
+    }
+
+    // Handle hash changes (back/forward, clicking toggle)
+    window.addEventListener('hashchange', updateMode);
+
+    // Initial state
+    updateMode();
+
+    textarea.addEventListener('input', () => {
+      isDirty = true;
+    });
+
+    window.addEventListener('beforeunload', (e) => {
+      if (isDirty) e.preventDefault();
+    });
+
+    async function savePost() {
+      status.textContent = 'Saving...';
+      try {
+        const res = await fetch('/api/save-post', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, content: textarea.value })
+        });
+        const data = await res.json();
+        if (data.success) {
+          isDirty = false;
+          status.textContent = 'Saved!';
+        } else {
+          status.textContent = `Error: ${data.error}`;
+        }
+      } catch (err) {
+        status.textContent = `Error: ${err.message}`;
+      }
+    }
+
+    saveBtn.addEventListener('click', savePost);
+
+    // Cmd/Ctrl+S to save
+    textarea.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        savePost();
+      }
+    });
+  </script>
+)}
+
+<style>
+  .editor {
+    width: 100%;
+  }
+
+  .editor textarea {
+    width: 100%;
+    min-height: 60vh;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    resize: vertical;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .editor-actions button {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  .editor-actions button:hover {
+    background: var(--border);
+  }
+
+  .editor-actions kbd {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+
+  #save-status {
+    font-size: 0.875rem;
+    color: var(--secondary);
+  }
+</style>

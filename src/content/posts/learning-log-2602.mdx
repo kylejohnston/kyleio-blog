@@ -1,0 +1,60 @@
+---
+title: 'Learning Log, February 2026'
+description: Where my attention flowed in February 2026
+pubDate: 2026-03-04T15:34:37.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-02-log.png
+draft: false
+---
+
+import { Image } from 'astro:assets';
+export const memexImages = import.meta.glob('../../assets/posts/2026-02-log/*.webp', { eager: true });
+
+## Work~Life
+My goal of walking or cycling most days has slowly evolved into a running goal. And somehow I managed to complete my first continuous 1-mile run *and* a 5k run/walk on the same day. 
+
+## Projects 
+- Launched [Massive Bloom](https://massivebloomsound.com/), my ambient drone generator project. It's a browser-based instrument for creating evolving, atmospheric drone sounds and textures. I started with a proof of concept in January and spent the past two weeks sweating the details of the sound, design, naming, etc. I'm happy with how this turned out… full writeup coming soon.
+- Completed a Digital Ocean server migration. I pruned defunct projects, moved to a smaller droplet, etc. I'd been putting it off until I asked Claude Code to draft a step-by-step migration – that was the push I needed. It was as time-consuming as my last migration (chunks of time over a long weekend), but I felt more confident with Claude Code available to troubleshoot issues and answer questions. 
+- As part of the server migration, I uploaded an archive of one of my original blogs—[Curiosities by flow14](https://blog-archive.flow14.com/)—it captures the design takes and the simpler times of 2006–2014. 
+
+## Workflow
+[Last month](https://kyleio.com/p/learning-log-2601/), I mentioned [LeaderKey](https://github.com/mikker/LeaderKey), a wonderfully flexible launcher for MacOS made by [Mikkel Malmberg](https://mikkelmalmberg.com/). Shortly after that post, Mikkel launched [Tuna](https://tunaformac.com/). It's an even *better* launcher (and it includes LeaderKey features). It's deeply inspired by [Quicksilver](https://en.wikipedia.org/wiki/Quicksilver_(software)), which was a precursor to launchers like Alfred, Spotlight, and Raycast. If you're curious, [Mikkel's launch video](https://www.youtube.com/watch?v=vkm-ZFlivyI) may charm you into trying it.
+
+## Digital gardening
+### Bookshelf
+Both of this months books are sci-fi adjacent, and both are excellent.
+- [*A Psalm for the Wild-Built*, by Becky Chambers](https://books.kyleio.com/book/a-psalm-for-the-wild-built). A cozy and thoughtful story of a monk on a self-discovery journey who meets a robot that's been living in the wilderness ever since robots gained self-awareness and ditched humans.
+- [*Shark Heart, a Love Story*, by Emily Habeck](https://books.kyleio.com/book/shark-heart). In which newlyweds navigate a rare diagnosis where the husband turns into a great white shark. A very strange premise, but very well written.
+
+### Other reading
+- [Wes Cook and The McDonald’s Mural](https://cabel.com/wes-cook-and-the-mcdonalds-mural/?ueid=c1c3873b4beb7a343ba10adabdf18232) – Cabel Sasser dives into the details of his wonderful [2024 XOXO talk](https://www.youtube.com/watch?v=Df_K7pIsfvg).
+- [mist: Share and edit Markdown together, quickly](https://interconnected.org/home/2026/02/12/mist) – Matt Webb launched mist, a collaborative markdown editor. It's good! The most interesting bit to me was how he planned and built it — talking to his watch on a long walk and letting Claude Code organize his thoughts and draft a plan.
+
+### MEMEX
+A few favorite visuals that I've added to MEMEX, my [swipe file](https://memex.flow14.com/):
+
+<div class="image-grid">
+  {Object.entries(memexImages).map(([path, module]) => {
+    const filename = path.split('/').pop()?.replace('.webp', '') || '';
+    const altText = filename.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l);
+    
+    return (
+      <div class="image-item">
+        <Image 
+          src={module.default} 
+          alt={altText}
+          class="rounded-md"
+        />
+        <p class="caption">{altText}</p>
+      </div>
+    );
+  })}
+</div>
+
+- A copywriter's wonderfully worded job application from 1934. Can't recall where I stumbled across this, but searching the name should uncover the backstory.
+- “As you start to walk on the way, the way appears” captured the vibe of this year so far
+- [bimmi packaging](https://www.bedow.se/work/bimmi/) — by Bedow. Love how the overlapping monospaced type creates texture.
+- Paint packed and shipped in a fully sustainable container 😍 – by [PiortWorks](https://www.piotrworks.com/piotr)
+- A tiny layout— a thing which I didn't have a name for—until I ran across [this Are.na channel](https://www.are.na/jaytel/tiny-layouts)
