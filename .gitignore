@@ -27,3 +27,5 @@ src/assets/posts/placeholder.png
 .gemini/settings.json
 /.gemini
 .claude/
+CLAUDE.md
+docs/
