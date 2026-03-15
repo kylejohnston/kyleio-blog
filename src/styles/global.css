@@ -106,9 +106,9 @@ p {
   font-size: 0.8em;
 }
 pre code {
-  white-space: pre;
+  white-space: pre-wrap;
+  word-break: break-word;
   display: block;
-  overflow-x: auto;
   max-width: 100%;
 }
 
