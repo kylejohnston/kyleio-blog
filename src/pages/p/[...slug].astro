@@ -44,6 +44,8 @@ const isDev = import.meta.env.DEV;
           <>
             <span class="tertiary">· · ·</span>
             <a id="edit-toggle" href="#edit" class="small">Edit</a>
+            <button id="save-btn" type="button" disabled style="display: none;">Save <kbd>⌃S</kbd></button>
+            <span id="save-status"></span>
           </>
         )}
       </div>
@@ -55,10 +57,6 @@ const isDev = import.meta.env.DEV;
       {isDev && (
         <div class="editor" id="edit-mode" style="display: none;">
           <textarea id="editor-content" rows="30" placeholder="Loading..."></textarea>
-          <div class="editor-actions">
-            <button id="save-btn" type="button" disabled>Save <kbd>⌘S</kbd></button>
-            <span id="save-status"></span>
-          </div>
         </div>
       )}
     </div>
@@ -107,6 +105,7 @@ const isDev = import.meta.env.DEV;
       editMode.style.display = editing ? '' : 'none';
       editToggle.textContent = editing ? 'View' : 'Edit';
       editToggle.href = editing ? window.location.pathname : '#edit';
+      saveBtn.style.display = editing ? '' : 'none';
 
       if (editing) {
         loadContent();
@@ -151,13 +150,66 @@ const isDev = import.meta.env.DEV;
 
     // Cmd/Ctrl+S to save
     textarea.addEventListener('keydown', (e) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      if (e.ctrlKey && e.key === 's') {
         e.preventDefault();
         savePost();
       }
     });
   </script>
 )}
+
+<script>
+  document.querySelectorAll('pre').forEach((pre) => {
+    const btn = document.createElement('button');
+    btn.textContent = 'Copy';
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'Copy code to clipboard');
+
+    btn.addEventListener('click', () => {
+      const code = pre.querySelector('code');
+      const text = code ? code.innerText : pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      });
+    });
+
+    pre.style.position = 'relative';
+    pre.appendChild(btn);
+  });
+</script>
+
+<style is:global>
+  pre {
+    position: relative;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: calc(var(--base) * 2);
+    right: calc(var(--base) * 2);
+    padding: 2px 8px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1.6;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: #fff;
+    color: var(--mid);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  pre:hover .copy-btn {
+    opacity: 1;
+  }
+
+  .copy-btn:hover {
+    background: var(--warm);
+    color: var(--text);
+  }
+</style>
 
 <style>
   .editor {
@@ -178,15 +230,7 @@ const isDev = import.meta.env.DEV;
     color: var(--text);
   }
 
-  .editor-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
-
-  .editor-actions button {
-    padding: 0.5rem 1rem;
+  #save-btn {
     font-family: var(--font-sans);
     font-size: 0.875rem;
     cursor: pointer;
@@ -194,13 +238,14 @@ const isDev = import.meta.env.DEV;
     border-radius: 4px;
     background: var(--surface);
     color: var(--text);
+    padding: 0 0.4rem;
   }
 
-  .editor-actions button:hover {
+  #save-btn:hover {
     background: var(--border);
   }
 
-  .editor-actions kbd {
+  #save-btn kbd {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     opacity: 0.6;
