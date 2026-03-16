@@ -4,6 +4,7 @@ description: All you need is a .project-hint file and a simple zsh function
 pubDate: 2026-01-24T22:33:17.000Z
 tags:
   - til
+ogImage: /ogImage/2026-02-log.png
 draft: false
 ---
 

@@ -4,6 +4,7 @@ description: Documenting my evolving understanding of CLAUDE.md files
 pubDate: 2026-03-15T22:59:32.000Z
 tags:
   - til
+ogImage: /ogImage/til.png
 draft: false
 ---
 
