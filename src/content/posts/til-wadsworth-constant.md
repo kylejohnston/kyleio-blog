@@ -3,7 +3,9 @@ title: The Wadsworth Constant
 description: On just how much to skip things you see online
 pubDate: 2025-05-03T14:00:00-05:00
 # tendDate:
-tags: ['til']
+tags:
+  - til
+ogImage: /ogImage/2026-02-log.png
 draft: false
 ---
 

@@ -3,7 +3,9 @@ title: Full-text feed in Astro
 description: Generating a full-text RSS feed in Astro that supports Markdown and MDX files
 pubDate: 2025-07-02T14:00:00-05:00
 # tendDate:
-tags: ['til']
+tags:
+  - til
+ogImage: /ogImage/2026-02-log.png
 draft: false
 ---
 
