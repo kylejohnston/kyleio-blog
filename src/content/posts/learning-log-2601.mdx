@@ -8,7 +8,7 @@ ogImage: /ogImage/2026-01-log.png
 draft: false
 ---
 
-import { Image } from 'astro:assets';
+import Gallery from '../../components/Gallery.astro';
 export const memexImages = import.meta.glob('../../assets/posts/2026-01-january/*.webp', { eager: true });
 
 ## Work~Life
@@ -42,23 +42,7 @@ I've been using [LeaderKey](https://github.com/mikker/LeaderKey) for a while and
 ### MEMEX
 A few favorite visuals that I've added to MEMEX, my ever-growing [swipe file](https://memex.flow14.com/):
 
-<div class="image-grid">
-  {Object.entries(memexImages).map(([path, module]) => {
-    const filename = path.split('/').pop()?.replace('.webp', '') || '';
-    const altText = filename.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l);
-    
-    return (
-      <div class="image-item">
-        <Image 
-          src={module.default} 
-          alt={altText}
-          class="rounded-md"
-        />
-        <p class="caption">{altText}</p>
-      </div>
-    );
-  })}
-</div>
+<Gallery images={memexImages} />
 
 - [MINI × DEUS](https://www.pentagram.com/work/mini-x-deus) – *might* have saved every image from this case study
 - [Shape of Words](https://the-brandidentity.com/interview/shape-of-words-is-a-printed-capsule-of-creativity-presenting-the-diverse-works-of-30-contributors) — I like how the handwritten type brings out the texture

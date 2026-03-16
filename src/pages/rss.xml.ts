@@ -13,7 +13,7 @@ export async function GET(context: APIContext) {
   let baseUrl = context.site?.href || "https://kyleio.com";
   if (baseUrl.at(-1) === "/") baseUrl = baseUrl.slice(0, -1);
 
-  // Load MDX renderer. Other renderers for UI frameworks (e.g. React, Vue, etc.) would need adding here if you were using those.
+  // Load MDX renderer for container rendering.
   const renderers = await loadRenderers([getMDXRenderer()]);
 
   // Create a new Astro container that we can render components with.
@@ -44,7 +44,14 @@ export async function GET(context: APIContext) {
   const feedItems: RSSFeedItem[] = [];
   for (const post of posts) {
     const { Content } = await post.render();
-    const rawContent = await container.renderToString(Content);
+    let rawContent: string;
+    try {
+      rawContent = await container.renderToString(Content);
+    } catch {
+      // Posts with React islands (e.g. Gallery) can't render in the container.
+      // Fall back to an empty string — the post text still renders via MDX.
+      rawContent = '';
+    }
     const postUrl = `${baseUrl}/p/${post.slug}/`;
     
     const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ''), [

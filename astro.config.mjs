@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -114,7 +115,7 @@ function devPostPlugin() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kyleio.com',
-  integrations: [mdx()],
+  integrations: [mdx(), react()],
   experimental: {
     liveContentCollections: true,
     fonts: [
