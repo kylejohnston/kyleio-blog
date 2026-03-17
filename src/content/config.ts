@@ -10,7 +10,8 @@ const posts = defineCollection({
     tendDate: z.date().optional(),
     tags: z.array(z.string()),
     draft: z.boolean().default(false),
-    ogImage: z.string().optional()
+    ogImage: z.string().optional(),
+    galleryPath: z.string().optional()
   })
 });
 

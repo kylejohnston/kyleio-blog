@@ -4,9 +4,40 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { getCollection } from "astro:content";
+import { micromark } from "micromark";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
+
+// Eagerly import all gallery images so we can include them in RSS feeds.
+const allGalleryImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/posts/**/*.webp",
+  { eager: true }
+);
+
+function getGalleryHtml(galleryPath: string, baseUrl: string): string {
+  const images = Object.entries(allGalleryImages)
+    .filter(([path]) => path.includes(`/${galleryPath}/`))
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  if (images.length === 0) return "";
+
+  const imgTags = images
+    .map(([path, mod]) => {
+      const filename =
+        path.split("/").pop()?.replace(/\.\w+$/, "") || "";
+      const alt = filename
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+      const src = mod.default.src.startsWith("/")
+        ? baseUrl + mod.default.src
+        : mod.default.src;
+      return `<img src="${src}" alt="${alt}" width="${mod.default.width}" height="${mod.default.height}" />`;
+    })
+    .join("\n");
+
+  return `<div>${imgTags}</div>`;
+}
 
 export async function GET(context: APIContext) {
   // Get the URL to prepend to relative site links. Based on `site` in `astro.config.mjs`.
@@ -43,14 +74,29 @@ export async function GET(context: APIContext) {
   // Loop over blog posts to create feed items
   const feedItems: RSSFeedItem[] = [];
   for (const post of posts) {
-    const { Content } = await post.render();
     let rawContent: string;
-    try {
+    const hasComponents = /^import .+from\s+['"]\.\.\/.*\.(?:astro|tsx|jsx)['"]/m.test(post.body || '');
+    if (hasComponents) {
+      // Posts with component imports can't render in the container.
+      // Strip MDX syntax and render the markdown body directly.
+      const markdown = post.body
+        ?.replace(/^import .+$/gm, '')       // strip import statements
+        .replace(/^export .+$/gm, '')         // strip export statements
+        .replace(/<[A-Z]\w*[^>]*\/>/g, '')    // strip self-closing JSX components
+        .replace(/<[A-Z]\w*[^>]*>[\s\S]*?<\/[A-Z]\w*>/g, '') // strip JSX blocks
+        .trim() || '';
+      const markdownHtml = micromark(markdown);
+      if (post.data.galleryPath) {
+        const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
+        const galleryNote = `<p><em>This post includes an interactive image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a> for the full experience.</em></p>`;
+        rawContent = galleryNote + markdownHtml + galleryHtml;
+      } else {
+        const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
+        rawContent = galleryNote + markdownHtml;
+      }
+    } else {
+      const { Content } = await post.render();
       rawContent = await container.renderToString(Content);
-    } catch {
-      // Posts with React islands (e.g. Gallery) can't render in the container.
-      // Fall back to an empty string — the post text still renders via MDX.
-      rawContent = '';
     }
     const postUrl = `${baseUrl}/p/${post.slug}/`;
     
