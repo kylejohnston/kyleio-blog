@@ -44,13 +44,11 @@ export async function GET(context: APIContext) {
   // Loop over blog posts to create feed items
   const feedItems: RSSFeedItem[] = [];
   for (const post of posts) {
-    const { Content } = await post.render();
     let rawContent: string;
-    try {
-      rawContent = await container.renderToString(Content);
-    } catch {
-      // Posts with React islands (e.g. Gallery) can't render in the container.
-      // Fall back to rendering the markdown body directly, stripping MDX syntax.
+    const hasComponents = /^import .+from\s+['"]\.\.\/.*\.(?:astro|tsx|jsx)['"]/m.test(post.body || '');
+    if (hasComponents) {
+      // Posts with component imports can't render in the container.
+      // Strip MDX syntax and render the markdown body directly.
       const markdown = post.body
         ?.replace(/^import .+$/gm, '')       // strip import statements
         .replace(/^export .+$/gm, '')         // strip export statements
@@ -59,6 +57,9 @@ export async function GET(context: APIContext) {
         .trim() || '';
       const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
       rawContent = galleryNote + micromark(markdown);
+    } else {
+      const { Content } = await post.render();
+      rawContent = await container.renderToString(Content);
     }
     const postUrl = `${baseUrl}/p/${post.slug}/`;
     
