@@ -1,0 +1,34 @@
+---
+import { getImage } from 'astro:assets';
+import GalleryGrid from './GalleryGrid';
+
+interface Props {
+  images: Record<string, { default: ImageMetadata }>;
+  columns?: 2 | 3;
+  wide?: boolean;
+  captions?: Record<string, string>;
+}
+
+const { images, columns = 2, wide = true, captions = {} } = Astro.props;
+
+const optimized = await Promise.all(
+  Object.entries(images).map(async ([path, mod]) => {
+    const img = await getImage({ src: mod.default, width: 1200 });
+    const thumb = await getImage({ src: mod.default, width: 600 });
+    const filename = path.split('/').pop()?.replace('.webp', '').replace('.png', '').replace('.jpg', '') || '';
+    const alt = filename.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const caption = captions[filename] || undefined;
+    return {
+      src: img.src,
+      thumbSrc: thumb.src,
+      alt,
+      caption,
+      width: mod.default.width,
+      height: mod.default.height,
+    };
+  })
+);
+---
+<div class={wide ? 'gallery-wide' : ''}>
+  <GalleryGrid client:visible images={optimized} columns={columns} />
+</div>

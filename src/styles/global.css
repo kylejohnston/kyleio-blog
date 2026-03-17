@@ -460,6 +460,23 @@ time, .count {
   }
 
 
+/* Gallery */
+.gallery-wide {
+  width: 100%;
+}
+
+@keyframes galleryFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes galleryFadeIn {
+    from { opacity: 1; }
+    to { opacity: 1; }
+  }
+}
+
 @media (min-width: 1024px) /* DESKTOP */ {
   nav, main {
     padding: 0 calc(var(--base) * 2);
@@ -482,6 +499,11 @@ time, .count {
     margin-right: calc(var(--base) * -8);
     max-width: none;
     /* border-radius: var(--base); */
+  }
+  .gallery-wide {
+    width: calc(100% + var(--base) * 32);
+    margin-left: calc(var(--base) * -16);
+    margin-right: calc(var(--base) * -16);
   }
   .image-grid {
     width: calc(100% + var(--base) * 32);
