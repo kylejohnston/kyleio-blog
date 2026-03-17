@@ -4,6 +4,7 @@ import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { getCollection } from "astro:content";
+import { micromark } from "micromark";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
@@ -49,8 +50,15 @@ export async function GET(context: APIContext) {
       rawContent = await container.renderToString(Content);
     } catch {
       // Posts with React islands (e.g. Gallery) can't render in the container.
-      // Fall back to an empty string — the post text still renders via MDX.
-      rawContent = '';
+      // Fall back to rendering the markdown body directly, stripping MDX syntax.
+      const markdown = post.body
+        ?.replace(/^import .+$/gm, '')       // strip import statements
+        .replace(/^export .+$/gm, '')         // strip export statements
+        .replace(/<[A-Z]\w*[^>]*\/>/g, '')    // strip self-closing JSX components
+        .replace(/<[A-Z]\w*[^>]*>[\s\S]*?<\/[A-Z]\w*>/g, '') // strip JSX blocks
+        .trim() || '';
+      const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
+      rawContent = galleryNote + micromark(markdown);
     }
     const postUrl = `${baseUrl}/p/${post.slug}/`;
     
