@@ -4,6 +4,7 @@ interface GalleryImage {
   src: string;
   thumbSrc: string;
   alt: string;
+  caption?: string;
   width: number;
   height: number;
 }
@@ -120,14 +121,23 @@ export default function GalleryGrid({ images, columns = 2 }: GalleryGridProps) {
                 borderRadius: '6px',
               }}
             />
-            <p style={{
-              marginTop: '8px',
-              color: '#808080',
-              fontSize: '.85em',
-              fontFamily: 'var(--font-base)',
-            }}>
-              {img.alt}
-            </p>
+            {img.caption ? (
+              <p style={{
+                marginTop: '8px',
+                color: '#808080',
+                fontSize: '.85em',
+                fontFamily: 'var(--font-base)',
+              }} dangerouslySetInnerHTML={{ __html: img.caption }} />
+            ) : (
+              <p style={{
+                marginTop: '8px',
+                color: '#808080',
+                fontSize: '.85em',
+                fontFamily: 'var(--font-base)',
+              }}>
+                {img.alt}
+              </p>
+            )}
           </button>
         ))}
       </div>
@@ -247,7 +257,11 @@ export default function GalleryGrid({ images, columns = 2 }: GalleryGridProps) {
             fontSize: '0.9em',
             fontFamily: 'var(--font-base)',
           }}>
-            <p style={{ margin: 0 }}>{active.alt}</p>
+            {active.caption ? (
+              <p style={{ margin: 0 }} dangerouslySetInnerHTML={{ __html: active.caption }} />
+            ) : (
+              <p style={{ margin: 0 }}>{active.alt}</p>
+            )}
             {images.length > 1 && (
               <p style={{ margin: '4px 0 0', fontSize: '0.85em', opacity: 0.6 }}>
                 {activeIndex! + 1} / {images.length}
