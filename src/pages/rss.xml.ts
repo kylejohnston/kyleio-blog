@@ -9,6 +9,36 @@ import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
 
+// Eagerly import all gallery images so we can include them in RSS feeds.
+const allGalleryImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/posts/**/*.webp",
+  { eager: true }
+);
+
+function getGalleryHtml(galleryPath: string, baseUrl: string): string {
+  const images = Object.entries(allGalleryImages)
+    .filter(([path]) => path.includes(`/${galleryPath}/`))
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  if (images.length === 0) return "";
+
+  const imgTags = images
+    .map(([path, mod]) => {
+      const filename =
+        path.split("/").pop()?.replace(/\.\w+$/, "") || "";
+      const alt = filename
+        .replace(/[_-]/g, " ")
+        .replace(/\b\w/g, (l) => l.toUpperCase());
+      const src = mod.default.src.startsWith("/")
+        ? baseUrl + mod.default.src
+        : mod.default.src;
+      return `<img src="${src}" alt="${alt}" width="${mod.default.width}" height="${mod.default.height}" />`;
+    })
+    .join("\n");
+
+  return `<div>${imgTags}</div>`;
+}
+
 export async function GET(context: APIContext) {
   // Get the URL to prepend to relative site links. Based on `site` in `astro.config.mjs`.
   let baseUrl = context.site?.href || "https://kyleio.com";
@@ -55,8 +85,15 @@ export async function GET(context: APIContext) {
         .replace(/<[A-Z]\w*[^>]*\/>/g, '')    // strip self-closing JSX components
         .replace(/<[A-Z]\w*[^>]*>[\s\S]*?<\/[A-Z]\w*>/g, '') // strip JSX blocks
         .trim() || '';
-      const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
-      rawContent = galleryNote + micromark(markdown);
+      const markdownHtml = micromark(markdown);
+      if (post.data.galleryPath) {
+        const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
+        const galleryNote = `<p><em>This post includes an interactive image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a> for the full experience.</em></p>`;
+        rawContent = galleryNote + markdownHtml + galleryHtml;
+      } else {
+        const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
+        rawContent = galleryNote + markdownHtml;
+      }
     } else {
       const { Content } = await post.render();
       rawContent = await container.renderToString(Content);
