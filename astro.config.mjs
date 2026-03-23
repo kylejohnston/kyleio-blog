@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
+import embeds from 'astro-embed/integration';
 
 // Dev-only plugin for reading and saving posts
 function devPostPlugin() {
@@ -115,7 +116,7 @@ function devPostPlugin() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kyleio.com',
-  integrations: [mdx(), react()],
+  integrations: [embeds(), mdx(), react()],
   experimental: {
     liveContentCollections: true,
     fonts: [
