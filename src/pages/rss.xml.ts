@@ -11,7 +11,7 @@ import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
 
 // Eagerly import all gallery images so we can include them in RSS feeds.
 const allGalleryImages = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/posts/**/*.webp",
+  ["../assets/posts/**/*.webp", "../assets/projects/**/*.webp"],
   { eager: true }
 );
 
@@ -65,8 +65,8 @@ export async function GET(context: APIContext) {
   const getRssFooter = (postUrl: string) => `
     <hr />
     <p style="font-size: 0.875em; color: #666;">
-      Thank you for using RSS! 
-      <a href="mailto:hello@flow14.com">Reply via email</a> 
+      Thank you for using RSS!
+      <a href="mailto:hello@flow14.com">Reply via email</a>
       or <a href="${postUrl}">view this post on the web</a>.
     </p>
   `;
@@ -79,12 +79,26 @@ export async function GET(context: APIContext) {
     if (hasComponents) {
       // Posts with component imports can't render in the container.
       // Strip MDX syntax and render the markdown body directly.
-      const markdown = post.body
-        ?.replace(/^import .+$/gm, '')       // strip import statements
+
+      // Pre-pass: convert <YouTube id="X" params="start=N" /> to linked thumbnail HTML
+      // before the JSX stripping regex removes them entirely.
+      const bodyWithYouTube = post.body?.replace(
+        /<YouTube\s+id="([^"]+)"(?:\s+params="([^"]*)")?\s*\/>/g,
+        (_, videoId, params) => {
+          const startMatch = params?.match(/start=(\d+)/);
+          const href = startMatch
+            ? `https://www.youtube.com/watch?v=${videoId}&t=${startMatch[1]}`
+            : `https://www.youtube.com/watch?v=${videoId}`;
+          return `<a href="${href}"><img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" alt="Watch on YouTube" /></a>`;
+        }
+      ) || '';
+
+      const markdown = bodyWithYouTube
+        .replace(/^import .+$/gm, '')       // strip import statements
         .replace(/^export .+$/gm, '')         // strip export statements
         .replace(/<[A-Z]\w*[^>]*\/>/g, '')    // strip self-closing JSX components
         .replace(/<[A-Z]\w*[^>]*>[\s\S]*?<\/[A-Z]\w*>/g, '') // strip JSX blocks
-        .trim() || '';
+        .trim();
       const markdownHtml = micromark(markdown);
       if (post.data.galleryPath) {
         const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
@@ -99,7 +113,7 @@ export async function GET(context: APIContext) {
       rawContent = await container.renderToString(Content);
     }
     const postUrl = `${baseUrl}/p/${post.slug}/`;
-    
+
     const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ''), [
       async (node) => {
         await walk(node, (node) => {
@@ -108,6 +122,27 @@ export async function GET(context: APIContext) {
           }
           if (node.name === "img" && node.attributes.src?.startsWith("/")) {
             node.attributes.src = baseUrl + node.attributes.src;
+          }
+          if (node.name === "lite-youtube") {
+            const videoId = node.attributes.videoid;
+            const params = node.attributes.params;
+            const startMatch = params?.match(/start=(\d+)/);
+            const href = startMatch
+              ? `https://www.youtube.com/watch?v=${videoId}&t=${startMatch[1]}`
+              : `https://www.youtube.com/watch?v=${videoId}`;
+            node.name = "a";
+            node.attributes = { href };
+            node.children = [
+              {
+                type: 1, // element node
+                name: "img",
+                attributes: {
+                  src: `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`,
+                  alt: "Watch on YouTube",
+                },
+                children: [],
+              },
+            ];
           }
         });
         return node;
@@ -118,10 +153,10 @@ export async function GET(context: APIContext) {
     // Add footer to content
     const contentWithFooter = content + getRssFooter(postUrl);
 
-    feedItems.push({ 
-      ...post.data, 
-      link: `/p/${post.slug}/`, 
-      content: contentWithFooter 
+    feedItems.push({
+      ...post.data,
+      link: `/p/${post.slug}/`,
+      content: contentWithFooter
     });
   }
 
