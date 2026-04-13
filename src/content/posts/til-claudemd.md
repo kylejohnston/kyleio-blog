@@ -40,6 +40,8 @@ draft: false
 For example, if I started a project that uses Next.js (which would conflict with my global frontend development principles to avoid frameworks), the project-level CLAUDE.md is more specific, so it takes priority.
 
 ## ✱ Creation: how to write CLAUDE.md files
+Note: You can replace any of these examples with `/init`. Everything happens automatically, but you should review the output. Using these examples as a starting point may help you understand what's happening under the hood. 
+
 *Excerpts from Hannah Stulberg's extensive [guide to Claude Code](https://hannahstulberg.substack.com/p/claude-code-for-everything-the-best-personal-assistant-remembers-everything-about-you)*
 
 ### Method 1: Plan mode interview
@@ -78,5 +80,6 @@ Look at the CLAUDE.md files in this project. Are any of them too long, redundant
 
 ## *Sources*
 - [Anthropic Docs: Understanding system prompts](https://platform.claude.com/docs/en/agent-sdk/modifying-system-prompts#method-1-claude-md-files-project-level-instructions)
+- [Claude.com: Using CLAUDE.md files](https://claude.com/blog/using-claude-md-files)
 - [Claude Code for Everything](https://hannahstulberg.substack.com/p/claude-code-for-everything-finally) by Hannah Stulberg — a comprehensive, step-by-step guide. A great place to start if you're new to Claude Code or want to deepen your knowledge.
 - [reddit: Claude Code is a beast](https://www.reddit.com/r/ClaudeAI/comments/1oivjvm/claude_code_is_a_beast_tips_from_6_months_of/) — assumes a lot of domain knowledge, but sparked my curiosity about this topic.
