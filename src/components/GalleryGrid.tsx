@@ -86,8 +86,9 @@ export default function GalleryGrid({ images, columns = 2 }: GalleryGridProps) {
       {/* Thumbnail Grid */}
       <div
         style={{
-          columns: columns,
-          columnGap: '24px',
+          display: 'grid',
+          gridTemplateColumns: `repeat(${columns}, 1fr)`,
+          gap: '24px',
         }}
       >
         {images.map((img, i) => (
@@ -98,8 +99,6 @@ export default function GalleryGrid({ images, columns = 2 }: GalleryGridProps) {
             style={{
               display: 'block',
               width: '100%',
-              breakInside: 'avoid',
-              marginBottom: '24px',
               padding: 0,
               border: 'none',
               background: 'none',
