@@ -39,6 +39,116 @@ function getGalleryHtml(galleryPath: string, baseUrl: string): string {
   return `<div>${imgTags}</div>`;
 }
 
+// Remove MDX/JSX components (<Capital ... /> or <Capital ...>...</Capital>) from
+// a markdown body. Unlike a plain regex, this scanner respects strings, template
+// literals, and `{...}` JSX expressions, so `>` characters inside props (e.g.
+// embedded HTML in a `captions` object) don't terminate the match prematurely.
+function stripMdxComponents(input: string): string {
+  let out = "";
+  let i = 0;
+  while (i < input.length) {
+    if (input[i] === "<" && /[A-Z]/.test(input[i + 1] ?? "")) {
+      const end = skipComponent(input, i);
+      if (end > i) {
+        i = end;
+        continue;
+      }
+    }
+    out += input[i];
+    i++;
+  }
+  return out;
+}
+
+function skipComponent(input: string, start: number): number {
+  let p = start + 1;
+  const nameStart = p;
+  while (p < input.length && /[A-Za-z0-9_.]/.test(input[p])) p++;
+  const name = input.slice(nameStart, p);
+  if (!name || !/^[A-Z]/.test(name)) return start;
+
+  const opening = readTagBody(input, p);
+  if (!opening) return start;
+  if (opening.selfClosing) return opening.end;
+
+  let depth = 1;
+  let q = opening.end;
+  while (q < input.length) {
+    if (input[q] === "<") {
+      // Closing tag </Name>?
+      if (
+        input[q + 1] === "/" &&
+        input.slice(q + 2, q + 2 + name.length) === name
+      ) {
+        const after = input[q + 2 + name.length];
+        if (after === ">" || after === undefined || /\s/.test(after)) {
+          const close = input.indexOf(">", q + 2 + name.length);
+          if (close === -1) return start;
+          depth--;
+          if (depth === 0) return close + 1;
+          q = close + 1;
+          continue;
+        }
+      }
+      // Nested same-name opening tag?
+      if (input.slice(q + 1, q + 1 + name.length) === name) {
+        const after = input[q + 1 + name.length] ?? "";
+        if (after === ">" || after === "/" || /\s/.test(after)) {
+          const nested = readTagBody(input, q + 1 + name.length);
+          if (nested) {
+            if (!nested.selfClosing) depth++;
+            q = nested.end;
+            continue;
+          }
+        }
+      }
+    }
+    q++;
+  }
+  return start;
+}
+
+function readTagBody(
+  input: string,
+  p: number
+): { end: number; selfClosing: boolean } | null {
+  let braces = 0;
+  let str: string | null = null;
+  while (p < input.length) {
+    const c = input[p];
+    if (str !== null) {
+      if (c === "\\") {
+        p += 2;
+        continue;
+      }
+      if (c === str) str = null;
+      p++;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") {
+      str = c;
+      p++;
+      continue;
+    }
+    if (c === "{") {
+      braces++;
+      p++;
+      continue;
+    }
+    if (c === "}") {
+      if (braces > 0) braces--;
+      p++;
+      continue;
+    }
+    if (braces === 0) {
+      if (c === "/" && input[p + 1] === ">") return { end: p + 2, selfClosing: true };
+      if (c === ">") return { end: p + 1, selfClosing: false };
+    }
+    p++;
+  }
+  return null;
+}
+
 export async function GET(context: APIContext) {
   // Get the URL to prepend to relative site links. Based on `site` in `astro.config.mjs`.
   let baseUrl = context.site?.href || "https://kyleio.com";
@@ -93,12 +203,11 @@ export async function GET(context: APIContext) {
         }
       ) || '';
 
-      const markdown = bodyWithYouTube
-        .replace(/^import .+$/gm, '')       // strip import statements
-        .replace(/^export .+$/gm, '')         // strip export statements
-        .replace(/<[A-Z]\w*[^>]*\/>/g, '')    // strip self-closing JSX components
-        .replace(/<[A-Z]\w*[^>]*>[\s\S]*?<\/[A-Z]\w*>/g, '') // strip JSX blocks
-        .trim();
+      const markdown = stripMdxComponents(
+        bodyWithYouTube
+          .replace(/^import .+$/gm, '')   // strip import statements
+          .replace(/^export .+$/gm, '')   // strip export statements
+      ).trim();
       const markdownHtml = micromark(markdown);
       if (post.data.galleryPath) {
         const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
