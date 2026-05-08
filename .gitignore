@@ -8,6 +8,7 @@ src/content/posts/.obsidian/
 node_modules/
 
 # logs
+WORKLOG.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
