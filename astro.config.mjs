@@ -131,18 +131,6 @@ export default defineConfig({
       },
     },
     {
-      provider: fontProviders.local(),
-      name: "At Umami VAR",
-      cssVariable: "--at-umami-head",
-      options: {
-        variants: [{
-          src: ['./src/assets/fonts/AtUmami-Bold.woff2 '],
-          weight: 'normal',
-          style: 'normal',
-        }],
-      },
-    },
-    {
       provider: fontProviders.google(),
       name: "IBM Plex Mono",
       cssVariable: "--font-mono",
