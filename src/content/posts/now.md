@@ -2,9 +2,21 @@
 title: Now
 description: What I'm doing now. 
 pubDate: 2025-06-20T12:00:00-05:00
-tendDate: 2025-08-03T12:00:00-05:00
+tendDate: 2026-05-10T12:00:00-05:00
 tags: ['page']
 draft: false
+---
+
+## May 2026
+### Work
+Still spending my days as a staff product designer at Etsy. Also serving as an interim product manager for my squad, focusing on improving the web sign in experience.
+
+### Life
+Picked up a running habit this year. Currently focused on improving my 5k pace and seeing where things go from there.
+
+### AI
+It's become a normal part of my coding and prototyping workflow. I'm coaching and learning from colleagues at work. I still don't use it for generating images, designs, or original writing.
+
 ---
 
 ## August 2025
