@@ -50,6 +50,7 @@ body {
   line-height: 1.5;
   letter-spacing: 0.0em;
   font-family: var(--font-base);
+  font-feature-settings: "ss03" 1, "ss06" 1, "ss07" 1;
   position: relative;
   /* background: var(--warm); */
   /* border-top: 8px solid var(--warm); */
