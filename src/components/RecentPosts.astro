@@ -19,7 +19,7 @@ const featuredPost = filteredPosts
 
 // Exclude featured post from recent posts
 const recentPosts = filteredPosts
-  .filter(post => post.slug !== featuredPost?.slug)
+  .filter(post => post.id !== featuredPost?.id)
   .sort((a, b) => {
     const dateA = a.data.tendDate?.getTime() || a.data.pubDate.getTime();
     const dateB = b.data.tendDate?.getTime() || b.data.pubDate.getTime();
@@ -54,31 +54,31 @@ const allTags = sortedTags;
     {featuredPost && (
       <article>
         <h3>
-          <span class="small tertiary block font-normal mb-1">NEWEST POST · · ·</span>
-          <a href={`/p/${featuredPost.slug}`}>{featuredPost.data.title}</a>
+          <span class="text-base tertiary block weight-base mb-1">NEWEST POST · · ·</span>
+          <a href={`/p/${featuredPost.id}`}>{featuredPost.data.title}</a>
         </h3>
-        <p style="margin-block: 8px 24px;">{featuredPost.data.description} <a href={`/p/${featuredPost.slug}`}> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
+        <p style="margin-block: 4px;">{featuredPost.data.description} <a href={`/p/${featuredPost.id}`}> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
       </article>
     )}
   </div>
-  <h2 class="mb-3 tertiary">Explore</h2>
+  <h2 class="mb-3 text-sm tertiary">EXPLORE · · ·</h2>
   <div class="posts grid gap-y-3">
     {
       recentPosts.map((post) => (
           <article class="post">
             <h3>
-              <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
+              <a href={`/p/${post.id}`} class="post-link">{post.data.title}</a>
             </h3>
             <div class="grid ml-1">
               <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
             </div>
-            <div class="tags small ml-1">
+            <div class="tags text-sm ml-1">
               {post.data.tags.map((tag) => (
                 <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
               ))}
             </div>
             <span class="lite hidden ml-1 sm:block" style="">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="small hidden ml-1 sm:block">
+            <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
               { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
             </time>
           </article>

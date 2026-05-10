@@ -117,28 +117,37 @@ function devPostPlugin() {
 export default defineConfig({
   site: 'https://kyleio.com',
   integrations: [embeds(), mdx(), react()],
-  experimental: {
-    liveContentCollections: true,
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: "IBM Plex Mono",
-        cssVariable: "--font-mono",
+  fonts: [
+    {
+      provider: fontProviders.local(),
+      name: "At Umami",
+      cssVariable: "--at-umami",
+      options: {
+        variants: [{
+          weight: '100 900',
+          style: 'normal',
+          src: ['./src/assets/fonts/AtUmamiVAR.woff2 '],
+        }],
       },
-      {
-        provider: fontProviders.google(),
-        name: "IBM Plex Sans",
-        weights: [400, 500],
-        cssVariable: "--font-sans",
-      },
-      {
-        provider: fontProviders.google(),
-        name: "Newsreader",
-        weights: [400, 700],
-        cssVariable: "--font-text",
-      }
-    ]
-  },
+    },
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Mono",
+      cssVariable: "--font-mono",
+    },
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Sans",
+      weights: [400, 500],
+      cssVariable: "--at-sans",
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Newsreader",
+      weights: [400, 700],
+      cssVariable: "--font-text",
+    }
+  ],
   vite: {
     plugins: [tailwindcss(), devPostPlugin()]
   },

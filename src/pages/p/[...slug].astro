@@ -1,19 +1,19 @@
 ---
 // #post
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { format } from 'date-fns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const isDev = import.meta.env.DEV;
 ---
@@ -28,7 +28,7 @@ const isDev = import.meta.env.DEV;
     <header>
       <h1>{post.data.title}</h1>
       {post.data.description && <p class="description">{post.data.description}</p>}
-      <div class="small">
+      <div class="text-sm">
         <time datetime={post.data.pubDate.toISOString()}>
           Planted {format(post.data.pubDate, 'MMM yyyy')}
         </time>
@@ -43,7 +43,7 @@ const isDev = import.meta.env.DEV;
         {isDev && (
           <>
             <span class="tertiary">· · ·</span>
-            <a id="edit-toggle" href="#edit" class="small">Edit</a>
+            <a id="edit-toggle" href="#edit" class="text-sm">Edit</a>
             <button id="save-btn" type="button" disabled style="display: none;">Save <kbd>⌃S</kbd></button>
             <span id="save-status"></span>
           </>
@@ -64,7 +64,7 @@ const isDev = import.meta.env.DEV;
 </Layout>
 
 {isDev && (
-  <script define:vars={{ slug: post.slug }}>
+  <script define:vars={{ slug: post.id }}>
     const textarea = document.getElementById('editor-content');
     const saveBtn = document.getElementById('save-btn');
     const status = document.getElementById('save-status');
@@ -231,7 +231,7 @@ const isDev = import.meta.env.DEV;
   }
 
   #save-btn {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: 0.875rem;
     cursor: pointer;
     border: 1px solid var(--border);

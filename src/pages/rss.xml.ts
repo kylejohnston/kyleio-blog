@@ -3,7 +3,7 @@ import rss, { type RSSFeedItem } from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { micromark } from "micromark";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
@@ -164,7 +164,7 @@ export async function GET(context: APIContext) {
   // Load the content collection entries to add to our RSS feed.
   const posts = (await getCollection("posts", ({ data, id }) => {
     // Exclude drafts and the links page
-    return !data.draft && id !== 'links.mdx' && id !== 'about.md';
+    return !data.draft && id !== 'links' && id !== 'about';
   })).sort((a, b) => {
     const dateA = a.data.tendDate || a.data.pubDate;
     const dateB = b.data.tendDate || b.data.pubDate;
@@ -211,17 +211,17 @@ export async function GET(context: APIContext) {
       const markdownHtml = micromark(markdown);
       if (post.data.galleryPath) {
         const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
-        const galleryNote = `<p><em>This post includes an interactive image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a> for the full experience.</em></p>`;
+        const galleryNote = `<p><em>This post includes an interactive image gallery — <a href="${baseUrl}/p/${post.id}/">view it on the web</a> for the full experience.</em></p>`;
         rawContent = galleryNote + markdownHtml + galleryHtml;
       } else {
-        const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.slug}/">view it on the web</a>.</em></p>`;
+        const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.id}/">view it on the web</a>.</em></p>`;
         rawContent = galleryNote + markdownHtml;
       }
     } else {
-      const { Content } = await post.render();
+      const { Content } = await render(post);
       rawContent = await container.renderToString(Content);
     }
-    const postUrl = `${baseUrl}/p/${post.slug}/`;
+    const postUrl = `${baseUrl}/p/${post.id}/`;
 
     const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ''), [
       async (node) => {
@@ -264,7 +264,7 @@ export async function GET(context: APIContext) {
 
     feedItems.push({
       ...post.data,
-      link: `/p/${post.slug}/`,
+      link: `/p/${post.id}/`,
       content: contentWithFooter
     });
   }

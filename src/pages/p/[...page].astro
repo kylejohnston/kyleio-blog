@@ -29,25 +29,25 @@ const totalPages = page.lastPage;
 <Layout title="Everything">
   <div class="archive">
     <header>
-    <h1 class="tertiary capitalize">Everything <span class="inline-block relative text-2xl top-0.5">☟</span></h1>
+    <h1 class="tertiary capitalize text-lg">Everything <span class="inline-block relative text-2xl top-0.5">☟</span></h1>
     </header>
     <div class="posts grid gap-y-3">
       {
         page.data.map((post) => (
           <article class="post">
             <h3>
-              <a href={`/p/${post.slug}`} class="post-link">{post.data.title}</a>
+              <a href={`/p/${post.id}`} class="post-link">{post.data.title}</a>
             </h3>
             <div class="grid ml-1">
               <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
             </div>
-            <div class="tags small ml-1">
+            <div class="tags text-sm ml-1">
               {post.data.tags.map((tag) => (
                 <a href={`/t/${tag}`} class={`tag ${tag}`}>{tag}</a>
               ))}
             </div>
             <span class="lite hidden ml-1 sm:block" style="">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="small hidden ml-1 sm:block">
+            <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
               { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
             </time>
               {/* {post.data.description && <p>{post.data.description}</p>} */}
