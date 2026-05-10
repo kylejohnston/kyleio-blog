@@ -15,8 +15,8 @@ later: shuffle button to randomize posts
 /* Theme Variables */
 @theme {
   --font-mono: var(--font-mono);
-  --font-base: var(--font-sans);
-  --font-text: var(--font-text);
+  --font-base: var(--at-umami);
+  --font-body: var(--at-umami);
   --font-headline: "Bricolage Grotesque", "Helvetica", "sans-serif";
 }
 
@@ -45,9 +45,10 @@ body {
   margin: 0;
   padding: 0;
   color: var(--dark);
-  font-size: 1.25em;
-  font-weight: 400;
+  font-size: 1.3125rem;
+  font-weight: 300;
   line-height: 1.5;
+  letter-spacing: 0.0em;
   font-family: var(--font-base);
   position: relative;
   /* background: var(--warm); */
@@ -70,42 +71,49 @@ h1 {
   overflow-wrap: break-word;
 }
 h1.tertiary, h2.tertiary, h3.tertiary {
-  font-size: 1em; 
   font-family: var(--font-base);
-  font-weight: 4--;
+  font-weight: 300;
 }
 
 h2 {
   margin: calc(var(--base) * 3) 0;
-  font-size: 1.5em;
+  font-size: 1.75rem;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 h3 {
-  font-size: 1em;
+  font-size: 1.5rem;
   line-height: 1.2;
   font-family: var(--font-base);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 p {
   margin: calc(var(--base) * 3) 0;
 }
 
+strong { font-weight: 500; }
+.capitalize { text-transform: uppercase; }
+
+.weight-base { font-weight: 300; }
+
 .content h2, .content h3, .content p, .link-item {
   margin-block: calc(var(--base) * 4);
 }
 
 .content p, .content li, .content blockquote {
-  font-family: var(--font-text);
-  font-size: 1.05em;
+  font-family: var(--at-body);
+  font-size: 1.3125rem;
 }
-.content code {
-  font-size: 0.8em;
-}
+
+code .line { font-size: 1rem; }
+
+.content code { font-size: 1.1875rem; }
+
 pre code {
+  font-size: 1rem;
   white-space: pre-wrap;
   word-break: break-word;
   display: block;
@@ -187,8 +195,8 @@ nav.pagination {
 .nav-tag {
   color: var(--light);
   font-family: var(--font-mono);
-  text-transform: capitalize;
-  font-size: 0.875em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
 }
 
 /* Logo Styles */
@@ -286,9 +294,10 @@ a.project:hover {
   width: 100%;
   text-wrap: balance;
 }
-.post h3 {
+.posts h3 {
   min-width: 0;
-  font-weight: 400;
+  font-weight: 300;
+  font-size: 1.25rem;
 }
 .post h3 a {
   color: var(--warmer);
@@ -325,7 +334,7 @@ article hr {
 p.caption {
   margin-top: var(--base);
   color: var(--light);
-  font-size: .85em;
+  font-size: 0.875rem;
 }
 
 /* Utility Classes */
@@ -341,13 +350,12 @@ p.caption {
   color: var(--lighter);
 }
 
-.smallish {
-  font-size: .8em;
-}
-
-.small {
-  font-size: .7em;
-}
+.text-2xl  { font-size: 1.75rem; }
+.text-xl   { font-size: 1.5rem; }
+.text-lg   { font-size: 1.3125rem; }
+.text-base { font-size: 1rem; }
+.text-sm   { font-size: 0.875rem; }
+.small     { font-size: 0.875rem; }
 
 .mono {
   font-family: var(--font-mono);
