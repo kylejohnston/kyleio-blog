@@ -119,6 +119,30 @@ export default defineConfig({
   integrations: [embeds(), mdx(), react()],
   fonts: [
     {
+      provider: fontProviders.local(),
+      name: "At Umami",
+      cssVariable: "--at-umami",
+      options: {
+        variants: [{
+          weight: '100 900',
+          style: 'normal',
+          src: ['./src/assets/fonts/AtUmamiVAR.woff2 '],
+        }],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "At Umami VAR",
+      cssVariable: "--at-umami-head",
+      options: {
+        variants: [{
+          src: ['./src/assets/fonts/AtUmami-Bold.woff2 '],
+          weight: 'normal',
+          style: 'normal',
+        }],
+      },
+    },
+    {
       provider: fontProviders.google(),
       name: "IBM Plex Mono",
       cssVariable: "--font-mono",
@@ -127,7 +151,7 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: "IBM Plex Sans",
       weights: [400, 500],
-      cssVariable: "--font-sans",
+      cssVariable: "--at-sans",
     },
     {
       provider: fontProviders.google(),
