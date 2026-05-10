@@ -1,19 +1,19 @@
 ---
 // #post
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { format } from 'date-fns';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const isDev = import.meta.env.DEV;
 ---
@@ -64,7 +64,7 @@ const isDev = import.meta.env.DEV;
 </Layout>
 
 {isDev && (
-  <script define:vars={{ slug: post.slug }}>
+  <script define:vars={{ slug: post.id }}>
     const textarea = document.getElementById('editor-content');
     const saveBtn = document.getElementById('save-btn');
     const status = document.getElementById('save-status');

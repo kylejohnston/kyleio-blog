@@ -117,28 +117,25 @@ function devPostPlugin() {
 export default defineConfig({
   site: 'https://kyleio.com',
   integrations: [embeds(), mdx(), react()],
-  experimental: {
-    liveContentCollections: true,
-    fonts: [
-      {
-        provider: fontProviders.google(),
-        name: "IBM Plex Mono",
-        cssVariable: "--font-mono",
-      },
-      {
-        provider: fontProviders.google(),
-        name: "IBM Plex Sans",
-        weights: [400, 500],
-        cssVariable: "--font-sans",
-      },
-      {
-        provider: fontProviders.google(),
-        name: "Newsreader",
-        weights: [400, 700],
-        cssVariable: "--font-text",
-      }
-    ]
-  },
+  fonts: [
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Mono",
+      cssVariable: "--font-mono",
+    },
+    {
+      provider: fontProviders.google(),
+      name: "IBM Plex Sans",
+      weights: [400, 500],
+      cssVariable: "--font-sans",
+    },
+    {
+      provider: fontProviders.google(),
+      name: "Newsreader",
+      weights: [400, 700],
+      cssVariable: "--font-text",
+    }
+  ],
   vite: {
     plugins: [tailwindcss(), devPostPlugin()]
   },
