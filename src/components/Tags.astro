@@ -36,8 +36,8 @@ const sortedTags = Object.keys(tagCounts).sort((a, b) => {
 const allTags = sortedTags;
 ---
 
-<div class="filter tags small my-6">
-  <h3 class="font-mono tertiary w-100">FILTER BY</h3>
+<div class="filter tags text-sm my-6">
+  <h3 class="font-mono tertiary w-100 text-sm">FILTER BY · · ·</h3>
   {allTags.map((tag) => (
     <div>
       <a href={`/t/${tag}`} class={`tag ${tag}`}>

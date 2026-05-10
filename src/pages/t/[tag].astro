@@ -35,7 +35,7 @@ const { posts } = Astro.props;
 <Layout title={pluralizedTag}>
   <div class="tag-page">
     <header>
-      <h1 class="tertiary uppercase">{tag}s</h1>
+      <h1 class="tertiary uppercase text-lg">{tag}s</h1>
     </header>
     <div class="posts grid gap-y-3">
       {posts.map(post => (
@@ -46,7 +46,7 @@ const { posts } = Astro.props;
           <div class="grid ml-1">
             <div class="truncate lite">· · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · </div>
           </div>
-          <time datetime={post.data.pubDate.toISOString()} class="small ml-1">
+          <time datetime={post.data.pubDate.toISOString()} class="text-sm ml-1">
             { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
           </time>
         </article>

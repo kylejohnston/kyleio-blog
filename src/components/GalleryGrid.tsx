@@ -124,14 +124,14 @@ export default function GalleryGrid({ images, columns = 2 }: GalleryGridProps) {
               <p style={{
                 marginTop: '8px',
                 color: '#808080',
-                fontSize: '.85em',
+                fontSize: '1rem',
                 fontFamily: 'var(--font-base)',
               }} dangerouslySetInnerHTML={{ __html: img.caption }} />
             ) : (
               <p style={{
                 marginTop: '8px',
                 color: '#808080',
-                fontSize: '.85em',
+                fontSize: '1rem',
                 fontFamily: 'var(--font-base)',
               }}>
                 {img.alt}

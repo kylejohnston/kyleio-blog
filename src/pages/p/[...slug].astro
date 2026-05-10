@@ -28,7 +28,7 @@ const isDev = import.meta.env.DEV;
     <header>
       <h1>{post.data.title}</h1>
       {post.data.description && <p class="description">{post.data.description}</p>}
-      <div class="small">
+      <div class="text-sm">
         <time datetime={post.data.pubDate.toISOString()}>
           Planted {format(post.data.pubDate, 'MMM yyyy')}
         </time>
@@ -43,7 +43,7 @@ const isDev = import.meta.env.DEV;
         {isDev && (
           <>
             <span class="tertiary">· · ·</span>
-            <a id="edit-toggle" href="#edit" class="small">Edit</a>
+            <a id="edit-toggle" href="#edit" class="text-sm">Edit</a>
             <button id="save-btn" type="button" disabled style="display: none;">Save <kbd>⌃S</kbd></button>
             <span id="save-status"></span>
           </>
@@ -231,7 +231,7 @@ const isDev = import.meta.env.DEV;
   }
 
   #save-btn {
-    font-family: var(--font-sans);
+    font-family: var(--font-body);
     font-size: 0.875rem;
     cursor: pointer;
     border: 1px solid var(--border);

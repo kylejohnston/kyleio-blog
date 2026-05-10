@@ -45,8 +45,7 @@ const ogType = isHome ? 'website' : 'article';
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@40,75,800&display=swap">
     <Font cssVariable="--font-mono" preload />
-    <Font cssVariable="--font-sans" preload />
-    <Font cssVariable="--font-text" preload />
+    <Font cssVariable="--at-umami" preload />
   </head>
   <body class={isHome ? 'home' : ''}>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -58,17 +57,17 @@ const ogType = isHome ? 'website' : 'article';
             <Logo class="guava" />
           </a>
           {tag && <span class="nav-separator"> / </span>}
-          {tag && <div><a href={`/t/${tag}`} class={`small tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}
+          {tag && <div><a href={`/t/${tag}`} class={`text-sm tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}
         </div>
       </nav>
       <main id="main-content">
         <slot />
-        <div>{tag && <div style="margin-top: 32px"><span class="small secondary mr-0.5">View more </span><a href={`/t/${tag}`} class={`small tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}</div>
+        <div>{tag && <div style="margin-top: 32px"><span class="text-sm secondary mr-0.5">View more </span><a href={`/t/${tag}`} class={`text-sm tag ${tag}`} title={`View all ${tag}s`} aria-label={`View all ${tag}s`}>{tag}s</a></div>}</div>
       </main>
     </div>
     <footer>
         <div class="wrapper">
-          <div class="smallish">
+          <div class="text-base">
             <p><a href="/">Home</a> <span class="spacer">•</span> <a href="/p/about/">About</a> <span class="spacer">•</span> <a href="/p/links/">Links</a> <span class="spacer">•</span> <a href="/p/now/">Now</a></p>
             <p>Connect with me on <a href="https://mastodon.online/@kylejohnston">🦣 Mastodon</a>, <a href="https://bsky.app/profile/kylejohnston.bsky.social">🦋 Bluesky</a>, or <a href="https://www.linkedin.com/in/kylejohnston/">👔 LinkedIn</a></p>
             <p>RSS: <a href="/rss.xml">Subscribe to posts</a> & <a href="/links.xml">Subscribe to links</a></p>
