@@ -107,6 +107,7 @@ strong { font-weight: 500; }
 .content p, .content li, .content blockquote {
   font-family: var(--at-body);
   font-size: 1.3125rem;
+  letter-spacing: -.01rem;
 }
 
 code .line { font-size: 1rem; }
