@@ -126,7 +126,19 @@ export default defineConfig({
         variants: [{
           weight: '100 900',
           style: 'normal',
-          src: ['./src/assets/fonts/AtUmamiVAR.woff2 '],
+          src: ['./src/assets/fonts/AtUmamiVAR.woff2'],
+        }],
+      },
+    },
+    {
+      provider: fontProviders.local(),
+      name: "At Textual",
+      cssVariable: "--at-textual",
+      options: {
+        variants: [{
+          weight: '60 150',
+          style: 'normal',
+          src: ['./src/assets/fonts/AtTextualVAR.woff2'],
         }],
       },
     },
