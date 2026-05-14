@@ -50,9 +50,9 @@ body {
   margin: 0;
   padding: 0;
   color: var(--dark);
-  font-size: 1.3125rem;
+  font-size: 1.125rem;
   font-weight: var(--wt-base);
-  line-height: 1.5;
+  line-height: 1.6111111111;
   letter-spacing: 0.0em;
   font-family: var(--font-base);
   position: relative;
@@ -108,13 +108,14 @@ strong { font-weight: var(--wt-xbold); }
 
 .content p, .content li, .content blockquote {
   font-family: var(--at-body);
-  font-size: 1.3125rem;
-  letter-spacing: -.0045rem;
+  font-size: 1.125rem;
+  letter-spacing: 0rem;
+  /* letter-spacing: -.0045rem; */
 }
 
 code .line { font-size: 1rem; }
 
-.content code { font-size: 1.1875rem; }
+.content code { font-size: 1.125rem; }
 
 pre code {
   font-size: 1rem;
@@ -354,9 +355,9 @@ p.caption {
   color: var(--lighter);
 }
 
-.text-2xl  { font-size: 1.75rem; }
-.text-xl   { font-size: 1.5rem; }
-.text-lg   { font-size: 1.3125rem; }
+.text-2xl  { font-size: 1.625rem; }
+.text-xl   { font-size: 1.375rem; }
+.text-lg   { font-size: 1.125rem; }
 .text-base { font-size: 1rem; }
 .text-sm   { font-size: 0.875rem; }
 .small     { font-size: 0.875rem; }
