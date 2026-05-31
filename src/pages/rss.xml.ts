@@ -211,11 +211,9 @@ export async function GET(context: APIContext) {
       const markdownHtml = micromark(markdown);
       if (post.data.galleryPath) {
         const galleryHtml = getGalleryHtml(post.data.galleryPath, baseUrl);
-        const galleryNote = `<p><em>This post includes an interactive image gallery — <a href="${baseUrl}/p/${post.id}/">view it on the web</a> for the full experience.</em></p>`;
-        rawContent = galleryNote + markdownHtml + galleryHtml;
+        rawContent = markdownHtml + galleryHtml;
       } else {
-        const galleryNote = `<p><em>This post includes an image gallery — <a href="${baseUrl}/p/${post.id}/">view it on the web</a>.</em></p>`;
-        rawContent = galleryNote + markdownHtml;
+        rawContent = markdownHtml;
       }
     } else {
       const { Content } = await render(post);

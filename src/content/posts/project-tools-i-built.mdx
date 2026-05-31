@@ -1,0 +1,125 @@
+---
+title: Tools I built for myself
+description: 'Small, specialized tools I''ve created'
+pubDate: 2026-05-31T21:48:33.000Z
+ogImage: /ogImage/projects/tools.png
+tags:
+  - project
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/projects/tools/*.webp', { eager: true })
+);
+
+This page captures projects too specialized or too small to warrant a full write-up ([see my projects page](/t/project/) for those).
+
+## Productivity tools
+
+### [Notebin](https://github.com/kylejohnston/notebin)
+A PWA (aka web app) for capturing a single note. Open it, write something, and leave. The only controls: light/dark mode, font size, and clear. It uses local storage, so nothing ever syncs or leaves your device. You can [try it here](https://kylejohnston.github.io/notebin/). If you want to save it to your home screen on iOS, select 'Share' then 'Add to Home Screen'.
+
+<div class="flex flex-row gap-2 wide">
+    <div>
+        <Image src={pics["notebin-01"]} alt="Empty state" class="border border-neutral-400 rounded-[40px]" />
+        <p class="caption text-center">Empty state</p>
+    </div>
+    <div>
+        <Image src={pics["notebin-02"]} alt="Adding a note" class="border border-neutral-400 rounded-[40px]" />
+        <p class="caption text-center">Adding a note</p>
+    </div>
+    <div>
+        <Image src={pics["notebin-03"]} alt="Options" class="border border-neutral-400 rounded-[40px]" />
+        <p class="caption text-center">Options</p>
+    </div>
+    <div>
+        <Image src={pics["notebin-04"]} alt="Dark mode" class="border border-neutral-400 rounded-[40px]" />
+        <p class="caption text-center">Dark mode</p>
+    </div>
+</div>
+
+### Book cover search
+A single local HTML file for searching Google Books for high-res book covers that I use to populate [my bookshelf](https://books.kyleio.com/). Inspired by Gina Trapani’s ‘just for me’ [Cover Search project](https://notetoself.studio/projects/cover-search/).
+
+<Image src={pics["covers"]} alt="Book cover search tool" class="border border-neutral-400 rounded-lg wide" />
+<p class="caption text-center">Book covers, ready to download</p>
+
+## Design & development tools
+
+### Image downloader plugin
+A Chrome plugin that downloads any number of images based on a target class or ID. I use this at work to pull images for realistic page mockups.
+
+<Image src={pics["image-downloader"]} alt="Image downloader tool" class="border border-neutral-400 rounded-lg wide" />
+<p class="caption text-center">Image downloader plugin</p>
+
+### Riso texture generator
+I built this generator to recreate the textures [in these Riso ink samples](https://risottostudio.com/collections/ink-swatches). The tool lets me choose ink and paper color combinations, fine-tune grain, mottling, and specks, then export seamless tiles for use in my designs.
+
+<Image src={pics["riso"]} alt="Riso texture generator" class="border border-neutral-400 rounded-lg wide" />
+<p class="caption text-center">Sample textures</p>
+
+### Wireframe UI kit
+This UI kit helps me explore ideas at low-fidelity. A CSS file paired with wireframe-style fonts.
+
+<div class="flex flex-row gap-2 wide">
+    <div>
+        <Image src={pics["wireframe-desktop"]} alt="Wireframe UI kit, desktop view" class="border border-neutral-400 rounded-lg" />
+    </div>
+    <div>
+        <Image src={pics["wireframe-mobile"]} alt="Wireframe UI kit, mobile view" class="border border-neutral-400 rounded-[40px] max-w-3xs" />
+    </div>
+</div>
+
+
+### Overlay-style blog
+I created this overlay UI as a proof of concept, inspired by a previous version of [Area17](https://area17.com/). Each page can load in a slideover panel to maintain the context of the parent page. And if you load the page directly, it renders as a normal webpage. Still looking for the right project to use it on.
+
+<Image src={pics["overlay-concept"]} alt="Overlay UI concept" class="border border-neutral-400 rounded-lg" />
+<p class="caption text-center">The concept in action</p>
+
+
+## Personal tools
+
+### Daily journal email digest
+Every morning, I get an email with my journal entries from this date in previous years. I used DayOne for years. I loved its "On This Day" feature, but I wasn't comfortable keeping everything in a proprietary app or locked into a subscription. So I converted 12+ years of journal entries into markdown files. Now, I use a Python script and GitHub Actions to parse the files and send a daily email.
+
+### [Daily RSS email digest](https://github.com/kylejohnston/rss-email-digest)
+Delivers a daily email with posts from blogs I follow published in the past 24 hours. It runs on a Python script, GitHub Actions, and an OPML file. If you want to try it yourself, [the repo](https://github.com/kylejohnston/rss-email-digest) walks through the setup.
+<div class="flex flex-row justify-center">
+    <div>
+        <Image src={pics["rss-digest"]} alt="Bracket tracker, game view" class="border border-neutral-300 rounded-[40px] max-w-2xs" />
+        <p class="caption"></p>
+    </div>
+</div>
+
+### Recipes
+An Astro-based site for keeping favorite recipes accessible. I mostly use it to track ingredients for each dish so I know where to start. It includes instant search, tags for favorites and someday dishes, and a mobile-optimized design.
+
+### [The Madness](https://github.com/kylejohnston/the-madness)
+Every year, I wished for *some* way to track our NCAA basketball brackets, so I finally built a tracker for the 2026 tournament. I built it in a hurry — during the first round — so there's plenty to clean up before next year.
+
+<div class="flex flex-row gap-2 justify-center">
+    <div>
+        <Image src={pics["madness-01"]} alt="Bracket tracker, game view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <p class="caption text-center">Game view</p>
+    </div>
+    <div>
+        <Image src={pics["madness-02"]} alt="Bracket tracker, scoreboard view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <p class="caption text-center">Scoreboard</p>
+    </div>
+</div>
+
+### Auto loan calculator
+Built as a single-use tool for negotiating the first car I'd purchased since 2008. It helped me focus on the 'out the door' price and keep track of how taxes, down payments, and other factors affected the financing.
+
+<div class="flex flex-row gap-2 justify-center">
+    <div>
+        <Image src={pics["car-calc-home"]} alt="Auto loan calculator" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <p class="caption text-center">Reference view</p>
+    </div>
+    <div>
+        <Image src={pics["car-calc-keeb"]} alt="Auto loan calculator, edit view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <p class="caption text-center">Edit view</p>
+    </div>
+</div>
