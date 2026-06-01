@@ -20,21 +20,21 @@ This page captures projects too specialized or too small to warrant a full write
 ### [Notebin](https://github.com/kylejohnston/notebin)
 A PWA (aka web app) for capturing a single note. Open it, write something, and leave. The only controls: light/dark mode, font size, and clear. It uses local storage, so nothing ever syncs or leaves your device. You can [try it here](https://kylejohnston.github.io/notebin/). If you want to save it to your home screen on iOS, select 'Share' then 'Add to Home Screen'.
 
-<div class="flex flex-row gap-2 wide">
+<div class="flex flex-col sm:flex-row gap-2 wide items-center px-2 sm:px-0">
     <div>
-        <Image src={pics["notebin-01"]} alt="Empty state" class="border border-neutral-400 rounded-[40px]" />
+        <Image src={pics["notebin-01"]} alt="Empty state" class="border border-neutral-400 rounded-4xl" />
         <p class="caption text-center">Empty state</p>
     </div>
     <div>
-        <Image src={pics["notebin-02"]} alt="Adding a note" class="border border-neutral-400 rounded-[40px]" />
+        <Image src={pics["notebin-02"]} alt="Adding a note" class="border border-neutral-400 rounded-4xl" />
         <p class="caption text-center">Adding a note</p>
     </div>
     <div>
-        <Image src={pics["notebin-03"]} alt="Options" class="border border-neutral-400 rounded-[40px]" />
+        <Image src={pics["notebin-03"]} alt="Options" class="border border-neutral-400 rounded-4xl" />
         <p class="caption text-center">Options</p>
     </div>
     <div>
-        <Image src={pics["notebin-04"]} alt="Dark mode" class="border border-neutral-400 rounded-[40px]" />
+        <Image src={pics["notebin-04"]} alt="Dark mode" class="border border-neutral-400 rounded-4xl" />
         <p class="caption text-center">Dark mode</p>
     </div>
 </div>
@@ -42,32 +42,38 @@ A PWA (aka web app) for capturing a single note. Open it, write something, and l
 ### Book cover search
 A single local HTML file for searching Google Books for high-res book covers that I use to populate [my bookshelf](https://books.kyleio.com/). Inspired by Gina Trapani’s ‘just for me’ [Cover Search project](https://notetoself.studio/projects/cover-search/).
 
-<Image src={pics["covers"]} alt="Book cover search tool" class="border border-neutral-400 rounded-lg wide" />
-<p class="caption text-center">Book covers, ready to download</p>
+<div class="px-2 sm:px-0">
+    <Image src={pics["covers"]} alt="Book cover search tool" class="border border-neutral-400 rounded-lg wide" />
+    <p class="caption text-center">Book covers, ready to download</p>
+</div>
 
 ## Design & development tools
 
 ### Image downloader plugin
 A Chrome plugin that downloads any number of images based on a target class or ID. I use this at work to pull images for realistic page mockups.
 
-<Image src={pics["image-downloader"]} alt="Image downloader tool" class="border border-neutral-400 rounded-lg wide" />
-<p class="caption text-center">Image downloader plugin</p>
+<div class="px-2 sm:px-0">
+    <Image src={pics["image-downloader"]} alt="Image downloader tool" class="border border-neutral-400 rounded-lg wide" />
+    <p class="caption text-center">Image downloader plugin</p>
+</div>
 
 ### Riso texture generator
 I built this generator to recreate the textures [in these Riso ink samples](https://risottostudio.com/collections/ink-swatches). The tool lets me choose ink and paper color combinations, fine-tune grain, mottling, and specks, then export seamless tiles for use in my designs.
 
-<Image src={pics["riso"]} alt="Riso texture generator" class="border border-neutral-400 rounded-lg wide" />
-<p class="caption text-center">Sample textures</p>
+<div class="px-2 sm:px-0">
+    <Image src={pics["riso"]} alt="Riso texture generator" class="border border-neutral-400 rounded-lg wide" />
+    <p class="caption text-center">Sample textures</p>
+</div>
 
 ### Wireframe UI kit
 This UI kit helps me explore ideas at low-fidelity. A CSS file paired with wireframe-style fonts.
 
-<div class="flex flex-row gap-2 wide">
+<div class="flex flex-col sm:flex-row gap-2 wide items-center px-1 sm:mx-0">
     <div>
         <Image src={pics["wireframe-desktop"]} alt="Wireframe UI kit, desktop view" class="border border-neutral-400 rounded-lg" />
     </div>
     <div>
-        <Image src={pics["wireframe-mobile"]} alt="Wireframe UI kit, mobile view" class="border border-neutral-400 rounded-[40px] max-w-3xs" />
+        <Image src={pics["wireframe-mobile"]} alt="Wireframe UI kit, mobile view" class="border border-neutral-400 rounded-4xl max-w-3xs" />
     </div>
 </div>
 
@@ -88,7 +94,7 @@ Every morning, I get an email with my journal entries from this date in previous
 Delivers a daily email with posts from blogs I follow published in the past 24 hours. It runs on a Python script, GitHub Actions, and an OPML file. If you want to try it yourself, [the repo](https://github.com/kylejohnston/rss-email-digest) walks through the setup.
 <div class="flex flex-row justify-center">
     <div>
-        <Image src={pics["rss-digest"]} alt="Bracket tracker, game view" class="border border-neutral-300 rounded-[40px] max-w-2xs" />
+        <Image src={pics["rss-digest"]} alt="Bracket tracker, game view" class="border border-neutral-300 rounded-4xl max-w-2xs" />
         <p class="caption"></p>
     </div>
 </div>
@@ -99,13 +105,13 @@ An Astro-based site for keeping favorite recipes accessible. I mostly use it to 
 ### [The Madness](https://github.com/kylejohnston/the-madness)
 Every year, I wished for *some* way to track our NCAA basketball brackets, so I finally built a tracker for the 2026 tournament. I built it in a hurry — during the first round — so there's plenty to clean up before next year.
 
-<div class="flex flex-row gap-2 justify-center">
+<div class="flex flex-col sm:flex-row gap-2 justify-center items-center px-2 sm:px-0">
     <div>
-        <Image src={pics["madness-01"]} alt="Bracket tracker, game view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <Image src={pics["madness-01"]} alt="Bracket tracker, game view" class="border border-neutral-400 rounded-4xl max-w-2xs" />
         <p class="caption text-center">Game view</p>
     </div>
     <div>
-        <Image src={pics["madness-02"]} alt="Bracket tracker, scoreboard view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <Image src={pics["madness-02"]} alt="Bracket tracker, scoreboard view" class="border border-neutral-400 rounded-4xl max-w-2xs" />
         <p class="caption text-center">Scoreboard</p>
     </div>
 </div>
@@ -113,13 +119,13 @@ Every year, I wished for *some* way to track our NCAA basketball brackets, so I 
 ### Auto loan calculator
 Built as a single-use tool for negotiating the first car I'd purchased since 2008. It helped me focus on the 'out the door' price and keep track of how taxes, down payments, and other factors affected the financing.
 
-<div class="flex flex-row gap-2 justify-center">
+<div class="flex flex-col sm:flex-row gap-2 justify-center items-center">
     <div>
-        <Image src={pics["car-calc-home"]} alt="Auto loan calculator" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <Image src={pics["car-calc-home"]} alt="Auto loan calculator" class="border border-neutral-400 rounded-4xl max-w-2xs" />
         <p class="caption text-center">Reference view</p>
     </div>
     <div>
-        <Image src={pics["car-calc-keeb"]} alt="Auto loan calculator, edit view" class="border border-neutral-400 rounded-[40px] max-w-2xs" />
+        <Image src={pics["car-calc-keeb"]} alt="Auto loan calculator, edit view" class="border border-neutral-400 rounded-4xl max-w-2xs" />
         <p class="caption text-center">Edit view</p>
     </div>
 </div>
