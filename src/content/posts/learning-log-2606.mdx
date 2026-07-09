@@ -1,0 +1,83 @@
+---
+title: 'Learning Log, June 2026'
+description: Where my attention flowed in June 2026
+pubDate: 2026-07-09T14:04:33.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-06-log.png
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/2026-06-log/*.webp', { eager: true })
+);
+
+## Life~Work
+**Life:** the big event this month was a drive from KC to Estes Park for a week of hiking. [Chasm Lake](https://www.alltrails.com/trail/us/colorado/chasm-lake) was the focus (inspired by [Naz's account](https://nazhamid.com/journal/return-to-chasm-lake/)). It kicked my ass, but the views and experience were unforgettable. [Deer Mountain](https://www.alltrails.com/trail/us/colorado/deer-mountain-trail) was my warm up hike on day one—spotted many chipmunks and enjoyed stunning views of the town and park. Day three (and sore legs) led me to the easiest hike of the week, [Ouzel Falls](https://www.alltrails.com/trail/us/colorado/ouzel-falls-via-wild-basin-trail-from-sandbeach-lake), where a rainy start created a vibrant landscape with a cool, moody haze hanging over the treeline. By the end of the week, I'm proud to say locals were asking if I was local.
+
+Processing all the photos I took gave me quality time with the [Aphera](https://aphera.co/) beta. It's a thoughtfully-crafted photo editor and it's the first app I've used in a while that induced a flow state.
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div class="col-span-2">
+        <Image src={pics["rmnp-chasm-lake-feat"]} alt="Chasm Lake" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Chasm Lake</p>
+    </div>
+    <div class="col-span-2">
+        <Image src={pics["rmnp-chasm-lake-boulders"]} alt="Boulders leading to Chasm Lake" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Final scramble before reaching the lake—note the people on the right for scale</p>
+    </div>
+    <div class="col-span-2">
+        <Image src={pics["rmnp-ouzel-falls-hike"]} alt="Ouzel Falls hike" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Somewhere along the Ouzel Falls hike—morning rain made a lovely haze</p>
+    </div>
+    <div>
+        <Image src={pics["rmnp-deer-mountain-chipmunk"]} alt="Chipmunk spotted on Deer Mountain" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Chipmunk spotted on Deer Mountain</p>
+    </div>
+    <div>
+        <Image src={pics["rmnp-patches_5-4"]} alt="Commemorative patches" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Commemorative patches from [Estes Park Mountain Shop](https://www.estesparkmountainshop.com/)</p>
+    </div>
+</div>
+
+**Work:** finally stepped back from my interim PM duties, launched the project I'd been focused on, and started digging into a new set of user problems. The trip landed at the perfect moment for a reset before shifting focus. 
+
+## Projects
+- started exploring ideas for an iOS version of [notebin](https://github.com/kylejohnston/notebin), my minimal, single-note capture app.
+- On a lark, made a one-page trip planner to chart my drive time. It helped me figure out where to stop for gas and food along the way. 
+- Explored landing page designs for [HNC Living](https://www.hncliving.org/), a nonprofit I've worked with for years who helps head and neck cancer patients during and after treatment.
+
+## Digital gardening
+### Bookshelf
+All shorter books this month, and I'd recommend each one!
+
+- [The Life That's Waiting by Brianna Wiest](https://books.kyleio.com/book/life-thats-waiting/) – kind of a choose-your-own-adventure self-help book. Each chapter begins with, 'Read this when…'. 
+- [What I Talk About When I Talk About Running by Haruki Murakami](https://books.kyleio.com/book/what-i-talk-about-when-i-talk-about-running/) – a re-read, except I listened to the audiobook this time. But I count audiobooks as reading, so 're-read' feels right. Opens with a favorite passage on running, *'Pain is inevitable. Suffering is optional.'*
+- [The Serviceberry by Robin Wall Kimmerer](https://books.kyleio.com/book/serviceberry) – shares a different way to think about the economy, community, and our place in the ecosystem.
+
+### MEMEX
+A few favorite visuals that I've added to MEMEX, my [swipe file](https://memex.flow14.com/):
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div>
+        <Image src={pics["maxvoltar.com"]} alt="Max Voltar non-work projects" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">[Max Voltar's](https://maxvoltar.com/) new non-work portfolio 😍</p>
+    </div>
+    <div>
+        <Image src={pics["mr-bingo-studio-01"]} alt="Mr. Bingo studio" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">[Mr. Bingo's studio](https://www.brunch.design/articles/mr-bingos-open-studio). Love the use of tape to hang pieces—feels like a work-in-progress.</p>
+    </div>
+    <div>
+        <Image src={pics["aphera-empty-state"]} alt="Aphera empty state" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">[Aphera's](https://aphera.co/) empty state. Love how color and copy set the tone.</p>
+    </div>
+    <div>
+        <Image src={pics["grow-typography_emma-hansson"]} alt="Grow by Emma Hansson" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Grow card by [Emma Hansson](https://www.instagram.com/ehansson.design/)</p>
+    </div>
+    <div>
+        <Image src={pics["wrong-after-effects"]} alt="wrong after effects" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Still makes me chuckle</p>
+    </div>
+</div>
