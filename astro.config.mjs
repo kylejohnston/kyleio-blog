@@ -6,6 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { readFile, writeFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
 import embeds from 'astro-embed/integration';
+import { unified } from '@astrojs/markdown-remark';
 
 // Dev-only plugin for reading and saving posts
 function devPostPlugin() {
@@ -116,6 +117,11 @@ function devPostPlugin() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kyleio.com',
+  markdown: {
+    // astro-embed's astro-auto-import integration only works with the
+    // remark/rehype pipeline, not the new Satteri default processor.
+    processor: unified(),
+  },
   integrations: [embeds(), mdx(), react()],
   fonts: [
     {
