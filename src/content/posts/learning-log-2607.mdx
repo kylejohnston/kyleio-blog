@@ -1,0 +1,60 @@
+---
+title: 'Learning Log, July 2026'
+description: Where my attention flowed in July 2026
+pubDate: 2026-08-01T14:04:33.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-07-log.png
+draft: true
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/2026-07-log/*.webp', { eager: true })
+);
+
+## Life~Work
+**Life:** A few people wrote to say they're enjoying the blog, which was a nice surprise. Serendipitously, I'd done something similar recently. Reading Mike Monteiro's [post on friendship](https://buttondown.com/monteiro/archive/how-to-stay-friends/) prompted me to send notes to people to let them know I appreciate what they're doing.
+
+Minor surgery disrupted my running routine, and just when it was getting good. Thankfully, it was fast—in and out in an afternoon. I figure I'll be back on track by the end of August, in fine form for cooler weather.
+
+**Work:** Started a new project at the beginning of the month. It balances heads-down time with collaboration and gives me new problems to solve without starting from scratch, all on a short deadline. I've realized that's my favorite kind of project.
+
+## Projects
+- Created a working version of notebin for iOS, my minimal, single-note capture app. I developed it with two constraints: no UI elements and no settings. Every action—share, clear, resize text—is a swipe. Now I'm exploring Siri integration to capture a note without opening the app. Email me if you want to a TestFlight invite.
+- I'm getting the itch to redesign my professional portfolio. The last major redesign was late 2018. The design has held up well, but the focus of my work has changed enough to warrant a fresh approach. I'm starting with a moodboard and gathering inspiration until I'm ready to scratch the itch.
+
+## Digital gardening
+### Bookshelf
+Only one book this month, but I enjoyed it!
+
+- [Children of Ruin by Adrian Tchaikovsky](https://books.kyleio.com/book/children-of-ruin/) – the sequel to [Children of Time](https://books.kyleio.com/book/children-of-time). The series premise: humans abandon a dying Earth to terraform habitable planets, then reckon with the alien life that evolves there. *Ruin* pushes into stranger forms of life, going deeper into the collision between different kinds of intelligence and communication. As with all great Sci-Fi, it helps me reframe my thinking about Current Times.
+
+### Links
+- [Marcel](https://marcel.io/posts/the-future-of-creativity-on-the-internet-in-a-world-with-ai) shared [The future of creativity on the internet in a world with AI](https://www.youtube.com/watch?v=17_HcR95YBc), a talk by Jack Conte (of Pomplamoose and Patreon). I've watched it three times. I love how he frames the struggle between new things destroying what came before and creative curiosity pushing forward anyway.
+
+### MEMEX
+A few favorite visuals that I've added to MEMEX, my [swipe file](https://memex.flow14.com/). Texture turned out to be the theme this month:
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div>
+        <Image src={pics["amen"]} alt="AMEN album cover" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Found this [browsing are.na](https://www.are.na/search?q=%7B%22term%22%3A%7B%22facet%22%3A%22%5C%22jester+hairston%5C%22%22%7D%7D). Love the quirky type and patina of the monochromatic design.</p>
+    </div>
+    <div>
+        <Image src={pics["twotimespi.dev"]} alt="twotimespi.dev homepage" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">The graph paper on [tau's homepage](https://twotimespi.dev/) gives me skeuomorphic vibes ^_^ but also vibe-coded vibes v_v</p>
+    </div>
+    <div>
+        <Image src={pics["nike-flipbook-stills"]} alt="nike flipbook" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Nike, obviously. Source lost to time.</p>
+    </div>
+    <div>
+        <Image src={pics["english-syllabus"]} alt="Thoreau vs Bun B" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">From an English syllabus. Love the juxtaposition of Thoreau and Bun B.</p>
+    </div>
+    <div>
+        <Image src={pics["brendandawes"]} alt="Brendan Dawes, manifesto for myself" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Brendan Dawes' ['Manifesto for Myself'](https://brendandawes.com/projects/manifestoformyself)</p>
+    </div>
+</div>
