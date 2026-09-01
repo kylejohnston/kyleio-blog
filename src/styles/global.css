@@ -259,7 +259,7 @@ a.tag {
   text-transform: uppercase;
 }
 
-a.tag:hover { 
+a.tag:hover {
   background: var(--light);
   transition: 0.15s;
 
@@ -267,6 +267,8 @@ a.tag:hover {
 a.tag:hover .count {
   color: white;
 }
+
+/* Tag names below must match the TAGS constant in src/consts.ts. */
 
 a.post:hover {
   background: var(--cool);

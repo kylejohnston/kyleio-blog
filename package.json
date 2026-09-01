@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
     "deploy": "npm run build && wrangler deploy",
@@ -33,9 +34,12 @@
     "ultrahtml": "^1.6.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@clack/prompts": "^0.11.0",
+    "@types/node": "^26.4.1",
     "gray-matter": "^4.0.3",
     "tsx": "^4.21.0",
+    "typescript": "^6.0.3",
     "wrangler": "^4.83.0"
   }
 }

@@ -1,16 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../lib/posts';
+import { TAGS } from '../consts';
 
-// Get all posts with draft filtering
-const posts = await getCollection('posts', ({ data }) => {
-  return import.meta.env.PROD ? data.draft !== true : true;
-});
-
-// Define tag order
-const tagOrder = ['post', 'til', 'page', 'project'];
+const posts = await getPublishedPosts();
 
 // Get tag counts
-const tagCounts = posts.reduce((acc, post) => {
+const tagCounts = posts.reduce<Record<string, number>>((acc, post) => {
   post.data.tags?.forEach(tag => {
     acc[tag] = (acc[tag] || 0) + 1;
   });
@@ -19,8 +14,8 @@ const tagCounts = posts.reduce((acc, post) => {
 
 // Sort tags by custom order first, then alphabetically for any remaining tags
 const sortedTags = Object.keys(tagCounts).sort((a, b) => {
-  const aIndex = tagOrder.indexOf(a);
-  const bIndex = tagOrder.indexOf(b);
+  const aIndex = TAGS.indexOf(a as (typeof TAGS)[number]);
+  const bIndex = TAGS.indexOf(b as (typeof TAGS)[number]);
   
   // If both tags are in tagOrder, sort by order
   if (aIndex !== -1 && bIndex !== -1) {
@@ -40,7 +35,7 @@ const allTags = sortedTags;
   <h3 class="font-mono tertiary w-100 text-sm">FILTER BY · · ·</h3>
   {allTags.map((tag) => (
     <div>
-      <a href={`/t/${tag}`} class={`tag ${tag}`}>
+      <a href={`/t/${tag}`} class={`tag ${tag}`} data-astro-prefetch>
         {tag}s <span class="count">{tagCounts[tag]}</span>
       </a>
     </div>

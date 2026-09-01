@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { TAGS } from './consts';
 
 const posts = defineCollection({
   loader: glob({
@@ -12,7 +13,7 @@ const posts = defineCollection({
     description: z.string(),
     pubDate: z.date(),
     tendDate: z.date().optional(),
-    tags: z.array(z.string()),
+    tags: z.array(z.enum(TAGS)),
     draft: z.boolean().default(false),
     ogImage: z.string().optional(),
     galleryPath: z.string().optional()

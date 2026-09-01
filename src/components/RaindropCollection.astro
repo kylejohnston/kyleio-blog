@@ -13,7 +13,7 @@ if (error) {
     <p>No bookmarks found.</p>
   ) : (
     <div class="link-list">
-        {raindrops && raindrops.map((raindrop: any) => (
+        {raindrops && raindrops.map((raindrop) => (
             <div class="link-item">
                 <h2><a href={raindrop.data.link} target="_blank" rel="noopener noreferrer">{raindrop.data.title}</a></h2>
                 {/* Check for excerpt */}
