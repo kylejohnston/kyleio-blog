@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, envField, fontProviders } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
@@ -125,6 +126,19 @@ function devPostPlugin() {
 export default defineConfig({
   site: 'https://kyleio.com',
   prefetch: true,
+  adapter: cloudflare({
+    // 'compile' keeps image transforms happening at build time for
+    // prerendered routes, matching current behavior. Revisit once
+    // on-demand routes need runtime image transforms (would need the
+    // 'cloudflare-binding' service).
+    imageService: 'compile',
+    // rss.xml.ts renders MDX at build time via astro/container +
+    // @astrojs/mdx/container-renderer; that fails to resolve under the
+    // adapter's default 'workerd' prerender sandbox ("No such module
+    // chunks/@astrojs/mdx/server.js"). 'node' matches pre-adapter behavior
+    // for build-time prerendering; on-demand routes still run on workerd.
+    prerenderEnvironment: 'node',
+  }),
   env: {
     schema: {
       RAINDROP_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
