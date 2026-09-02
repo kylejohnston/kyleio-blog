@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, fontProviders } from 'astro/config';
+import { defineConfig, envField, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
@@ -12,9 +12,13 @@ import { unified } from '@astrojs/markdown-remark';
 function devPostPlugin() {
   return {
     name: 'dev-post-plugin',
+    /** @param {import('vite').ViteDevServer} server */
     configureServer(server) {
       // Read endpoint - get raw file content
-      server.middlewares.use('/api/read-post', async (req, res) => {
+      server.middlewares.use('/api/read-post', async (
+        /** @type {import('node:http').IncomingMessage} */ req,
+        /** @type {import('node:http').ServerResponse} */ res
+      ) => {
         if (req.method !== 'GET') {
           res.statusCode = 405;
           res.end(JSON.stringify({ error: 'Method not allowed' }));
@@ -22,7 +26,7 @@ function devPostPlugin() {
         }
 
         try {
-          const url = new URL(req.url, 'http://localhost');
+          const url = new URL(req.url ?? '', 'http://localhost');
           const slug = url.searchParams.get('slug');
 
           if (!slug) {
@@ -61,7 +65,10 @@ function devPostPlugin() {
       });
 
       // Save endpoint
-      server.middlewares.use('/api/save-post', async (req, res) => {
+      server.middlewares.use('/api/save-post', async (
+        /** @type {import('node:http').IncomingMessage} */ req,
+        /** @type {import('node:http').ServerResponse} */ res
+      ) => {
         if (req.method !== 'POST') {
           res.statusCode = 405;
           res.end(JSON.stringify({ error: 'Method not allowed' }));
@@ -69,7 +76,7 @@ function devPostPlugin() {
         }
 
         let body = '';
-        req.on('data', chunk => { body += chunk; });
+        req.on('data', (/** @type {Buffer} */ chunk) => { body += chunk; });
         req.on('end', async () => {
           try {
             const { slug, content } = JSON.parse(body);
@@ -117,6 +124,12 @@ function devPostPlugin() {
 // https://astro.build/config
 export default defineConfig({
   site: 'https://kyleio.com',
+  prefetch: true,
+  env: {
+    schema: {
+      RAINDROP_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+    },
+  },
   markdown: {
     // astro-embed's astro-auto-import integration only works with the
     // remark/rehype pipeline, not the new Satteri default processor.

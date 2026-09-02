@@ -3,11 +3,12 @@ import rss, { type RSSFeedItem } from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
-import { getCollection, render } from "astro:content";
+import { render } from "astro:content";
 import { micromark } from "micromark";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
+import { getPublishedPosts, sortByDate } from "../lib/posts";
 
 // Eagerly import all gallery images so we can include them in RSS feeds.
 const allGalleryImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -162,14 +163,9 @@ export async function GET(context: APIContext) {
   const container = await AstroContainer.create({ renderers });
 
   // Load the content collection entries to add to our RSS feed.
-  const posts = (await getCollection("posts", ({ data, id }) => {
-    // Exclude drafts and the links page
-    return !data.draft && id !== 'links' && id !== 'about';
-  })).sort((a, b) => {
-    const dateA = a.data.tendDate || a.data.pubDate;
-    const dateB = b.data.tendDate || b.data.pubDate;
-    return dateA > dateB ? -1 : 1;
-  });
+  const posts = sortByDate(
+    (await getPublishedPosts()).filter(post => post.id !== 'links' && post.id !== 'about')
+  );
 
   // Add RSS footer template
   const getRssFooter = (postUrl: string) => `

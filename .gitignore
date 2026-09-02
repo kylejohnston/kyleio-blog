@@ -1,6 +1,7 @@
 # build output
 dist/
 .astro/
+.wrangler/
 .obsidian/
 src/content/posts/.obsidian/
 
