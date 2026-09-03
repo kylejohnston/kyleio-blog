@@ -1,0 +1,65 @@
+---
+title: 'Learning Log, August 2026'
+description: Where my attention flowed in August
+pubDate: 2026-09-03T19:58:18.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-08-log.png
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/2026-08-log/*.webp', { eager: true })
+);
+
+## Work~Life
+
+**Work:** Aug 5th, 12pm. I was in a user research session when an email from the CEO landed. All offices were closing for the day ahead of a company-wide announcement in 3 hours. Nobody was sure what was coming—an acquisition? Layoffs? We could only speculate. In the meantime, I started backing up my work—I didn't know whether I'd need it. 3pm. We watched a terse, pre-recorded announcement from the CEO. Reader, it was layoffs. 220 people cut from the ranks. After the short video, we would each learn our fate via email. Slowly, then quickly, Slack lit up with messages: 'safe' or some form of 'goodbye'. I was in the latter camp. After 5 years at Etsy, I was out. I worked with people I learned from every day, on ambitious projects that shipped to millions of buyers. And now I'm eligible for the Alumni Slack, catching up with people I’ve worked with and admired.  
+
+**Life:** Mostly decompressing and relishing the downtime. After the layoff, I realized I had been holding on to a lot of work-related stress and I've been happy to let that go.  
+
+
+## Projects
+Last month I started gathering inspiration for a redesign of [my professional portfolio](https://www.kylewjohnston.com). And with the sudden free time, I finished the redesign and launched it mid-month! I built it on [Astro](https://astro.build/), and added features that allow me to control where case studies appear. For example, I can create custom homepages with case studies hand-selected for a specific company. And I can create multiple versions of case studies, with details tuned to the audience.  
+
+## Digital gardening
+### Bookshelf
+I finished four books this month. Three of them were short, quick reads. Plus, I had extra time on my hands.  
+
+- [Kurt Vonnegut: Letters by Dan Wakefield](https://books.kyleio.com/book/kurt-vonnegut-letters/) — I read this based on [a Marginalian post](https://www.themarginalian.org/2013/11/11/kurt-vonnegut-advice-to-children/), which hits the highlights. I wouldn't pick it up again, but I did highlight a passage that felt relevant to modern times:  
+> People capable of loving some paintings or etchings or whatever can rarely do this without knowing something about the artist. … Any work of art is one half of a conversation between two human beings, and it helps a lot to know who is talking at you. … There are virtually no beloved or respected paintings made by persons of whom we know nothing. We can even surmise a lot about the lives of whoever did the paintings in the caves underneath Lascaux, France. … **Pictures are famous for their human-ness and not their picture-ness.** (1995)
+- [A Man Without a Country by Kurt Vonnegut](https://books.kyleio.com/book/man-without-a-country/) — of the two Vonnegut-focused books, I'd recommend this one. It's a fast, fun read of his short essays and speeches.
+- [The Secret of Secrets by Dan Brown](https://books.kyleio.com/book/secret-of-secrets/) — from the author of *The Da Vinci Code*, who knows how to write a fun page-turner.  
+- [Transcription by Ben Lerner](https://books.kyleio.com/book/transcription/) — a short book with an interesting structure. It tells a story from different perspectives across time.  
+
+### Links
+- [Be the director: how stage craft informs product craft](https://www.youtube.com/watch?v=lr7jom1NHzg) by Kim Beverett of OpenAI — I finally made time to watch this talk from Figma Config 2026. Kim tells a story about a 1970 production of Midsummer Night's Dream, and this quote caught my eye:  
+> The script is not the show. The show is the intentional layer added on top of the script to communicate human perspective.
+- [Making a jig for design.](https://every.to/p/designing-with-ai-make-a-jig?gift=SAva5oIiHtX6d-IbEqA16Mxu5Oag3P8b) — (a jig is a tool that makes it easier to create something else.) I used this technique for my portfolio redesign, creating purpose-built code that helped me fine-tune design and interaction details.  
+
+### MEMEX
+A few favorite visuals that I've added to MEMEX, my [swipe file](https://memex.flow14.com/).
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div>
+        <Image src={pics["stoned-freaks-business-card"]} alt="Stoned Freaks Business Card" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Professional stoners?</p>
+    </div>
+    <div>
+        <Image src={pics["tbwa_2026_identity_elements"]} alt="TBWA brand identity" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">I like what they’re doing with the backslash. via [Brand New](https://www.underconsideration.com/brandnew/archives/new_identity_for_tbwa_done_in_house.php).</p>
+    </div>
+    <div>
+        <Image src={pics["this-isnt-us"]} alt="This isn't us poster" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Still relevant, sadly. By [Nick Adam](https://nickadam.co/), who has a delightful portfolio.</p>
+    </div>
+    <div>
+        <Image src={pics["hello"]} alt="Applying for the graphic design position" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Timely, perhaps</p>
+    </div>
+    <div>
+        <Image src={pics["scratch-n-sniff-stickers"]} alt="Scratch n sniff stickers" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Sensory nostalgia</p>
+    </div>
+</div>
