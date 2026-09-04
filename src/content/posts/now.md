@@ -2,10 +2,13 @@
 title: Now
 description: What I'm doing now. 
 pubDate: 2025-06-20T12:00:00-05:00
-tendDate: 2026-05-10T12:00:00-05:00
+tendDate: 2026-09-04T12:00:00-05:00
 tags: ['page']
 draft: false
 ---
+
+## September 2026
+Taking a deep breath after spending 5 years at Etsy. 
 
 ## May 2026
 ### Work

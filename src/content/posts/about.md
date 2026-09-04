@@ -2,13 +2,13 @@
 title: About
 description: The who, what, and why of this site.
 pubDate: 2025-06-20T14:00:00-05:00
-tendDate: 2026-05-10T14:00:00-05:00
+tendDate: 2026-09-04T14:00:00-05:00
 tags:
   - page
 draft: false
 ---
 
-Hello! I'm Kyle Johnston. I'm based in the Kansas City area where I spend my days as a staff product designer at Etsy. Prior to Etsy, I ran my own design studio, [flow14](https://www.flow14.com/). Before *that*, I worked for a range of companies – from startups to agencies to big companies like Garmin. You can find my professional design portfolio at [kylewjohnston.com](https://www.kylewjohnston.com/) or check out my [LinkedIn](https://www.linkedin.com/in/kylejohnston/).
+Hello! I'm Kyle Johnston, a designer based in the Kansas City area. Most recently, I spent five years as a Staff Product Designer at Etsy. Prior to that, I ran my own design studio, [flow14](https://www.flow14.com/). Before *that*, I worked for a range of companies – from startups to agencies to big companies like Garmin. You can find my professional design portfolio at [kylewjohnston.com](https://www.kylewjohnston.com/) or check out my [LinkedIn](https://www.linkedin.com/in/kylejohnston/).  
 
 This site is a creative journal of things that spark my curiosity, including [projects](/t/project), [posts](/t/post), and [discoveries](/t/til).
 
