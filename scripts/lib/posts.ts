@@ -2,8 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { formatDateForFrontmatter } from './utils.js';
-
-const POSTS_DIR = path.join(process.cwd(), 'src/content/posts');
+import { POSTS_DIR } from './postPath.js';
 
 export interface PostFrontmatter {
   title: string;
