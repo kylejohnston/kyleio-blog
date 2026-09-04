@@ -11,4 +11,6 @@ import RaindropCollection from '../../components/RaindropCollection.astro';
 
 <p class="small" style="margin-block: 0 !important;"><a href="https://kyleio.com/links.xml">Links RSS</a></p>
 
-<RaindropCollection />
+<RaindropCollection server:defer>
+  <p slot="fallback" class="small">Loading bookmarks&hellip;</p>
+</RaindropCollection>
