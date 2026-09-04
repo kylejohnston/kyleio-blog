@@ -4,10 +4,11 @@ import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
-import { readFile, writeFile, access } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import embeds from 'astro-embed/integration';
 import { unified } from '@astrojs/markdown-remark';
+import { POSTS_DIR, resolvePostFilePath } from './scripts/lib/postPath.js';
 
 // Dev-only plugin for reading and saving posts
 function devPostPlugin() {
@@ -43,17 +44,13 @@ function devPostPlugin() {
             return;
           }
 
-          const postsDir = join(process.cwd(), 'src/content/posts');
-          let content;
-          let filePath;
-
-          try {
-            filePath = join(postsDir, `${slug}.mdx`);
-            content = await readFile(filePath, 'utf-8');
-          } catch {
-            filePath = join(postsDir, `${slug}.md`);
-            content = await readFile(filePath, 'utf-8');
+          const filePath = resolvePostFilePath(slug);
+          if (!filePath) {
+            res.statusCode = 404;
+            res.end(JSON.stringify({ error: 'Post not found' }));
+            return;
           }
+          const content = await readFile(filePath, 'utf-8');
 
           res.statusCode = 200;
           res.setHeader('Content-Type', 'application/json');
@@ -96,15 +93,8 @@ function devPostPlugin() {
               return;
             }
 
-            // Determine file path - try .mdx first, then .md
-            const postsDir = join(process.cwd(), 'src/content/posts');
-            let filePath = join(postsDir, `${slug}.mdx`);
-
-            try {
-              await access(filePath);
-            } catch {
-              filePath = join(postsDir, `${slug}.md`);
-            }
+            // Default new posts to .mdx; existing posts keep their extension.
+            const filePath = resolvePostFilePath(slug) ?? join(POSTS_DIR, `${slug}.mdx`);
 
             await writeFile(filePath, content, 'utf-8');
 

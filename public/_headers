@@ -1,0 +1,13 @@
+# Hashed /_astro/* assets (including self-hosted fonts) get immutable
+# caching for free from the Cloudflare adapter — see the build log line
+# "Injected immutable Cache-Control for /_astro/* into _headers."
+#
+# OG images live at stable, unhashed URLs (they're referenced directly in
+# <meta> tags), so they can't be marked immutable — a redeploy can replace
+# the file at the same path. A day of caching still saves social-media
+# crawlers a refetch on every share without risking a long-lived stale image.
+/og-image.png
+  Cache-Control: public, max-age=86400
+
+/ogImage/*
+  Cache-Control: public, max-age=86400

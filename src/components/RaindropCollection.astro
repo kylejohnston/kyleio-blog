@@ -9,7 +9,9 @@ if (error) {
 ---
 
 <div>
-  {raindrops && raindrops.length === 0 ? (
+  {error ? (
+    <p class="small">Couldn't load bookmarks right now &mdash; try refreshing.</p>
+  ) : raindrops && raindrops.length === 0 ? (
     <p>No bookmarks found.</p>
   ) : (
     <div class="link-list">
