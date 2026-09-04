@@ -19,10 +19,10 @@ const recentPosts = filteredPosts
     {featuredPost && (
       <article>
         <h3>
-          <span class="text-base tertiary block weight-base mb-1">NEWEST POST · · ·</span>
+          <span class="text-sm tertiary block weight-base mb-1">NEWEST POST · · ·</span>
           <a href={`/p/${featuredPost.id}`} data-astro-prefetch>{featuredPost.data.title}</a>
         </h3>
-        <p style="margin-block: 4px;">{featuredPost.data.description} <a href={`/p/${featuredPost.id}`} data-astro-prefetch> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5">☞</span></nobr></a></p>
+        <p style="margin-block: 8px;">{featuredPost.data.description} <a href={`/p/${featuredPost.id}`} data-astro-prefetch> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5" style="margin-block: -8px;">☞</span></nobr></a></p>
       </article>
     )}
   </div>

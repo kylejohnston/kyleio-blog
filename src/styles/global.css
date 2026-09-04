@@ -328,7 +328,7 @@ article hr {
 }
 
 .featured {
-  margin-bottom: calc(var(--base) * 8);
+  margin-bottom: calc(var(--base) * 4);
   text-wrap: balance;
 }
 
