@@ -4,6 +4,7 @@ description: >-
   I built a browser-based instrument to create evolving, atmospheric sonic
   textures.
 pubDate: 2026-04-13T00:00:08.000Z
+tendDate: 2026-09-22T00:00:08.000Z
 ogImage: /ogImage/projects/massive-bloom.png
 tags:
   - project
@@ -15,27 +16,25 @@ import { YouTube } from 'astro-embed';
 import Gallery from '../../components/Gallery.astro';
 export const mbImages = import.meta.glob('../../assets/projects/massivebloom/*.webp', { eager: true });
 
-[Massive Bloom](https://massivebloomsound.com/) is a browser-based instrument for creating evolving, atmospheric sonic textures. 
+I built a browser-based synth called [Massive Bloom](https://massivebloomsound.com/) to create evolving, atmospheric sonic textures—drones, music that blooms slowly, for as long as you’d like.
 
 [View the project](https://massivebloomsound.com/) ¦ [GitHub repo](https://github.com/kylejohnston/ambient-drone-generator)
 
-## The inspiration
-The project started with a Fred Again.. video about his production process, specifically how Brian Eno's influence led him to layer ambient drones for texture in his music.
+## The idea
+I got the idea from an interview with Fred again.., who was demoing how drones add texture to his music. He got the idea from Brian Eno. Who knows where Brian Eno got the idea… where does any idea begin?
 
 <YouTube id="zeD0g5xXo7E" params="start=2420" />
 
 ## The build
-I drafted the first plan in early January, spun up the first prototype, and spent the rest of the month just listening.
+I started in January with a plan. The plan led to a prototype. The prototype led to a pause. I sat with it for a month, just listening. 
 
-Taking time to listen helped me realize one of my core development principles—YAGNI (you aren't going to need it)—works for design, too and I started cutting features. You can see the [first version of the generator here](https://v0.massivebloomsound.com/).
+The [first version](https://v0.massivebloomsound.com/) had two modes—easy and create. Easy mode was too simple, too repetitive, and the sound was awful. Create mode was too complex. Every control served a purpose, but collectively: confusing. 
 
-**Things I wasn't happy with:** It was challenging to produce a pleasant drone sound. The UI was too complicated. Ironically, my original idea included easy mode; just press a button and hear a drone. But it didn't sound great *and* it lacked surprise—it sounded the same every time.
+Programmers have a rule called YAGNI, which stands for 'you aren't gonna need it'. They're talking about code, not design. But it applies to design. And so I started cutting. Easy mode: out. Create mode: organized. What remained, I tuned. That was February. 
 
-**February** was all about iterating the sound and shaping the remaining features. By the end of the month, the features felt more intuitive and the sound was closer to what I'd imagined. That's when I started design.
+March. Design polish. Then, user testing, where I watched people try it for the first time and hesitate, not sure what to do. So I simplified more, making it easier to hear the first sound, which invited play and exploration. That led to my favorite feature. Not the sound, but how you save it. Move a fader and the URL rewrites itself. Your sound becomes a string of words you can share with a friend or save for your next flow state. 
 
-Once the design was in place, I did light user testing. Seeing people struggle with the first contact led me to simplify the UI, improve the time to first drone, and add guardrails to the sequencer.
-
-It also led to my favorite feature: the URL updates as you change settings. It provides built-in shareability and if you program a sound that you want to hear every day, simply bookmark it. For example: load [covers-little-destiny…](https://massivebloomsound.com/?p=covers-little-destiny-gourmet-also-make-boiling-bunker-submit-girl-mango-above-barrel-awesome-abides), press the power button, and listen to the sound unfold.
+Try this one: [covers-little-destiny…](https://massivebloomsound.com/?p=covers-little-destiny-gourmet-also-make-boiling-bunker-submit-girl-mango-above-barrel-awesome-abides). Press power. Then listen. Then keep listening… let it bloom. Then make it yours. That’s all there is to it.
 
 ## The visual evolution
 <Gallery
@@ -48,6 +47,3 @@ It also led to my favorite feature: the URL updates as you change settings. It p
         "04-design-live": "Final design"
     }}
 />
-
-## The future
-Since launch, I've started experimenting with new sounds—classic piano, organ, kick drum. But I'm taking it slow and living with the sounds before shipping. 
