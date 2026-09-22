@@ -23,5 +23,15 @@
 
   "observability": {
     "enabled": true
-  }
+  },
+
+  // Session storage used by Astro's Cloudflare adapter (astro.config.mjs sets
+  // this up automatically). Namespace ID pinned explicitly so wrangler binds
+  // to the existing namespace instead of trying to create a new one on deploy.
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "2767008a657f493bbb6b0df712a30595"
+    }
+  ]
 }
