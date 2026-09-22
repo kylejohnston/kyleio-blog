@@ -34,9 +34,9 @@ const isDev = import.meta.env.DEV;
           Planted {format(post.data.pubDate, 'MMM yyyy')}
         </time>
         {post.data.tendDate ?
-          <span class="tertiary">· · ·</span>
+          <span class="tertiary"> · · · </span>
           <time datetime={post.data.tendDate.toISOString()}>
-            Tended {format(post.data.tendDate, 'MMM yyyy')}
+             Tended {format(post.data.tendDate, 'MMM yyyy')}
           </time>
           :
           null
