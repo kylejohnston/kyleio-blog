@@ -152,7 +152,6 @@ blockquote {
   width: calc(100% - 8px);
   margin: 0 auto;
   color: var(--mid);
-  font-style: italic;
 }
 
 pre {
