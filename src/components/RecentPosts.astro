@@ -1,7 +1,6 @@
 ---
-import { format } from 'date-fns';
 import Tags from './Tags.astro';
-import LinksUpdated from './LinksUpdated.astro';
+import PostDate from './PostDate.astro';
 import { getPublishedPosts, sortByDate } from '../lib/posts';
 
 const filteredPosts = sortByDate(await getPublishedPosts());
@@ -50,17 +49,7 @@ const recentPosts = [
               ))}
             </div>
             <span class="lite hidden ml-1 sm:block" style="">·</span>
-            {post.id === 'links' ? (
-              <LinksUpdated server:defer placeholder={(post.data.tendDate ?? post.data.pubDate).toISOString()}>
-                <time slot="fallback" class="text-sm hidden ml-1 sm:block invisible" aria-hidden="true">
-                  {format(post.data.tendDate ?? post.data.pubDate, 'MMM yyyy')}
-                </time>
-              </LinksUpdated>
-            ) : (
-              <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
-                { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
-              </time>
-            )}
+            <PostDate post={post} />
           </article>
       ))
     }
