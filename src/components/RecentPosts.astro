@@ -1,6 +1,6 @@
 ---
-import { format } from 'date-fns';
 import Tags from './Tags.astro';
+import PostDate from './PostDate.astro';
 import { getPublishedPosts, sortByDate } from '../lib/posts';
 
 const filteredPosts = sortByDate(await getPublishedPosts());
@@ -8,10 +8,16 @@ const filteredPosts = sortByDate(await getPublishedPosts());
 // Get the newest post tagged with 'post'
 const featuredPost = filteredPosts.find(post => post.data.tags?.includes('post'));
 
+// Pages (About, Links) are pinned to the end instead of competing by date
+const isPage = (post: typeof filteredPosts[number]) => post.data.tags.includes('page');
+
 // Exclude featured post from recent posts
-const recentPosts = filteredPosts
-  .filter(post => post.id !== featuredPost?.id)
-  .slice(0, 8);
+const recentPosts = [
+  ...filteredPosts
+    .filter(post => post.id !== featuredPost?.id && !isPage(post))
+    .slice(0, 5),
+  ...filteredPosts.filter(isPage),
+];
 ---
 
 <section>
@@ -43,9 +49,7 @@ const recentPosts = filteredPosts
               ))}
             </div>
             <span class="lite hidden ml-1 sm:block" style="">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
-              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
-            </time>
+            <PostDate post={post} />
           </article>
       ))
     }

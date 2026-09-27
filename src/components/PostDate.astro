@@ -1,0 +1,22 @@
+---
+// Date cell for post list rows. Links swaps its static date for the
+// LinksUpdated server island, which shows "new" for fresh bookmarks.
+import type { CollectionEntry } from 'astro:content';
+import { format } from 'date-fns';
+import LinksUpdated from './LinksUpdated.astro';
+
+const { post } = Astro.props as { post: CollectionEntry<'posts'> };
+const date = post.data.tendDate ?? post.data.pubDate;
+---
+
+{post.id === 'links' ? (
+  <LinksUpdated server:defer placeholder={date.toISOString()}>
+    <time slot="fallback" class="text-sm hidden ml-1 sm:block invisible" aria-hidden="true">
+      {format(date, 'MMM yyyy')}
+    </time>
+  </LinksUpdated>
+) : (
+  <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
+    {format(date, 'MMM yyyy')}
+  </time>
+)}

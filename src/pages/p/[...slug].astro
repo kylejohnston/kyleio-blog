@@ -30,17 +30,22 @@ const isDev = import.meta.env.DEV;
       <h1>{post.data.title}</h1>
       {post.data.description && <p class="description">{post.data.description}</p>}
       <div class="text-sm">
-        <time datetime={post.data.pubDate.toISOString()}>
-          Planted {format(post.data.pubDate, 'MMM yyyy')}
-        </time>
-        {post.data.tendDate ?
-          <span class="tertiary"> · · · </span>
-          <time datetime={post.data.tendDate.toISOString()}>
-             Tended {format(post.data.tendDate, 'MMM yyyy')}
-          </time>
-          :
-          null
-        }
+        {/* Links changes whenever a bookmark is saved, so its dates would mislead */}
+        {post.id !== 'links' && (
+          <>
+            <time datetime={post.data.pubDate.toISOString()}>
+              Planted {format(post.data.pubDate, 'MMM yyyy')}
+            </time>
+            {post.data.tendDate ?
+              <span class="tertiary"> · · · </span>
+              <time datetime={post.data.tendDate.toISOString()}>
+                 Tended {format(post.data.tendDate, 'MMM yyyy')}
+              </time>
+              :
+              null
+            }
+          </>
+        )}
         {isDev && (
           <>
             <span class="tertiary">· · ·</span>

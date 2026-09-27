@@ -2,12 +2,15 @@
 // lists all posts, paginated
 import type { GetStaticPathsOptions } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import { format } from 'date-fns';
 import Tags from '../../components/Tags.astro';
+import PostDate from '../../components/PostDate.astro';
 import { getPublishedPosts, sortByDate } from '../../lib/posts';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = sortByDate(await getPublishedPosts());
+  const sorted = sortByDate(await getPublishedPosts());
+  // Pages (About, Links, Now) are pinned to the top of page 1
+  const isPage = (post: typeof sorted[number]) => post.data.tags.includes('page');
+  const posts = [...sorted.filter(isPage), ...sorted.filter(post => !isPage(post))];
   return paginate(posts, { pageSize: 32 });
 }
 
@@ -38,9 +41,7 @@ const totalPages = page.lastPage;
               ))}
             </div>
             <span class="lite hidden ml-1 sm:block" style="">·</span>
-            <time datetime={post.data.pubDate.toISOString()} class="text-sm hidden ml-1 sm:block">
-              { post.data.tendDate ? format(post.data.tendDate, 'MMM yyyy') : format(post.data.pubDate, 'MMM yyyy')}
-            </time>
+            <PostDate post={post} />
               {/* {post.data.description && <p>{post.data.description}</p>} */}
           </article>
         ))
