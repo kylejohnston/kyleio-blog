@@ -7,7 +7,10 @@ import Tags from '../../components/Tags.astro';
 import { getPublishedPosts, sortByDate } from '../../lib/posts';
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-  const posts = sortByDate(await getPublishedPosts());
+  const sorted = sortByDate(await getPublishedPosts());
+  // Pages (About, Links, Now) are pinned to the top of page 1
+  const isPage = (post: typeof sorted[number]) => post.data.tags.includes('page');
+  const posts = [...sorted.filter(isPage), ...sorted.filter(post => !isPage(post))];
   return paginate(posts, { pageSize: 32 });
 }
 

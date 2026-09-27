@@ -1,0 +1,22 @@
+---
+import { getLiveCollection } from 'astro:content';
+import { format } from 'date-fns';
+
+// Server island: flags the Links row as "new" when a bookmark was saved in
+// the last week, so the prerendered homepage reflects new links without a
+// rebuild. The invisible date keeps the column as wide as the other rows'
+// dates, so tags stay right-aligned whether or not "new" shows.
+const { placeholder } = Astro.props as { placeholder: string };
+const { entries, error } = await getLiveCollection('raindrops');
+if (error) console.error('LinksUpdated:', error.message);
+
+const WEEK = 7 * 24 * 60 * 60 * 1000;
+const isNew = entries?.some(({ data }) => Date.now() - new Date(data.created).getTime() < WEEK);
+
+Astro.response.headers.set('Cache-Control', 'public, max-age=300');
+---
+
+<span class="text-sm hidden ml-1 sm:grid justify-items-start">
+  <time class="invisible [grid-area:1/1]" aria-hidden="true">{format(new Date(placeholder), 'MMM yyyy')}</time>
+  {isNew && <time class="[grid-area:1/1]">✳ new ✳</time>}
+</span>
