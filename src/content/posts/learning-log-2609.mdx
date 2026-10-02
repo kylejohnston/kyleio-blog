@@ -1,0 +1,60 @@
+---
+title: 'Learning Log, September 2026'
+description: Where my attention flowed in September
+pubDate: 2026-10-02T18:42:54.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-09-log.png
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/2026-09-log/*.{webp,gif}', { eager: true })
+);
+
+## Life~Work
+
+**Life:** I've been enjoying my free time after [last month's](https://kyleio.com/p/learning-log-2608/) layoffs at Etsy. I spent it on side projects, catching up with friends, and mental health days. And the summer heatwave finally broke, which made my afternoon runs more fun.  
+
+**Work:** I made time for freelance projects, but my focus was finding my next full-time role. Between Etsy's alumni network, recruiters, and friends, I've landed 9 interviews so far. I'm taking my time to find a team I'd enjoy working with at a company whose mission I believe in.
+
+## Projects
+
+- [My portfolio](https://www.kylewjohnston.com) – relaunched last month. This month I refined the design, added motion, and rebuilt key case studies as web-based presentations, so I can demo prototypes and other interactive elements during interviews.
+- [notebin](https://github.com/kylejohnston/notebin) – continued adding features to the iOS version of my minimal note-capture app. Now it supports iOS 27, Siri, widgets, and lock screen controls. Reach out if you want to try it via TestFlight!
+- Antigrav – an Obsidian plugin to support [append-and-review](https://karpathy.bearblog.dev/the-append-and-review-note/)-style note taking. It lets you set a command to instantly move a text selection to the top of a note. My next step is to release it as an official community plugin.
+- [mage](https://github.com/kylejohnston/mage) – a CLI wizard that resizes images and converts them to WebP. OptImage had been my go-to tool for this, but it stopped working in macOS 27, so I made `mage` as a replacement.
+
+<img src={pics["mage-full-tour"].src} width="1200" height="650" alt="Terminal recording of mage resizing an image and converting it to WebP" loading="lazy" class="border border-neutral-400 rounded-lg" />
+
+## Digital gardening
+### Bookshelf
+- [It Lasts Forever and Then It's Over by Anne de Marcken](https://books.kyleio.com/book/it-lasts-forever-and-then-its-over) – a zombie's-eye view of a post-apocalyptic world. Strange premise, but the perspective made a zombie feel relatable.
+- [The Making of the Atomic Bomb by Richard Rhodes](https://books.kyleio.com/book/making-of-the-atomic-bomb) – an in-depth history of the splitting of the atom and its consequences. I think there's a parallel to AI: once scientists grasped the power of the atom, they warned government officials. Officials ignored them at first (where AI is now).  
+
+### Links
+- [The Lightbulb Computer](https://lightbulbcomputer.com/) – a conceptual project around spatial and ambient computing. I liked the kitchen use case: talking and pointing to place timers and recipes on different surfaces looks handy.
+- [Glance Chrome extension](https://www.jasoncashdollar.com/glance) – a Figma-style design inspector for any webpage. It's a local Chrome extension, so proceed with caution. I've used it daily with no issues.
+
+### MEMEX
+A few favorite visuals I've added to MEMEX, my [swipe file](https://memex.flow14.com/).
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div>
+        <Image src={pics["fialu.re_about"]} alt="fialu.re about page" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Exploring a collaboration between [Actual Source](https://actualsource.work/) and [Ghostly](https://ghostly.com/) led me to [fialu.re's about page](https://fialu.re/about/), where the ceiling mural caught my eye.</p>
+    </div>
+    <div>
+        <Image src={pics["reframe.camera"]} alt="Reframe camera" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Love the dithered aesthetic of the [reFrame camera](https://reframe.camera/), an experimental open-source concept.</p>
+    </div>
+    <div>
+        <Image src={pics["wealthsimple-design-system"]} alt="Wealthsimple design system" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Enjoyed exploring the interactive elements in this post: [Wealthsimple: one year post-acquisition](https://performance.dev/wealthsimple-year-one).</p>
+    </div>
+    <div>
+        <Image src={pics["typesafe.ai"]} alt="typesafe.ai homepage" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">[TypeSafe AI homepage](https://typesafe.ai/), the typography feels fresh and different compared to other tools in this space.</p>
+    </div>
+</div>
