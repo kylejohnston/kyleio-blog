@@ -12,32 +12,35 @@ import design from '../../assets/projects/memex-design.webp';
 import art from '../../assets/projects/memex-art.webp';
 import nav from '../../assets/projects/memex-nav.webp';
 
-I created MEMEX as a tool to gather design inspiration. For years, I had used tools like Pinterest or standalone macOS apps to gather inspiration, but they were either too complex, too basic, too expensive; the list goes on.
+I created MEMEX as a tool to gather design inspiration. For years, I had used tools like Pinterest or standalone macOS apps to gather inspiration, but they were either too complex, too basic, too expensive, deprecated… the list goes on.
 
-I wanted something where I could drop images into a folder and see them in a browser. When I discovered PHP had a simple method to support this, MEMEX was born. Under the hood, a snippet of PHP looks for any image in a folder and renders it on the page. Simple!
+I wanted a tool where I could drop images into a folder and see them in a browser. When I discovered PHP had a simple method to support this, MEMEX was born. I used one snippet of PHP to look for any images in a folder and render them on the page. Simple! Since launching in 2018, I've migrated the site to [Astro](https://astro.build/)… that keeps things simple, gives the site a speed boost, and supports simpler hosting options.
 
-[View the project](https://memex.flow14.com/) ¦ [GitHub repo](https://github.com/kylejohnston/memex)
+[View the project](https://memex.kyleio.com/) ¦ [GitHub repo](https://github.com/kylejohnston/memex-static)
 
 <Image src={design} alt="MEMEX, visual design page" class="border border-neutral-200 shadow-xl rounded-sm wide" />
-<p class="caption">[Design Index](https://memex.flow14.com/design.php)</p>
+<p class="caption">[Design Index](https://memex.kyleio.com/design)</p>
 
 <Image src={art} alt="MEMEX, art & illustration page" class="border border-neutral-200 rounded-sm" />
-<p class="caption">[Art & Illustration page](https://memex.flow14.com/art-illustration.php)</p>
+<p class="caption">[Art & Illustration page](https://memex.kyleio.com/art-illustration)</p>
 
 <Image src={nav} alt="MEMEX, navigation" class="border border-neutral-200 rounded-sm" />
-<p class="caption">[Navigation view](https://memex.flow14.com/all.php#menu)</p>
+<p class="caption">[Navigation view](https://memex.kyleio.com/#menu)</p>
 
-I run a local version of the site that's always up-to-date (and speedy). I also maintain [a public version](https://memex.flow14.com) so I can browse for inspiration when I'm away from home.
+I run a local (PHP) version of the site that's always up-to-date (and speedy). I also maintain [a public version](https://memex.kyleio.com) so I can browse for inspiration when I'm away from home.
 
-Since creating MEMEX in 2018, I've regularly refined it. I've restructured the nav several times, randomized the image rendering, added an inbox, and more. I've added a few LLM-assisted features, like displaying image counts for each page, and created index pages that render images from all the subdirectories for my largest categories, [visual design](https://memex.flow14.com/design.php) and [web design](https://memex.flow14.com/websites.php).
+Since creating MEMEX in 2018, I've continued to refine it: I've restructured the nav, randomized the image rendering, added an inbox, and more. I've also added LLM-assisted features, like displaying image counts for each page, and created index pages that render images from all the subdirectories for the largest categories: [visual design](https://memex.kyleio.com/design) and [web design](https://memex.kyleio.com/websites).
 
-If you're curious about the design and tooling, there's [a colophon](https://memex.flow14.com/colophon.php). And I keep [a changelog](https://memex.flow14.com/colophon.php) to track how the site is evolving. The [source code is available on GitHub](https://github.com/kylejohnston/memex) and there's even a  [boilerplate version](https://github.com/kylejohnston/memex-core) if you want to roll your own version.
+If you're curious about the design and tooling, there's [a colophon](https://memex.kyleio.com/colophon). The [source code is available on GitHub](https://github.com/kylejohnston/memex-static) and there's even a [boilerplate (PHP) version](https://github.com/kylejohnston/memex-core) if you want to roll your own.
 
 ## Tools used
-- **Figma** for design explorations. (pro plan)
-- **PHP** for the core functionality. (free)
-- **VS Code** for coding. (free)
-- **GitHub** for hosting the code. (free)
-- **Digital Ocean** for serving the site. ($12/month)
+- **Astro**, static site framework (free)
+- **Cloudflare Pages**, hosting and deployment (free tier)
+- **Cloudflare R2**, image storage (free tier)
+- **rclone**, file sync to R2 (free)
+- **Node.js** and **sharp**, image processing (free)
+- **Visual Studio Code** (free) and **Claude** (pro plan), coding
+- **Figma**, logo and visual design (pro plan)
+- **GitHub**, hosting the code (free)
 
-[Explore the MEMEX](https://memex.flow14.com/)
+[Explore the MEMEX](https://memex.kyleio.com/)
