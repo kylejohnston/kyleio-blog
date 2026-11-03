@@ -1,0 +1,62 @@
+---
+title: 'Learning Log, October 2026'
+description: Where my attention flowed in October
+pubDate: 2026-11-03T19:09:10.000Z
+tags:
+  - post
+ogImage: /ogImage/2026-10-log.png
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/2026-10-log/*.{webp,gif}', { eager: true })
+);
+
+## Life~Work
+I stayed busy looking for my next full-time role. I've been picky about what I consider, so I've had a good hit rate for interviews. It's been fun (and a little stressful) to talk with so many recruiters, hiring managers, and teams. My aim in every conversation is to interview them as much as they're interviewing me. As I write this, I have two strong opportunities in progress, and I am still open to hearing about product design roles that fit my profile. I'm focused on companies with a positive mission, with teams building marketplaces and rethinking their workflows and tooling. If that's you (or you know anyone), [reach out](https://www.linkedin.com/in/kylejohnston/).
+
+## Projects
+I focused on one side project: [MEMEX](https://memex.kyleio.com), aka my swipe file, aka my collection of visual inspiration. I migrated it to Astro, the same framework that powers this journal. When it launched in 2018, MEMEX was built with PHP, using a simple command to render a folder full of images on a page. I loved the simplicity, but PHP limited my hosting options and organizing and syncing new visuals was always a drag. Claude helped with the migration and created scripts that automate organizing and uploading. And running on Astro means I can host almost anywhere, so I moved it from DigitalOcean to Cloudflare, and it now lives at [memex.kyleio.com](https://memex.kyleio.com).
+
+## Digital gardening
+
+### Bookshelf
+- [*The Buried Giant* by Kazuo Ishiguro](https://books.kyleio.com/book/buried-giant/) – a dreamy, fantasy novel set in a time of knights and dragons, with themes of memory and loss emerging through a fog that's enveloped the land.  
+- [*Helen of Nowhere* by Makenna Goodman](https://books.kyleio.com/book/helen-of-nowhere/) – a short, surreal read touching on the past and present, regret and happiness. 
+- [*Box 88* by Charles Cumming](https://books.kyleio.com/book/box-88/) – a change of pace: a modern spy thriller. It's the first in a series I found through the [Why Is This Interesting?](https://whyisthisinteresting.substack.com/p/the-friday-interview-with-charles) newsletter, and I'm looking forward to reading more of the series. 
+
+### Links
+
+- [Benchma(r)king – James Bridle](https://emergencemagazine.org/essay/benchmarking/) — Great read for two reasons. First, I learned the origin of 'benchmarking' — not what I expected! Second, seeing the results of his attempts to build a chair designed by AI, or "designed by someone who has read a lot about chairs but never actually sat in one"
+- [Preview a Link](https://previewa.link/) – Handy tool from [Generic Applications](https://generic-applications.com/) for checking link previews across a wide range of applications and platforms.
+
+### MEMEX
+A few favorite visuals I've added to MEMEX, my [swipe file](https://memex.kyleio.com/).
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+    <div>
+        <Image src={pics["thomasschneider-art.de"]} alt="Thomas Schneider collage work" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Inspired by [Thomas Schneider's](https://www.thomasschneider-art.de/) collages—he deconstructs large-scale posters and reassembles them into visual compositions. ([Instagram](https://www.instagram.com/thomasschneiderart/))</p>
+    </div>
+    <div>
+        <Image src={pics["mikemcquade.com--artwork"]} alt="Mike McQuade's collage work" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Lovely collage work by [Mike McQuade](https://mikemcquade.com/). ([Instagram](https://www.instagram.com/mikemcquade/))</p>
+    </div>
+    <div>
+        <Image src={pics["karel-martens-untitled-2018"]} alt="Karel Martens' Untitled 2018 print" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Love the color + layering of this piece by [Karel Martens](https://www.instagram.com/martens__martens/). Discovered via [Dan Catt's newsletter](https://newsletter.revdancatt.com/p/098-cream-coloured-background-pen).</p>
+    </div>
+    <div>
+        <Image src={pics["charliedeets.com_timeline"]} alt="Charlie Deets' timeline page" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">I've noticed a trend in design portfolios: presenting work on a timeline. The simplicity of [Charlie Deets' page](https://charliedeets.com/timeline/) is a classy example of the trend.</p>
+    </div>
+    <div>
+        <Image src={pics["generic-applications.com"]} alt="Generic Applications page" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">The [Generic Applications](https://generic-applications.com/) homepage feels… generic, but in a unique way.</p>
+    </div>
+    <div>
+        <Image src={pics["paper.design_mono"]} alt="Paper Design Mono landing page" class="border border-neutral-400 rounded-lg" />
+        <p class="caption text-center">Well-designed landing page for the newly-released [Paper Mono font](https://paper.design/mono).</p>
+    </div>
+</div>
+
