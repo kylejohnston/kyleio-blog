@@ -1,6 +1,8 @@
 # Replies between posts: proposal
 
-Captured 2026-11-11, revised the same day after reviewing the reference posts. Scope is **self-replies only**: a post can reply to an earlier post on this site, and a chain of replies forms a thread. Replies are full posts (same schema, title and description required). Reply status is a frontmatter field, not a tag; `TAGS` and the tag colors stay unchanged.
+Captured 2026-11-11, revised the same day after reviewing the reference posts.
+
+**Status:** phases 1 and 2 implemented (section 7). Lists, CLI and the T1/T2 comparison remain. Scope is **self-replies only**: a post can reply to an earlier post on this site, and a chain of replies forms a thread. Replies are full posts (same schema, title and description required). Reply status is a frontmatter field, not a tag; `TAGS` and the tag colors stay unchanged.
 
 Outbound replies (to other people's blogs) and inbound replies (Webmentions) are out of scope. The data model is chosen so both can be added later without migrating content.
 
@@ -42,7 +44,7 @@ inReplyTo: public-bathrooms-and-liquid-glass
 Decisions:
 
 - **Single parent, stored on the child.** The child names its parent; the parent never lists its children. Children are derived at build time. Replying never requires editing an old post.
-- **`reference('posts')` over `z.string()`.** It types the value as `{ collection, id }` and documents intent. It does **not** validate that the target exists: Astro only resolves references when `getEntry()` is called. The site validates (section 2).
+- **`reference('posts')` over `z.string()`.** It types the value as `{ collection, id }` and documents intent. Astro 7 also reports a reference to a missing entry during content sync. It can't know the thread rules (published parent, date order, no pages), so the site validates those (section 2).
 - **Name matches the microformat.** `inReplyTo` maps to `u-in-reply-to`. Outbound replies later widen it to `z.union([reference('posts'), z.object({ url: z.url(), title: z.string(), author: z.string().optional() })])` — the same three facts Thomas stores as `origin_url` / `origin_title` / `origin_author`, nested under one key. Existing replies stay valid.
 - **The thread title is the root post's title.** Marcel's `↩ A couple of opinions about the iPhone Duo` is the thread's first post. No separate field until threads drift in topic enough to need one.
 - **A thread is a tree, rendered as a list.** Two posts can reply to the same parent. Data allows branching; the UI flattens it chronologically. Forbidding branches buys nothing and costs a rule to enforce.
@@ -225,8 +227,8 @@ The CLI reads frontmatter with gray-matter, not through Astro, so it can't use t
 
 Each phase ships on its own and leaves the site coherent.
 
-1. **Data.** Schema field, `src/lib/threads.ts` with validation, RSS eyebrow. No page changes yet; the build now fails on a broken `inReplyTo`.
-2. **Thread view.** `ThreadEntry.astro`, thread rendering on `[...slug].astro` (T2), rail styling, eyebrow on branch replies and the featured block. Lists unchanged. This is the feature: a reply is discoverable from any post in its thread.
+1. **Data.** *(done)* Schema field, `src/lib/threads.ts` with validation, RSS eyebrow. No page changes yet; the build now fails on a broken `inReplyTo`.
+2. **Thread view.** *(done)* `ThreadView.astro` (wraps the focused post; renders the slot unchanged outside threads), `ThreadEntry.astro`, `ReplyEyebrow.astro`, thread rendering on `[...slug].astro` (T2), rail styling, eyebrow on branch replies and the featured block. Lists unchanged. This is the feature: a reply is discoverable from any post in its thread.
 3. **List refactor.** Extract `PostRow.astro`. No visual change; verify by diffing built HTML before and after.
 4. **List modes.** `REPLY_LIST_MODE`, `prepareList`, marker line. Write a real thread, compare, delete the losing mode.
 5. **CLI.** Reply prompt in `post:create`.

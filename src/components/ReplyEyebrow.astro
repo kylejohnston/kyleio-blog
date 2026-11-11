@@ -1,0 +1,15 @@
+---
+// "A reply to …" line shown above a reply's title when its parent isn't
+// visible directly above it (featured block, branch replies in a thread).
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  parent: CollectionEntry<'posts'>;
+}
+
+const { parent } = Astro.props;
+---
+
+<p class="reply-eyebrow text-sm">
+  <span aria-hidden="true">↩</span> A reply to <a class="u-in-reply-to" href={`/p/${parent.id}`} data-astro-prefetch>“{parent.data.title}”</a>
+</p>

@@ -1,0 +1,40 @@
+---
+// Wraps the focused post (the default slot) in its thread: older posts
+// collapsed above, newer posts in full below, joined by a dotted rail.
+// Posts outside a thread render the slot unchanged.
+import type { CollectionEntry } from 'astro:content';
+import ThreadEntry from './ThreadEntry.astro';
+import { branchParent, type ThreadIndex } from '../lib/threads';
+
+interface Props {
+  thread?: CollectionEntry<'posts'>[];
+  focusId: string;
+  index: ThreadIndex;
+}
+
+const { thread, focusId, index } = Astro.props;
+const focusIndex = thread ? thread.findIndex((post) => post.id === focusId) : -1;
+const older = thread ? thread.slice(0, focusIndex) : [];
+const newer = thread ? thread.slice(focusIndex + 1) : [];
+---
+
+{thread ? (
+  <div class="thread">
+    <p class="thread-label text-sm tertiary">THREAD · · · {thread.length} POSTS</p>
+    {older.map((post) => (
+      <ThreadEntry post={post} variant="context" />
+    ))}
+    <div class="thread-focus">
+      <slot />
+    </div>
+    {newer.map((post, i) => (
+      <ThreadEntry
+        post={post}
+        variant="continued"
+        replyTo={branchParent(index, thread, focusIndex + 1 + i)}
+      />
+    ))}
+  </div>
+) : (
+  <slot />
+)}
