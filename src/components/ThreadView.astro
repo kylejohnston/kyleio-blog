@@ -21,19 +21,23 @@ const newer = thread ? thread.slice(focusIndex + 1) : [];
 {thread ? (
   <div class="thread">
     <p class="thread-label text-sm tertiary">THREAD · · · {thread.length} POSTS</p>
-    {older.map((post) => (
-      <ThreadEntry post={post} variant="context" />
-    ))}
-    <div class="thread-focus">
-      <slot />
+    {/* The rail starts at the first node, whose height depends on whether
+        the focused post is first (no older posts). */}
+    <div class:list={['thread-rail', older.length === 0 && 'starts-focused']}>
+      {older.map((post) => (
+        <ThreadEntry post={post} variant="context" />
+      ))}
+      <div class="thread-focus">
+        <slot />
+      </div>
+      {newer.map((post, i) => (
+        <ThreadEntry
+          post={post}
+          variant="continued"
+          replyTo={branchParent(index, thread, focusIndex + 1 + i)}
+        />
+      ))}
     </div>
-    {newer.map((post, i) => (
-      <ThreadEntry
-        post={post}
-        variant="continued"
-        replyTo={branchParent(index, thread, focusIndex + 1 + i)}
-      />
-    ))}
   </div>
 ) : (
   <slot />

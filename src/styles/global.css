@@ -550,14 +550,31 @@ time, .count {
     margin-left: calc(var(--thread-indent) * -1);
   }
 }
-/* The rail: same dotted treatment as article hr */
-.thread::before {
+/* The rail: same dotted treatment as article hr. It starts at the bottom
+   of the first node (node top + 12px) and sits behind content (z-index -1
+   inside the isolated .thread-rail), so anything with a background covers it. */
+.thread-rail {
+  --node-top: 6px;
+  --focus-node-top: 14px;
+  position: relative;
+  isolation: isolate;
+}
+.thread-rail::before {
   content: '';
   position: absolute;
-  top: calc(var(--base) * 5);
+  z-index: -1;
+  top: calc(var(--node-top) + 12px);
   bottom: calc(var(--base) * 2);
-  left: var(--rail-x);
+  left: calc(var(--rail-x) - var(--thread-indent));
   border-left: 2px dotted var(--lighter);
+}
+.thread-rail.starts-focused::before {
+  top: calc(var(--focus-node-top) + 12px);
+}
+/* Content wider than the text column (galleries, .wide images) would sit
+   on the rail; give it the page background so the rail passes under it. */
+.thread-rail :is(.gallery-wide, .image-grid, .content .wide) {
+  background: var(--back);
 }
 .thread-label {
   margin: 0 0 calc(var(--base) * 3);
@@ -572,7 +589,7 @@ time, .count {
 .thread-focus::before {
   content: '';
   position: absolute;
-  top: 6px;
+  top: var(--node-top);
   left: calc(var(--rail-x) + 1px - var(--thread-indent) - 6px);
   width: 12px;
   height: 12px;
@@ -581,7 +598,7 @@ time, .count {
   background: var(--back);
 }
 .thread-focus::before {
-  top: 14px;
+  top: var(--focus-node-top);
   border-color: var(--warm);
   background: var(--warm);
 }
