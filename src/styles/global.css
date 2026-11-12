@@ -598,7 +598,7 @@ time, .count {
   background: var(--back);
 }
 .thread-focus::before {
-  top: var(--focus-node-top);
+  top: calc(var(--focus-node-top) + 10px);
   border-color: var(--warm);
   background: var(--warm);
 }
