@@ -9,6 +9,15 @@ import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "../consts";
 import { getPublishedPosts, sortByDate } from "../lib/posts";
+import { buildThreadIndex } from "../lib/threads";
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
 
 // Eagerly import all gallery images so we can include them in RSS feeds.
 const allGalleryImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -163,9 +172,16 @@ export async function GET(context: APIContext) {
   const container = await AstroContainer.create({ renderers });
 
   // Load the content collection entries to add to our RSS feed.
+  const allPosts = await getPublishedPosts();
+  const threadIndex = buildThreadIndex(allPosts);
   const posts = sortByDate(
-    (await getPublishedPosts()).filter(post => post.id !== 'links' && post.id !== 'about')
+    allPosts.filter(post => post.id !== 'links' && post.id !== 'about')
   );
+
+  // Feed readers don't see the thread view, so every reply names its parent.
+  const getReplyHeader = (parentId: string, parentTitle: string) => `
+    <p><em>↩ A reply to <a href="${baseUrl}/p/${parentId}/">“${escapeHtml(parentTitle)}”</a></em></p>
+  `;
 
   // Add RSS footer template
   const getRssFooter = (postUrl: string) => `
@@ -253,8 +269,10 @@ export async function GET(context: APIContext) {
       sanitize({ dropElements: ["script", "style"] }),
     ]);
 
-    // Add footer to content
-    const contentWithFooter = content + getRssFooter(postUrl);
+    // Add reply header and footer to content
+    const parent = threadIndex.parentOf.get(post.id);
+    const replyHeader = parent ? getReplyHeader(parent.id, parent.data.title) : '';
+    const contentWithFooter = replyHeader + content + getRssFooter(postUrl);
 
     feedItems.push({
       ...post.data,

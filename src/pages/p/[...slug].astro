@@ -3,18 +3,28 @@
 import { render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { format } from 'date-fns';
+import ThreadView from '../../components/ThreadView.astro';
+import ReplyEyebrow from '../../components/ReplyEyebrow.astro';
 import { getPublishedPosts } from '../../lib/posts';
+import { branchParent, buildThreadIndex, threadFor } from '../../lib/threads';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
+  const index = buildThreadIndex(posts);
   return posts.map(post => ({
     params: { slug: post.id },
-    props: { post },
+    props: { post, index, thread: threadFor(index, post.id) },
   }));
 }
 
-const { post } = Astro.props;
+const { post, index, thread } = Astro.props;
 const { Content } = await render(post);
+
+// In a thread, posts can be days apart, so show the day.
+const dateFormat = thread ? 'MMM d, yyyy' : 'MMM yyyy';
+const replyTo = thread
+  ? branchParent(index, thread, thread.findIndex(p => p.id === post.id))
+  : undefined;
 
 const isDev = import.meta.env.DEV;
 ---
@@ -25,8 +35,10 @@ const isDev = import.meta.env.DEV;
   description={post.data.description}
   ogImage={post.data.ogImage}
 >
+  <ThreadView thread={thread} focusId={post.id} index={index}>
   <article class="post">
     <header>
+      {replyTo && <ReplyEyebrow parent={replyTo} />}
       <h1>{post.data.title}</h1>
       {post.data.description && <p class="description">{post.data.description}</p>}
       <div class="text-sm">
@@ -34,12 +46,12 @@ const isDev = import.meta.env.DEV;
         {post.id !== 'links' && (
           <>
             <time datetime={post.data.pubDate.toISOString()}>
-              Planted {format(post.data.pubDate, 'MMM yyyy')}
+              Planted {format(post.data.pubDate, dateFormat)}
             </time>
             {post.data.tendDate ?
               <span class="tertiary"> · · · </span>
               <time datetime={post.data.tendDate.toISOString()}>
-                 Tended {format(post.data.tendDate, 'MMM yyyy')}
+                 Tended {format(post.data.tendDate, dateFormat)}
               </time>
               :
               null
@@ -67,6 +79,7 @@ const isDev = import.meta.env.DEV;
       )}
     </div>
   </article>
+  </ThreadView>
 </Layout>
 
 {isDev && (

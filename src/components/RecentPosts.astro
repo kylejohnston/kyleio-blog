@@ -1,12 +1,15 @@
 ---
 import Tags from './Tags.astro';
 import PostDate from './PostDate.astro';
+import ReplyEyebrow from './ReplyEyebrow.astro';
 import { getPublishedPosts, sortByDate } from '../lib/posts';
+import { buildThreadIndex } from '../lib/threads';
 
 const filteredPosts = sortByDate(await getPublishedPosts());
 
 // Get the newest post tagged with 'post'
 const featuredPost = filteredPosts.find(post => post.data.tags?.includes('post'));
+const featuredReplyTo = featuredPost && buildThreadIndex(filteredPosts).parentOf.get(featuredPost.id);
 
 // Pages (About, Links) are pinned to the end instead of competing by date
 const isPage = (post: typeof filteredPosts[number]) => post.data.tags.includes('page');
@@ -28,6 +31,7 @@ const recentPosts = [
           <span class="text-sm tertiary block weight-base mb-1">NEWEST POST · · ·</span>
           <a href={`/p/${featuredPost.id}`} data-astro-prefetch>{featuredPost.data.title}</a>
         </h3>
+        {featuredReplyTo && <ReplyEyebrow parent={featuredReplyTo} />}
         <p style="margin-block: 8px;">{featuredPost.data.description} <a href={`/p/${featuredPost.id}`} data-astro-prefetch> <nobr class="ml-1">Continue <span class="inline-block relative text-2xl top-0.5" style="margin-block: -8px;">☞</span></nobr></a></p>
       </article>
     )}

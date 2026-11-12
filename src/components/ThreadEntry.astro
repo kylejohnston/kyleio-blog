@@ -1,0 +1,58 @@
+---
+// One non-focused post inside a thread view.
+// - context:   older than the focused post. Collapsed into <details>; the
+//              full body is pre-rendered inside and expands without JS.
+// - continued: newer than the focused post. Rendered in full.
+import { render, type CollectionEntry } from 'astro:content';
+import { format } from 'date-fns';
+import ReplyEyebrow from './ReplyEyebrow.astro';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  variant: 'context' | 'continued';
+  /** Set when this entry replies to something other than the entry above it. */
+  replyTo?: CollectionEntry<'posts'>;
+}
+
+const { post, variant, replyTo } = Astro.props;
+const { Content } = await render(post);
+const href = `/p/${post.id}`;
+const date = format(post.data.pubDate, 'MMM d, yyyy');
+---
+
+{variant === 'context' ? (
+  <details class="thread-entry thread-context">
+    <summary>
+      <span class="thread-entry-title">{post.data.title}</span>
+      <span class="thread-entry-meta text-sm">
+        <time datetime={post.data.pubDate.toISOString()}>{date}</time>
+        <span class="tertiary"> · · · </span>
+        <span class="thread-toggle">
+          <span class="when-closed">Read <span aria-hidden="true">☟</span></span>
+          <span class="when-open">Hide <span aria-hidden="true">&#x261D;&#xFE0E;</span></span>
+        </span>
+      </span>
+      {post.data.description && <span class="description">{post.data.description}</span>}
+    </summary>
+    <div class="content">
+      <Content />
+    </div>
+    <p class="text-sm">
+      <a href={href} data-astro-prefetch>Go to this post <span aria-hidden="true">☞</span></a>
+    </p>
+  </details>
+) : (
+  <article class="thread-entry thread-continued">
+    <header>
+      {replyTo && <ReplyEyebrow parent={replyTo} />}
+      <h2 class="thread-entry-title"><a href={href} data-astro-prefetch>{post.data.title}</a></h2>
+      {post.data.description && <p class="description">{post.data.description}</p>}
+      <div class="text-sm">
+        <time datetime={post.data.pubDate.toISOString()}>Planted {date}</time>
+      </div>
+    </header>
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+)}

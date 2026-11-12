@@ -530,3 +530,128 @@ time, .count {
     break-inside: avoid;
   }
 }
+
+/* Reply threads: src/components/ThreadView.astro, ThreadEntry.astro */
+.reply-eyebrow {
+  margin: 0 0 var(--base);
+  color: var(--light);
+}
+
+.thread {
+  --thread-indent: calc(var(--base) * 4);
+  --rail-x: var(--base);
+  position: relative;
+  padding-left: var(--thread-indent);
+}
+/* With room to spare, hang the rail in the margin so text keeps the
+   site's left edge */
+@media (min-width: 768px) {
+  .thread {
+    margin-left: calc(var(--thread-indent) * -1);
+  }
+}
+/* The rail: same dotted treatment as article hr. It starts at the bottom
+   of the first node (node top + 12px) and sits behind content (z-index -1
+   inside the isolated .thread-rail), so anything with a background covers it. */
+.thread-rail {
+  --node-top: 6px;
+  --focus-node-top: 14px;
+  position: relative;
+  isolation: isolate;
+}
+.thread-rail::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--node-top) + 12px);
+  bottom: calc(var(--base) * 2);
+  left: calc(var(--rail-x) - var(--thread-indent));
+  border-left: 2px dotted var(--lighter);
+}
+.thread-rail.starts-focused::before {
+  top: calc(var(--focus-node-top) + 12px);
+}
+/* Content wider than the text column (galleries, .wide images) would sit
+   on the rail; give it the page background so the rail passes under it. */
+.thread-rail :is(.gallery-wide, .image-grid, .content .wide) {
+  background: var(--back);
+}
+.thread-label {
+  margin: 0 0 calc(var(--base) * 3);
+}
+
+.thread-entry,
+.thread-focus {
+  position: relative;
+}
+/* A node on the rail for each entry; the focused post is filled */
+.thread-entry::before,
+.thread-focus::before {
+  content: '';
+  position: absolute;
+  top: var(--node-top);
+  left: calc(var(--rail-x) + 1px - var(--thread-indent) - 6px);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--lighter);
+  background: var(--back);
+}
+.thread-focus::before {
+  top: var(--focus-node-top);
+  border-color: var(--warm);
+  background: var(--warm);
+}
+
+.thread-context {
+  margin-bottom: calc(var(--base) * 6);
+}
+.thread-context summary {
+  display: grid;
+  gap: calc(var(--base) * 0.5);
+  cursor: pointer;
+  list-style: none;
+}
+.thread-context summary::-webkit-details-marker {
+  display: none;
+}
+.thread-entry-title {
+  font-size: 1.25rem;
+  font-weight: var(--wt-bold);
+  line-height: 1.2;
+  color: var(--warmer);
+}
+.thread-context summary:hover .thread-entry-title {
+  text-decoration: underline;
+}
+.thread-toggle .when-open,
+.thread-context[open] .thread-toggle .when-closed {
+  display: none;
+}
+.thread-context[open] .thread-toggle .when-open {
+  display: inline;
+}
+
+.thread-continued {
+  margin-top: calc(var(--base) * 10);
+}
+.thread-continued::before {
+  top: 12px;
+}
+/* Below the focused h1, above the body's own h2s */
+.thread-continued h2.thread-entry-title {
+  margin: 0 0 calc(var(--base) * 3);
+  font-family: var(--font-headline);
+  font-size: calc(var(--base) * 5);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75, "opsz" 40;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+.thread-continued h2 a {
+  color: var(--dark);
+  text-decoration: none;
+}
+.thread-continued h2 a:hover {
+  color: var(--warmer);
+}
