@@ -1,0 +1,52 @@
+---
+title: mage
+description: A command-line tool for magically resizing and optimizing images
+pubDate: 2026-09-14T14:00:00-05:00
+ogImage: /ogImage/projects/mage.png
+tags:
+  - project
+draft: true
+---
+import { Image } from 'astro:assets';
+import one from '../../assets/projects/mage/mage-full-tour.webp';
+import two from '../../assets/projects/mage/mage-batch.webp';
+
+mage is a purpose-built, macOS command-line tool for the two things I do with most screenshots and images: resize them and convert them to WebP. 
+
+<Image src={one} alt="Demo: resizing and converting" class="border border-neutral-200 rounded-lg" />
+<p class="caption">mage at work</p>
+
+
+For years, one of my everyday tools on macOS was [OptImage](https://optimage.app/). It handily resized images, converted them from one format to another, and optimized their file size. Simple and fast. But it broke when I upgraded to macOS 27.
+
+There’s no indication it’s going to be upgraded or fixed, so I started looking for alternatives. My (narrow) requirements: (1) resize images (like large images and screenshots) by either percentage or max width and (2) convert images to WebP so they’re optimized for the web. [ImageOptim](https://imageoptim.com/mac) predates WebP, and hasn’t added support. [Clop](https://lowtechguys.com/clop) is a nice, modern alternative, but it’s positioned as a power tool; it does way too much for my needs. And most other options were subscription-based. 
+
+## Summoning mage 🧙
+
+Finding no alternative that fit my requirements, I created [mage](https://github.com/kylejohnston/mage) as an interactive CLI tool. Why the command-line? [Ghostty](https://ghostty.org/), a terminal replacement for macOS, is another one of my everyday apps. It’s always open, so it’s faster to jump there vs working with yet another app.
+
+Here’s how it works:
+
+* Type `mage filename.png` or, for batch processing: `mage *.png` (`*` selects any file that ends with `.png`). It also handles `jpg`, `gif`, and `tiff` files.
+* **Resize** by percentage or max-width (or skip resizing)
+* **Convert** to WebP, lossless or lossy (or skip converting). I’ve found using `lossy` set to `80` or `90` nets substantially smaller files with almost no perceived loss in quality, especially for images that end up on the web.
+* Done. The original images stay in place.
+
+<Image src={two} alt="Demo: batch processing" class="mt-4 border border-neutral-200 rounded-lg" />
+<p class="caption">Processing multiple images</p>
+
+For a concrete example: I took a screenshot that’s 2940×1912 and 1.6 MB. Resizing it by 50% and converting it to WebP using `lossy 90` reduces the file size to 153 KB, or just over 90% smaller.
+
+I built mage with Claude Code. I kicked off the project with the [Superpowers plugin](https://github.com/obra/superpowers), which drives a spec-plan-build process. Once the plan was complete, the build finished in an afternoon. 
+
+Behind the scenes, mage uses tools I already had installed through Homebrew: `ImageMagick` and `webp`. They’re both wrapped with [gum](https://github.com/charmbracelet/gum), a colorful, interactive command-line tool that makes the CLI feel friendlier.
+
+Day-to-day, mage has fully replaced OptImage in my workflow. The interactive prompts mean I can quickly navigate options with the keyboard. And because OptImage required changing a preference to manage resizing, the mage-based workflow is actually faster.
+
+If you want to give it a try, it’s free to use. You can [find the installation steps here](https://github.com/kylejohnston/mage). It requires macOS, [Homebrew](https://brew.sh/), and the [ImageMagick](https://formulae.brew.sh/formula/imagemagick), [webp](https://formulae.brew.sh/formula/webp), and [gum](https://formulae.brew.sh/formula/gum) Homebrew packages.
+
+## Tools used
+
+- Claude Code (Pro) + [**Superpowers**](https://github.com/obra/superpowers) for specs and planning (free)
+- `ImageMagick`, `webp`, and `gum` (free)
+- [Ghostty](https://ghostty.org/) (or Terminal) (free)
