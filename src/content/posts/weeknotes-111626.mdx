@@ -30,15 +30,27 @@ export const pics = globImages(
 
 <div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
   <div>
-    <Image src={pics["IMG_0972"]} alt="Thursday" class="border border-neutral-400 rounded-lg mt-4" />
+    <a href={pics["IMG_0972"].src} data-lightbox>
+      <Image src={pics["IMG_0972"]} width={1200} alt="Thursday" class="border border-neutral-400 rounded-lg mt-4" />
+    </a>
     <p class="caption">Thursday</p>
   </div>
   <div>
-    <Image src={pics["IMG_0973"]} alt="Friday" class="border border-neutral-400 rounded-lg mt-4" />
+    <a href={pics["IMG_0973"].src} data-lightbox>
+      <Image src={pics["IMG_0973"]} width={1200} alt="Friday" class="border border-neutral-400 rounded-lg mt-4" />
+    </a>
     <p class="caption">Friday</p>
   </div>
+  <div>
+    <a href={pics["IMG_0980"].src} data-lightbox>
+      <Image src={pics["IMG_0980"]} width={1200} alt="Saturday, peak color" class="border border-neutral-400 rounded-lg mt-4" />
+    </a>
+    <p class="caption">Saturday: peak color</p>
+  </div>
+  <div>
+    <a href={pics["IMG_0982"].src} data-lightbox>
+      <Image src={pics["IMG_0982"]} width={1200} alt="Leaves at night" class="border border-neutral-400 rounded-lg mt-4" />
+    </a>
+    <p class="caption">Leaves at night</p>
+  </div>
 </div>
-<Image src={pics["IMG_0980"]} alt="Saturday, peak color" class="border border-neutral-400 rounded-lg mt-4" />
-<p class="caption">Saturday: peak color</p>
-<Image src={pics["IMG_0982"]} alt="Leaves at night" class="border border-neutral-400 rounded-lg mt-4" />
-<p class="caption">Leaves at night</p>
