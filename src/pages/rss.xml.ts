@@ -239,6 +239,17 @@ export async function GET(context: APIContext) {
           if (node.name === "a" && node.attributes.href?.startsWith("/")) {
             node.attributes.href = baseUrl + node.attributes.href;
           }
+          // Lightbox links: the page shows a resized image, the feed gets the full-size one.
+          // walk() visits the <a> before its <img>, and href is already absolute here.
+          if (node.name === "a" && "data-lightbox" in node.attributes) {
+            const img = node.children?.find((c: any) => c.name === "img");
+            if (img) {
+              img.attributes.src = node.attributes.href;
+              delete img.attributes.srcset;
+              delete img.attributes.width;
+              delete img.attributes.height;
+            }
+          }
           if (node.name === "img" && node.attributes.src?.startsWith("/")) {
             node.attributes.src = baseUrl + node.attributes.src;
           }
