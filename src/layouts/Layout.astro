@@ -86,8 +86,7 @@ const ogType = isHome ? 'website' : 'article';
 <script>
   let dialog: HTMLDialogElement | undefined;
   let img: HTMLImageElement;
-  let prevBtn: HTMLButtonElement;
-  let nextBtn: HTMLButtonElement;
+  let nav: HTMLDivElement;
   let links: HTMLAnchorElement[] = [];
   let index = 0;
 
@@ -96,13 +95,12 @@ const ogType = isHome ? 'website' : 'article';
     const thumb = links[index].querySelector('img');
     img.src = links[index].href;
     img.alt = thumb?.alt ?? '';
-    prevBtn.hidden = nextBtn.hidden = links.length < 2;
+    nav.hidden = links.length < 2;
   };
 
-  const navButton = (cls: string, label: string, text: string, step: number) => {
+  const navButton = (label: string, text: string, step: number) => {
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = cls;
     b.setAttribute('aria-label', label);
     b.textContent = text;
     // Don't let the click reach the dialog, which closes on any click.
@@ -121,9 +119,12 @@ const ogType = isHome ? 'website' : 'article';
       dialog.className = 'lightbox';
       dialog.setAttribute('aria-label', 'Image viewer');
       img = document.createElement('img');
-      prevBtn = navButton('lightbox-prev', 'Previous image', '‹', -1);
-      nextBtn = navButton('lightbox-next', 'Next image', '›', 1);
-      [img, prevBtn, nextBtn].forEach((el) => dialog!.appendChild(el));
+      nav = document.createElement('div');
+      nav.className = 'lightbox-nav';
+      nav.appendChild(navButton('Previous image', '‹', -1));
+      nav.appendChild(navButton('Next image', '›', 1));
+      dialog.appendChild(img);
+      dialog.appendChild(nav);
       dialog.addEventListener('click', () => dialog!.close());
 
       // Swipe left/right. preventDefault on touchend stops the synthetic click that would close the dialog.
