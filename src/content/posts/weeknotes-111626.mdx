@@ -1,0 +1,44 @@
+---
+title: 'Weeknotes: Nov 22, 2026'
+description: '5-ish things from the past week, Nov 16–Nov 22, 2026'
+pubDate: 2026-11-22T17:51:54.000Z
+tags:
+  - post
+ogImage: /ogImage/weeknotes.png
+draft: false
+---
+import { Image } from 'astro:assets';
+import { globImages } from '../../lib/globImages';
+export const pics = globImages(
+  import.meta.glob('../../assets/posts/weeknotes-26_47/*.webp', { eager: true })
+);
+
+## Things I did
+
+- Updates to notebin: my iOS app for quickly capturing a single note. I refined the design and interactions, added support for iPhone Duo, and fixed iCloud syncing. I have maybe one more round of minor updates before I decide whether or not to publish it to the app store.
+- Unplanned server updates: I have a Digital Ocean droplet hosting a handful of projects. DO issued a series of alerts about severe vulnerabilities, which prompted me to spend time applying patches. Next, I need to migrate those projects to my current, preferred environment—static sites that are simpler to host.
+- Writing: [last week](https://kyleio.com/p/weeknotes-110926/), I started testing TK, a new writing app from Medium. I’ve found that I’m more inclined to write because it’s cross platform (web, iOS, and iPadOS). There’s less friction with getting started and I’ve been shaping a few ideas I hope to post in the weeks ahead.
+
+## Things I read
+
+- I _stopped_ reading _Weak in Comparison to Dreams_ by James Elkins. It’s a strange novel (complimentary) that I might come back to, but it’s too bleak for Current Times. I felt down after each chapter.
+- Still reading (and enjoying) Moby Dick. Aiming to finish this classic by the end of the month. To hit that goal, I looked up chapters I could skip and I was surprised to find guides on the topic. Maybe editors weren’t common in Melville’s day? 
+
+## Things I saw
+
+- Close to home, a big maple tree in my front yard is hitting its peak Fall color. I’m enjoying it while I can—knowing a big leaf cleanup project will be on the agenda in the weeks ahead. A few photos of how it’s changed this week:
+
+<div class="grid sm:grid-cols-2 gap-2 wide px-2 sm:px-0">
+  <div>
+    <Image src={pics["IMG_0972"]} alt="Thursday" class="border border-neutral-400 rounded-lg mt-4" />
+    <p class="caption">Thursday</p>
+  </div>
+  <div>
+    <Image src={pics["IMG_0973"]} alt="Friday" class="border border-neutral-400 rounded-lg mt-4" />
+    <p class="caption">Friday</p>
+  </div>
+</div>
+<Image src={pics["IMG_0980"]} alt="Saturday, peak color" class="border border-neutral-400 rounded-lg mt-4" />
+<p class="caption">Saturday: peak color</p>
+<Image src={pics["IMG_0982"]} alt="Leaves at night" class="border border-neutral-400 rounded-lg mt-4" />
+<p class="caption">Leaves at night</p>
